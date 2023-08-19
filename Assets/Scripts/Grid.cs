@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Grid
 {
@@ -34,7 +35,7 @@ public class Grid
                     cellType = GridCellType.Central;
                 }
 
-                Cells.Add(new GridCell(i, j, cellType));
+                Cells.Add(new GridCell(Mathf.CeilToInt(-_width / 2f + i), Mathf.CeilToInt(-_length / 2f + j), cellType));
             }
         }
     }

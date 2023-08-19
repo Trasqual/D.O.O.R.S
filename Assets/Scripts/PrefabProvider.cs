@@ -1,9 +1,9 @@
-using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
-public class PrefabProvider : Singleton<PrefabProvider>
+public class PrefabProvider : MonoBehaviour
 {
-    [SerializeField] public Dictionary<string, GameObject> Prefabs = new();
+    [SerializeField] public SerializedDictionary<string, GameObject> Prefabs = new();
 
     public GameObject GetRoom(Transform parent)
     {
@@ -38,7 +38,7 @@ public class PrefabProvider : Singleton<PrefabProvider>
     public GameObject GetWall(Transform parent)
     {
         GameObject spawn = null;
-        if (Prefabs.TryGetValue("Wall", out var prefab))
+        if (Prefabs.TryGetValue("wall", out var prefab))
         {
             spawn = Instantiate(prefab, parent);
         }
