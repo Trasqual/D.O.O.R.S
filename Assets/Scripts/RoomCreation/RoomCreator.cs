@@ -19,9 +19,25 @@ public class RoomCreator : MonoBehaviour
 
     private List<Room> _generatedRooms = new();
 
+    private DoorData _selectedDoorData;
+    private Room _lastRoom;
+
     private void Awake()
     {
         Random.InitState(_randomSeed);
+
+        EventManager.Instance.AddListener<DoorSelectedEvent>(OnDoorSelected);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Instance.RemoveListener<DoorSelectedEvent>(OnDoorSelected);
+    }
+
+    private void OnDoorSelected(object data)
+    {
+        _selectedDoorData = (DoorData)data;
+        _exitSide = _selectedDoorData.DoorSide;
     }
 
     [ContextMenu("CreateRoom")]
@@ -51,9 +67,9 @@ public class RoomCreator : MonoBehaviour
                 break;
         };
 
-        var room = spawnedRoom.GetComponent<Room>();
-        room.Init(roomWidth, roomLength, roomDoorCount, _exitSide, _prefabProvider);
+        _lastRoom = spawnedRoom.GetComponent<Room>();
+        _lastRoom.Init(roomWidth, roomLength, roomDoorCount, _exitSide, _prefabProvider);
 
-        _generatedRooms.Add(room);
+        _generatedRooms.Add(_lastRoom);
     }
 }

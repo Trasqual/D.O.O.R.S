@@ -11,10 +11,11 @@ public class Room : MonoBehaviour
     private PrefabProvider _prefabProvider;
 
     public List<IPlaceable> Items = new();
+    public List<GameObject> Doors = new();
     public List<IPlaceable> Visuals = new();
 
-    private List<Vector2> _doorDirections = new();
     private List<Vector2> _possibleDirections = new() { new Vector2(-1, 0), new Vector2(1, 0), new Vector2(0, -1), new Vector2(0, 1) };
+    private List<Vector2> _selectedDoorDirections = new();
 
     public void Init(int width, int length, int doorCount, Vector2 previousRoomDirection, PrefabProvider prefabProvider)
     {
@@ -32,14 +33,14 @@ public class Room : MonoBehaviour
     {
         if (_previousRoomDirection != Vector2.zero)
         {
-            _doorDirections.Add(_previousRoomDirection * -1);
+            _selectedDoorDirections.Add(_previousRoomDirection * -1);
             _possibleDirections.Remove(_previousRoomDirection * -1);
 
             for (int i = 1; i < _doorCount; i++)
             {
                 var rand = Random.Range(0, _possibleDirections.Count);
 
-                _doorDirections.Add(_possibleDirections[rand]);
+                _selectedDoorDirections.Add(_possibleDirections[rand]);
                 _possibleDirections.RemoveAt(rand);
             }
         }
@@ -49,7 +50,7 @@ public class Room : MonoBehaviour
             {
                 var rand = Random.Range(0, _possibleDirections.Count);
 
-                _doorDirections.Add(_possibleDirections[rand]);
+                _selectedDoorDirections.Add(_possibleDirections[rand]);
                 _possibleDirections.RemoveAt(rand);
             }
         }
@@ -164,11 +165,11 @@ public class Room : MonoBehaviour
         {
             GameObject generatedPiece = null;
 
-            if ((cell.Y == _length - 1 && _doorDirections.Contains(new Vector2(0, 1))) || (cell.X == _width - 1 && _doorDirections.Contains(new Vector2(1, 0))))
+            if ((cell.Y == _length - 1 && _selectedDoorDirections.Contains(new Vector2(0, 1))) || (cell.X == _width - 1 && _selectedDoorDirections.Contains(new Vector2(1, 0))))
             {
                 generatedPiece = _prefabProvider.GetFullHeightDoor(transform);
             }
-            else if ((cell.Y == 0 && _doorDirections.Contains(new Vector2(0, -1))) || (cell.X == 0 && _doorDirections.Contains(new Vector2(-1, 0))))
+            else if ((cell.Y == 0 && _selectedDoorDirections.Contains(new Vector2(0, -1))) || (cell.X == 0 && _selectedDoorDirections.Contains(new Vector2(-1, 0))))
             {
                 generatedPiece = _prefabProvider.GetShortDoor(transform);
             }
@@ -215,8 +216,8 @@ public class Room : MonoBehaviour
         {
             GameObject generatedPiece = null;
 
-            if ((cell.Y == _length - 1 && !_doorDirections.Contains(new Vector2(0, 1))) || (cell.X == _width - 1 && !_doorDirections.Contains(new Vector2(1, 0))) ||
-                (cell.Y == 0 && !_doorDirections.Contains(new Vector2(0, -1))) || (cell.X == 0 && !_doorDirections.Contains(new Vector2(-1, 0))))
+            if ((cell.Y == _length - 1 && !_selectedDoorDirections.Contains(new Vector2(0, 1))) || (cell.X == _width - 1 && !_selectedDoorDirections.Contains(new Vector2(1, 0))) ||
+                (cell.Y == 0 && !_selectedDoorDirections.Contains(new Vector2(0, -1))) || (cell.X == 0 && !_selectedDoorDirections.Contains(new Vector2(-1, 0))))
             {
                 ChangeCellType(cell);
                 CreateWallPiece(cell);

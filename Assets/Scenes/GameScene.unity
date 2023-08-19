@@ -455,14 +455,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7208ff0c621a01c45bb9190e8b52a9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minRoomWidth: 30
-  maxRoomWidth: 100
-  minRoomLength: 30
-  maxRoomLength: 100
-  minRoomDoorCount: 2
-  maxRoomDoorCount: 4
-  randomSeed: 2147483647
+  _minRoomWidth: 30
+  _maxRoomWidth: 100
+  _minRoomLength: 30
+  _maxRoomLength: 100
+  _minRoomDoorCount: 2
+  _maxRoomDoorCount: 4
+  _randomSeed: 2147483647
   _prefabProvider: {fileID: 726548725}
+  _exitSide: {x: 0, y: 0}
 --- !u!4 &2002946518
 Transform:
   m_ObjectHideFlags: 0
