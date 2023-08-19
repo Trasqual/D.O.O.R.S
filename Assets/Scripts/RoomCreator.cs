@@ -34,7 +34,7 @@ public class RoomCreator : MonoBehaviour
     {
         var roomWidth = Random.Range(_minRoomWidth, _maxRoomWidth);
         var roomLength = Random.Range(_minRoomLength, _maxRoomLength);
-        var roomDoorCount = Random.Range(_minRoomDoorCount, _maxRoomDoorCount);
+        var roomDoorCount = Random.Range(_minRoomDoorCount, _maxRoomDoorCount + 1);
 
         var spawnedRoom = _prefabProvider.GetRoom(transform);
 
