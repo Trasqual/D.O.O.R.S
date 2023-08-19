@@ -215,15 +215,8 @@ public class Room : MonoBehaviour
         {
             GameObject generatedPiece = null;
 
-            if ((cell.Y == _length - 1 && _doorDirections.Contains(new Vector2(0, 1))) || (cell.X == _width - 1 && _doorDirections.Contains(new Vector2(1, 0))))
-            {
-
-            }
-            else if ((cell.Y == 0 && _doorDirections.Contains(new Vector2(0, -1))) || (cell.X == 0 && _doorDirections.Contains(new Vector2(-1, 0))))
-            {
-
-            }
-            else
+            if ((cell.Y == _length - 1 && !_doorDirections.Contains(new Vector2(0, 1))) || (cell.X == _width - 1 && !_doorDirections.Contains(new Vector2(1, 0))) ||
+                (cell.Y == 0 && !_doorDirections.Contains(new Vector2(0, -1))) || (cell.X == 0 && !_doorDirections.Contains(new Vector2(-1, 0))))
             {
                 ChangeCellType(cell);
                 CreateWallPiece(cell);
