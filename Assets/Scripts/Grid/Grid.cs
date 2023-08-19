@@ -67,7 +67,7 @@ public class Grid
                     cellType = GridCellType.Central;
                 }
 
-                Cells.Add(new GridCell(i, j, new Vector3(Mathf.CeilToInt(-_width / 2f + i), 0f, Mathf.CeilToInt(-_length / 2f + j)), cellType));
+                Cells.Add(new GridCell(i, j, new Vector3(-_width / 2f + i + 0.5f, 0f, -_length / 2f + j + 0.5f), cellType));
             }
         }
     }

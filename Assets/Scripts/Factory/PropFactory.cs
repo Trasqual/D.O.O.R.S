@@ -1,7 +1,7 @@
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
-public class PrefabProvider : MonoBehaviour
+public class PropFactory : MonoBehaviour
 {
     [SerializeField] public SerializedDictionary<string, GameObject> Prefabs = new();
 

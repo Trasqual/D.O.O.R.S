@@ -13,7 +13,7 @@ public class RoomCreator : MonoBehaviour
     [SerializeField] private int _maxRoomDoorCount;
 
     [SerializeField] private int _randomSeed;
-    [SerializeField] private PrefabProvider _prefabProvider;
+    [SerializeField] private PropFactory _prefabProvider;
 
     [SerializeField] private Vector2 _exitSide;
 

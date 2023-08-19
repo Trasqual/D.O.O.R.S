@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Room : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class Room : MonoBehaviour
     private int _length;
     private int _doorCount;
     private Vector2 _previousRoomDirection;
-    private PrefabProvider _prefabProvider;
+    private PropFactory _prefabProvider;
 
     public List<IPlaceable> Items = new();
     public List<GameObject> Doors = new();
@@ -17,7 +18,7 @@ public class Room : MonoBehaviour
     private List<Vector2> _possibleDirections = new() { new Vector2(-1, 0), new Vector2(1, 0), new Vector2(0, -1), new Vector2(0, 1) };
     private List<Vector2> _selectedDoorDirections = new();
 
-    public void Init(int width, int length, int doorCount, Vector2 previousRoomDirection, PrefabProvider prefabProvider)
+    public void Init(int width, int length, int doorCount, Vector2 previousRoomDirection, PropFactory prefabProvider)
     {
         _width = width;
         _length = length;
@@ -27,6 +28,7 @@ public class Room : MonoBehaviour
         _grid = new Grid(width, length);
         GetDoorDirections();
         FillRoom();
+        GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 
     private void GetDoorDirections()
@@ -66,7 +68,7 @@ public class Room : MonoBehaviour
     private void GenerateFloor()
     {
         var floor = _prefabProvider.GetFloor(transform);
-        floor.transform.localScale = new Vector3(_width, 0f, _length);
+        floor.transform.localScale = new Vector3(_width, 1f, _length);
     }
 
     private void GenerateWallsAndDoors()
