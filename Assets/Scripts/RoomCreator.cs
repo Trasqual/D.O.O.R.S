@@ -1,27 +1,27 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class RoomCreator : MonoBehaviour
 {
-    [SerializeField] private int minRoomWidth;
-    [SerializeField] private int maxRoomWidth;
+    [SerializeField] private int _minRoomWidth;
+    [SerializeField] private int _maxRoomWidth;
 
-    [SerializeField] private int minRoomLength;
-    [SerializeField] private int maxRoomLength;
+    [SerializeField] private int _minRoomLength;
+    [SerializeField] private int _maxRoomLength;
 
-    [SerializeField] private int minRoomDoorCount;
-    [SerializeField] private int maxRoomDoorCount;
+    [SerializeField] private int _minRoomDoorCount;
+    [SerializeField] private int _maxRoomDoorCount;
 
-    [SerializeField] private int randomSeed;
+    [SerializeField] private int _randomSeed;
     [SerializeField] private PrefabProvider _prefabProvider;
+
+    [SerializeField] private Vector2 _exitSide;
 
     private List<Room> _generatedRooms = new();
 
     private void Awake()
     {
-        Random.InitState(randomSeed);
+        Random.InitState(_randomSeed);
     }
 
     [ContextMenu("CreateRoom")]
@@ -32,9 +32,9 @@ public class RoomCreator : MonoBehaviour
 
     public void CreateRoom(RoomType type)
     {
-        var roomWidth = Random.Range(minRoomWidth, maxRoomWidth);
-        var roomLength = Random.Range(minRoomLength, maxRoomLength);
-        var roomDoorCount = Random.Range(minRoomDoorCount, maxRoomDoorCount);
+        var roomWidth = Random.Range(_minRoomWidth, _maxRoomWidth);
+        var roomLength = Random.Range(_minRoomLength, _maxRoomLength);
+        var roomDoorCount = Random.Range(_minRoomDoorCount, _maxRoomDoorCount);
 
         var spawnedRoom = _prefabProvider.GetRoom(transform);
 
@@ -52,7 +52,7 @@ public class RoomCreator : MonoBehaviour
         };
 
         var room = spawnedRoom.GetComponent<Room>();
-        room.Init(roomWidth, roomLength, roomDoorCount, Vector2.zero, _prefabProvider);
+        room.Init(roomWidth, roomLength, roomDoorCount, _exitSide, _prefabProvider);
 
         _generatedRooms.Add(room);
     }
