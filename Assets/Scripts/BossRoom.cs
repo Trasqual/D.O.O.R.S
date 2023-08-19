@@ -1,7 +1,7 @@
 
 public class BossRoom : Room
 {
-    public override void FillRoom()
+    protected override void FillRoom()
     {
         base.FillRoom();
     }

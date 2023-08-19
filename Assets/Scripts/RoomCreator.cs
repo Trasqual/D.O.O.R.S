@@ -11,6 +11,9 @@ public class RoomCreator : MonoBehaviour
     [SerializeField] private int minRoomLength;
     [SerializeField] private int maxRoomLength;
 
+    [SerializeField] private int minRoomDoorCount;
+    [SerializeField] private int maxRoomDoorCount;
+
     [SerializeField] private int randomSeed;
     [SerializeField] private PrefabProvider _prefabProvider;
 
@@ -31,6 +34,7 @@ public class RoomCreator : MonoBehaviour
     {
         var roomWidth = Random.Range(minRoomWidth, maxRoomWidth);
         var roomLength = Random.Range(minRoomLength, maxRoomLength);
+        var roomDoorCount = Random.Range(minRoomDoorCount, maxRoomDoorCount);
 
         var spawnedRoom = _prefabProvider.GetRoom(transform);
 
@@ -48,7 +52,7 @@ public class RoomCreator : MonoBehaviour
         };
 
         var room = spawnedRoom.GetComponent<Room>();
-        room.Init(roomWidth, roomLength, _prefabProvider);
+        room.Init(roomWidth, roomLength, roomDoorCount, Vector2.zero, _prefabProvider);
 
         _generatedRooms.Add(room);
     }

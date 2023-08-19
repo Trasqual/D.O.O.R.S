@@ -6,24 +6,59 @@ public class Room : MonoBehaviour
     protected Grid _grid;
     private int _width;
     private int _length;
+    private int _doorCount;
+    private Vector2 _previousRoomDirection;
     private PrefabProvider _prefabProvider;
 
     public List<IPlaceable> Items = new();
     public List<IPlaceable> Visuals = new();
 
-    public void Init(int width, int length, PrefabProvider prefabProvider)
+    private List<Vector2> _doorDirections = new();
+    private List<Vector2> _possibleDirections = new() { new Vector2(-1, 0), new Vector2(1, 0), new Vector2(0, -1), new Vector2(0, 1) };
+
+    public void Init(int width, int length, int doorCount, Vector2 previousRoomDirection, PrefabProvider prefabProvider)
     {
         _width = width;
         _length = length;
-        _grid = new Grid(width, length);
+        _doorCount = doorCount;
+        _previousRoomDirection = previousRoomDirection;
         _prefabProvider = prefabProvider;
+        _grid = new Grid(width, length);
+        GetDoorDirections();
         FillRoom();
     }
 
-    public virtual void FillRoom()
+    private void GetDoorDirections()
+    {
+        if (_previousRoomDirection != Vector2.zero)
+        {
+            _doorDirections.Add(_previousRoomDirection * -1);
+            _possibleDirections.Remove(_previousRoomDirection * -1);
+
+            for (int i = 1; i < _doorCount; i++)
+            {
+                var rand = Random.Range(0, _possibleDirections.Count);
+
+                _doorDirections.Add(_possibleDirections[rand]);
+                _possibleDirections.RemoveAt(rand);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < _doorCount; i++)
+            {
+                var rand = Random.Range(0, _possibleDirections.Count);
+
+                _doorDirections.Add(_possibleDirections[rand]);
+                _possibleDirections.RemoveAt(rand);
+            }
+        }
+    }
+
+    protected virtual void FillRoom()
     {
         GenerateFloor();
-        GenerateWalls();
+        GenerateWallsAndDoors();
         GenerateProps();
     }
 
@@ -33,22 +68,170 @@ public class Room : MonoBehaviour
         floor.transform.localScale = new Vector3(_width, 0f, _length);
     }
 
-    private void GenerateWalls()
+    private void GenerateWallsAndDoors()
     {
         for (int i = 0; i < _grid.Cells.Count; i++)
         {
             var cell = _grid.Cells[i];
-            if (cell.Type == GridCellType.Corner)
-            {
-                var generatedCornerPiece = _prefabProvider.GetWallCorner(transform);
-                generatedCornerPiece.transform.position = cell.Position;
-                //cell.PlaceItem(generatedCornerPiece.GetComponent<IPlaceable>());
-            }
-            else if (cell.Type == GridCellType.Edge)
-            {
-                var generatedEdgePiece = _prefabProvider.GetWall(transform);
 
-                var rot = generatedEdgePiece.transform.localRotation;
+            CreateCornerPiece(cell);
+            CreateWallPiece(cell);
+            CreateDoorPiece(cell);
+            CreateDoorSecondaryPiece(cell);
+        }
+    }
+
+    private void CreateCornerPiece(GridCell cell)
+    {
+        if (cell.Type == GridCellType.FrontRightCorner || cell.Type == GridCellType.FrontLeftCorner || cell.Type == GridCellType.BackRightCorner)
+        {
+            var generatedCornerPiece = _prefabProvider.GetFullHeightWallCorner(transform);
+            generatedCornerPiece.transform.position = cell.Position;
+            //cell.PlaceItem(generatedCornerPiece.GetComponent<IPlaceable>());
+        }
+        else if (cell.Type == GridCellType.BackLeftCorner)
+        {
+            var generatedCornerPiece = _prefabProvider.GetShortWallCorner(transform);
+            generatedCornerPiece.transform.position = cell.Position;
+            //cell.PlaceItem(generatedCornerPiece.GetComponent<IPlaceable>());
+        }
+    }
+
+    private void CreateWallPiece(GridCell cell)
+    {
+        if (cell.Type == GridCellType.FrontEdge || cell.Type == GridCellType.RightEdge)
+        {
+            var generatedEdgePiece = _prefabProvider.GetFullHeightWall(transform);
+
+            var rot = generatedEdgePiece.transform.eulerAngles;
+            if (cell.X == 0)
+            {
+                rot.y = 90;
+            }
+            else if (cell.X == _width - 1)
+            {
+                rot.y = 270;
+            }
+            else if (cell.Y == 0)
+            {
+                rot.y = 0;
+            }
+            else if (cell.Y == _length - 1)
+            {
+                rot.y = 180;
+            }
+            generatedEdgePiece.transform.eulerAngles = rot;
+            generatedEdgePiece.transform.position = cell.Position;
+            IPlaceable item = generatedEdgePiece.GetComponent<IPlaceable>();
+
+            //cell.PlaceItem(item);
+            Visuals.Add(item);
+        }
+        else if (cell.Type == GridCellType.BackEdge || cell.Type == GridCellType.LeftEdge)
+        {
+            var generatedEdgePiece = _prefabProvider.GetShortWall(transform);
+
+            var rot = generatedEdgePiece.transform.eulerAngles;
+            if (cell.X == 0)
+            {
+                rot.y = 90;
+            }
+            else if (cell.X == _width - 1)
+            {
+                rot.y = 270;
+            }
+            else if (cell.Y == 0)
+            {
+                rot.y = 0;
+            }
+            else if (cell.Y == _length - 1)
+            {
+                rot.y = 180;
+            }
+            generatedEdgePiece.transform.eulerAngles = rot;
+            generatedEdgePiece.transform.position = cell.Position;
+            IPlaceable item = generatedEdgePiece.GetComponent<IPlaceable>();
+
+            //cell.PlaceItem(item);
+            Visuals.Add(item);
+
+        }
+    }
+
+    private void CreateDoorPiece(GridCell cell)
+    {
+        if (cell.Type == GridCellType.Door)
+        {
+            GameObject generatedPiece = null;
+
+            if ((cell.Y == _length - 1 && _doorDirections.Contains(new Vector2(0, 1))) || (cell.X == _width - 1 && _doorDirections.Contains(new Vector2(1, 0))))
+            {
+                generatedPiece = _prefabProvider.GetFullHeightDoor(transform);
+            }
+            else if ((cell.Y == 0 && _doorDirections.Contains(new Vector2(0, -1))) || (cell.X == 0 && _doorDirections.Contains(new Vector2(-1, 0))))
+            {
+                generatedPiece = _prefabProvider.GetShortDoor(transform);
+            }
+            else
+            {
+                ChangeCellType(cell);
+                CreateWallPiece(cell);
+            }
+            if (generatedPiece != null)
+            {
+                var rot = generatedPiece.transform.eulerAngles;
+                if (cell.X == 0)
+                {
+                    rot.y = 90;
+                    generatedPiece.transform.position = cell.Position + new Vector3(0f, 0f, 0.5f);
+                }
+                else if (cell.X == _width - 1)
+                {
+                    rot.y = 270;
+                    generatedPiece.transform.position = cell.Position + new Vector3(0f, 0f, 0.5f); ;
+                }
+                else if (cell.Y == 0)
+                {
+                    rot.y = 0;
+                    generatedPiece.transform.position = cell.Position + new Vector3(0.5f, 0f, 0f);
+                }
+                else if (cell.Y == _length - 1)
+                {
+                    rot.y = 180;
+                    generatedPiece.transform.position = cell.Position + new Vector3(0.5f, 0f, 0f);
+                }
+                generatedPiece.transform.eulerAngles = rot;
+                IPlaceable item = generatedPiece.GetComponent<IPlaceable>();
+
+                //cell.PlaceItem(item);
+                Visuals.Add(item);
+            }
+        }
+    }
+
+    private void CreateDoorSecondaryPiece(GridCell cell)
+    {
+        if (cell.Type == GridCellType.DoorSecondary)
+        {
+            GameObject generatedPiece = null;
+
+            if ((cell.Y == _length - 1 && _doorDirections.Contains(new Vector2(0, 1))) || (cell.X == _width - 1 && _doorDirections.Contains(new Vector2(1, 0))))
+            {
+
+            }
+            else if ((cell.Y == 0 && _doorDirections.Contains(new Vector2(0, -1))) || (cell.X == 0 && _doorDirections.Contains(new Vector2(-1, 0))))
+            {
+
+            }
+            else
+            {
+                ChangeCellType(cell);
+                CreateWallPiece(cell);
+            }
+
+            if (generatedPiece != null)
+            {
+                var rot = generatedPiece.transform.eulerAngles;
                 if (cell.X == 0)
                 {
                     rot.y = 90;
@@ -65,13 +248,33 @@ public class Room : MonoBehaviour
                 {
                     rot.y = 180;
                 }
-                generatedEdgePiece.transform.localRotation = rot;
-                generatedEdgePiece.transform.position = cell.Position;
-                IPlaceable item = generatedEdgePiece.GetComponent<IPlaceable>();
+                generatedPiece.transform.eulerAngles = rot;
+                generatedPiece.transform.position = cell.Position;
+                IPlaceable item = generatedPiece.GetComponent<IPlaceable>();
 
                 //cell.PlaceItem(item);
                 Visuals.Add(item);
             }
+        }
+    }
+
+    private void ChangeCellType(GridCell cell)
+    {
+        if (cell.X == 0)
+        {
+            cell.ChangeCellType(GridCellType.LeftEdge);
+        }
+        else if (cell.X == _width - 1)
+        {
+            cell.ChangeCellType(GridCellType.RightEdge);
+        }
+        else if (cell.Y == 0)
+        {
+            cell.ChangeCellType(GridCellType.BackEdge);
+        }
+        else if (cell.Y == _length - 1)
+        {
+            cell.ChangeCellType(GridCellType.FrontEdge);
         }
     }
 

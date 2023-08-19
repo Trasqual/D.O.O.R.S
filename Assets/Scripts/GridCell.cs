@@ -4,13 +4,19 @@ public class GridCell
 {
     public int X { get; private set; }
     public int Y { get; private set; }
-    public Vector3 Position => new(X, 0, Y);
+    public Vector3 Position;
     public GridCellType Type { get; private set; }
 
-    public GridCell(int x, int y, GridCellType cellType)
+    public GridCell(int x, int y, Vector3 position, GridCellType cellType)
     {
         X = x;
         Y = y;
+        Position = position;
+        Type = cellType;
+    }
+
+    public void ChangeCellType(GridCellType cellType)
+    {
         Type = cellType;
     }
 

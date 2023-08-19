@@ -1,7 +1,15 @@
 
 public enum GridCellType
 {
-    Edge,
-    Corner,
+    FrontEdge,
+    BackEdge,
+    RightEdge,
+    LeftEdge,
+    FrontRightCorner,
+    FrontLeftCorner,
+    BackRightCorner,
+    BackLeftCorner,
+    Door,
+    DoorSecondary,
     Central
 }
