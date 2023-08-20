@@ -14,6 +14,7 @@ public class Door : MonoBehaviour
     private void SelectDoor()
     {
         var doorData = new DoorData() { DoorSide = _doorSide, RoomType = _roomType };
+        GetComponent<Collider>().enabled = false;
         EventManager.Instance.TriggerEvent<DoorSelectedEvent>(new DoorSelectedEvent() { DoorData = doorData });
     }
 

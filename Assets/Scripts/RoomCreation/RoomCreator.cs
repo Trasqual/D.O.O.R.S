@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Collections;
 
 public class RoomCreator : MonoBehaviour
 {
@@ -26,8 +27,13 @@ public class RoomCreator : MonoBehaviour
     private void Awake()
     {
         Random.InitState(_randomSeed);
-        CreateCreatureRoom();
         EventManager.Instance.AddListener<DoorSelectedEvent>(OnDoorSelected);
+    }
+
+    private IEnumerator Start()
+    {
+        yield return new WaitForSeconds(1f);
+        CreateCreatureRoom();
     }
 
     private void OnDisable()
@@ -84,14 +90,17 @@ public class RoomCreator : MonoBehaviour
 
         _generatedRooms.Add(_lastRoom);
 
-        SlideRooms();
+        StartCoroutine(SlideRooms());
     }
 
-    private void SlideRooms()
+    private IEnumerator SlideRooms()
     {
+        EventManager.Instance.TriggerEvent<RoomsAreSlidingEvent>(new RoomsAreSlidingEvent() { SlideAmount = -_lastRoom.transform.position });
         foreach (var room in _generatedRooms)
         {
             room.transform.DOMove(-_lastRoom.transform.position, 3f).SetRelative();
         }
+        yield return new WaitForSeconds(3f);
+        EventManager.Instance.TriggerEvent<RoomSlidingEndedEvent>(new RoomsAreSlidingEvent() { SlideAmount = -_lastRoom.transform.position });
     }
 }

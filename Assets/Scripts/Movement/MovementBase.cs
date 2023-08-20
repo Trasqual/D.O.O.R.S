@@ -5,8 +5,9 @@ public abstract class MovementBase : MonoBehaviour
     [SerializeField] private InputBase _inputManager;
 
     protected Vector3 _movementVector;
+    protected bool _canMove = true;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _inputManager.OnInputDrag += OnInputDrag;
     }

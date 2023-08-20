@@ -195,6 +195,8 @@ public class Room : MonoBehaviour
             }
             if (generatedPiece != null)
             {
+                Doors.Add(generatedPiece);
+
                 var rot = generatedPiece.transform.eulerAngles;
                 if (cell.X == 0)
                 {
