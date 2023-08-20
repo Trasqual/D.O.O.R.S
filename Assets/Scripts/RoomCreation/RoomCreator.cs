@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class RoomCreator : MonoBehaviour
 {
@@ -82,5 +83,15 @@ public class RoomCreator : MonoBehaviour
         _lastRoom = curRoom;
 
         _generatedRooms.Add(_lastRoom);
+
+        SlideRooms();
+    }
+
+    private void SlideRooms()
+    {
+        foreach (var room in _generatedRooms)
+        {
+            room.transform.DOMove(-_lastRoom.transform.position, 3f).SetRelative();
+        }
     }
 }
