@@ -22,7 +22,6 @@ public class Door : MonoBehaviour
         if (other.TryGetComponent(out PlayerMovement player))
         {
             SelectDoor();
-            Debug.Log("detected player");
         }
     }
 }

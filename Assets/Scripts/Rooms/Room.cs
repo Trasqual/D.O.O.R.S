@@ -10,6 +10,7 @@ public class Room : MonoBehaviour
     private int _doorCount;
     private Vector2 _previousRoomDirection;
     private PropFactory _prefabProvider;
+    public Vector2 Size => new Vector2(_width, _length);
 
     public List<IPlaceable> Items = new();
     public List<GameObject> Doors = new();
@@ -89,13 +90,13 @@ public class Room : MonoBehaviour
         if (cell.Type == GridCellType.FrontRightCorner || cell.Type == GridCellType.FrontLeftCorner || cell.Type == GridCellType.BackRightCorner)
         {
             var generatedCornerPiece = _prefabProvider.GetFullHeightWallCorner(transform);
-            generatedCornerPiece.transform.position = cell.Position;
+            generatedCornerPiece.transform.localPosition = cell.Position;
             //cell.PlaceItem(generatedCornerPiece.GetComponent<IPlaceable>());
         }
         else if (cell.Type == GridCellType.BackLeftCorner)
         {
             var generatedCornerPiece = _prefabProvider.GetShortWallCorner(transform);
-            generatedCornerPiece.transform.position = cell.Position;
+            generatedCornerPiece.transform.localPosition = cell.Position;
             //cell.PlaceItem(generatedCornerPiece.GetComponent<IPlaceable>());
         }
     }
@@ -124,7 +125,7 @@ public class Room : MonoBehaviour
                 rot.y = 180;
             }
             generatedEdgePiece.transform.eulerAngles = rot;
-            generatedEdgePiece.transform.position = cell.Position;
+            generatedEdgePiece.transform.localPosition = cell.Position;
             IPlaceable item = generatedEdgePiece.GetComponent<IPlaceable>();
 
             //cell.PlaceItem(item);
@@ -152,7 +153,7 @@ public class Room : MonoBehaviour
                 rot.y = 180;
             }
             generatedEdgePiece.transform.eulerAngles = rot;
-            generatedEdgePiece.transform.position = cell.Position;
+            generatedEdgePiece.transform.localPosition = cell.Position;
             IPlaceable item = generatedEdgePiece.GetComponent<IPlaceable>();
 
             //cell.PlaceItem(item);
@@ -167,13 +168,25 @@ public class Room : MonoBehaviour
         {
             GameObject generatedPiece = null;
 
-            if ((cell.Y == _length - 1 && _selectedDoorDirections.Contains(new Vector2(0, 1))) || (cell.X == _width - 1 && _selectedDoorDirections.Contains(new Vector2(1, 0))))
+            if (cell.Y == _length - 1 && _selectedDoorDirections.Contains(new Vector2(0, 1)))
             {
                 generatedPiece = _prefabProvider.GetFullHeightDoor(transform);
+                generatedPiece.GetComponent<Door>().Init(new Vector2(0, 1), RoomType.Creature);
             }
-            else if ((cell.Y == 0 && _selectedDoorDirections.Contains(new Vector2(0, -1))) || (cell.X == 0 && _selectedDoorDirections.Contains(new Vector2(-1, 0))))
+            else if (cell.X == _width - 1 && _selectedDoorDirections.Contains(new Vector2(1, 0)))
+            {
+                generatedPiece = _prefabProvider.GetFullHeightDoor(transform);
+                generatedPiece.GetComponent<Door>().Init(new Vector2(1, 0), RoomType.Creature);
+            }
+            else if (cell.Y == 0 && _selectedDoorDirections.Contains(new Vector2(0, -1)))
             {
                 generatedPiece = _prefabProvider.GetShortDoor(transform);
+                generatedPiece.GetComponent<Door>().Init(new Vector2(0, -1), RoomType.Creature);
+            }
+            else if (cell.X == 0 && _selectedDoorDirections.Contains(new Vector2(-1, 0)))
+            {
+                generatedPiece = _prefabProvider.GetShortDoor(transform);
+                generatedPiece.GetComponent<Door>().Init(new Vector2(-1, 0), RoomType.Creature);
             }
             else
             {
@@ -186,22 +199,22 @@ public class Room : MonoBehaviour
                 if (cell.X == 0)
                 {
                     rot.y = 90;
-                    generatedPiece.transform.position = cell.Position + new Vector3(0f, 0f, 0.5f);
+                    generatedPiece.transform.localPosition = cell.Position + new Vector3(0f, 0f, 0.5f);
                 }
                 else if (cell.X == _width - 1)
                 {
                     rot.y = 270;
-                    generatedPiece.transform.position = cell.Position + new Vector3(0f, 0f, 0.5f); ;
+                    generatedPiece.transform.localPosition = cell.Position + new Vector3(0f, 0f, 0.5f); ;
                 }
                 else if (cell.Y == 0)
                 {
                     rot.y = 0;
-                    generatedPiece.transform.position = cell.Position + new Vector3(0.5f, 0f, 0f);
+                    generatedPiece.transform.localPosition = cell.Position + new Vector3(0.5f, 0f, 0f);
                 }
                 else if (cell.Y == _length - 1)
                 {
                     rot.y = 180;
-                    generatedPiece.transform.position = cell.Position + new Vector3(0.5f, 0f, 0f);
+                    generatedPiece.transform.localPosition = cell.Position + new Vector3(0.5f, 0f, 0f);
                 }
                 generatedPiece.transform.eulerAngles = rot;
                 IPlaceable item = generatedPiece.GetComponent<IPlaceable>();
@@ -245,7 +258,7 @@ public class Room : MonoBehaviour
                     rot.y = 180;
                 }
                 generatedPiece.transform.eulerAngles = rot;
-                generatedPiece.transform.position = cell.Position;
+                generatedPiece.transform.localPosition = cell.Position;
                 IPlaceable item = generatedPiece.GetComponent<IPlaceable>();
 
                 //cell.PlaceItem(item);
