@@ -11,9 +11,18 @@ public class Door : MonoBehaviour
         _roomType = roomType;
     }
 
-    public void SelectDoor()
+    private void SelectDoor()
     {
         var doorData = new DoorData() { DoorSide = _doorSide, RoomType = _roomType };
         EventManager.Instance.TriggerEvent<DoorSelectedEvent>(new DoorSelectedEvent() { DoorData = doorData });
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out PlayerMovement player))
+        {
+            SelectDoor();
+            Debug.Log("detected player");
+        }
     }
 }
