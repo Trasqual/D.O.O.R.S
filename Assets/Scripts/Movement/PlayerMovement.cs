@@ -40,7 +40,6 @@ namespace MovementSystem.PlayerMovements
         {
             if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 1, 1))
             {
-
                 transform.DOMove(hit.position - _moveAmount.normalized * 2f, 1f).OnComplete(() =>
                 {
                     _canMove = true;
