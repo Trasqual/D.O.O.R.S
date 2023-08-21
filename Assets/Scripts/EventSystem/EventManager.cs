@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using GamePlay.Utilities;
 
 public class EventManager : Singleton<EventManager>
 {

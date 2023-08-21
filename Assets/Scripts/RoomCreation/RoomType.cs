@@ -1,9 +1,11 @@
-
-public enum RoomType
+namespace RoomSystem.Creation
 {
-    Creature,
-    Health,
-    Puzzle,
-    Boss,
-    Treasure,
+    public enum RoomType
+    {
+        Creature,
+        Health,
+        Puzzle,
+        Boss,
+        Treasure,
+    }
 }

@@ -1,7 +1,11 @@
+using RoomSystem.Creation;
 using UnityEngine;
 
-public struct DoorData
+namespace RoomSystem.Doors
 {
-    public Vector2 DoorSide;
-    public RoomType RoomType;
+	public struct DoorData
+	{
+		public Vector2 DoorSide;
+		public RoomType RoomType;
+	} 
 }

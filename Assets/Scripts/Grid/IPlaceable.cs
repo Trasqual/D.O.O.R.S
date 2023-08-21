@@ -1,5 +1,7 @@
-
-public interface IPlaceable
+namespace GridSystem
 {
-    public void PlacedIn(GridCell gridCell);
+    public interface IPlaceable
+    {
+        public void PlacedIn(GridCell gridCell);
+    }
 }

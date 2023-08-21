@@ -1,8 +1,10 @@
-
-public class TreasureRoom : Room
+namespace RoomSystem.Rooms
 {
-    protected override void FillRoom()
+    public class TreasureRoom : Room
     {
-        base.FillRoom();
+        protected override void FillRoom()
+        {
+            base.FillRoom();
+        }
     }
 }

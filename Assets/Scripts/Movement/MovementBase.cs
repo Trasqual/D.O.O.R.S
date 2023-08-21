@@ -1,21 +1,25 @@
+using InputSystem;
 using UnityEngine;
 
-public abstract class MovementBase : MonoBehaviour
+namespace MovementSystem
 {
-    [SerializeField] private InputBase _inputManager;
-
-    protected Vector3 _movementVector;
-    protected bool _canMove = true;
-
-    protected virtual void Awake()
+    public abstract class MovementBase : MonoBehaviour
     {
-        _inputManager.OnInputDrag += OnInputDrag;
-    }
+        [SerializeField] private InputBase _inputManager;
 
-    private void OnInputDrag(Vector3 input)
-    {
-        _movementVector = input;
-    }
+        protected Vector3 _movementVector;
+        protected bool _canMove = true;
 
-    public abstract void Move();
+        protected virtual void Awake()
+        {
+            _inputManager.OnInputDrag += OnInputDrag;
+        }
+
+        private void OnInputDrag(Vector3 input)
+        {
+            _movementVector = input;
+        }
+
+        public abstract void Move();
+    }
 }

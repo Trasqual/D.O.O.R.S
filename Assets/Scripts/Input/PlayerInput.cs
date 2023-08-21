@@ -1,27 +1,30 @@
 using System;
 using UnityEngine;
 
-public class PlayerInput : InputBase
+namespace InputSystem.PlayerInputs
 {
-    public override Action<Vector3> OnInputDrag { get; set; }
-
-    [SerializeField] private LayerMask _mask;
-
-    private Camera _cam;
-
-    private void Awake()
+    public class PlayerInput : InputBase
     {
-        _cam = Camera.main;
-    }
+        public override Action<Vector3> OnInputDrag { get; set; }
 
-    private void Update()
-    {
-        if (Input.GetMouseButton(1))
+        [SerializeField] private LayerMask _mask;
+
+        private Camera _cam;
+
+        private void Awake()
         {
-            var ray = _cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, 1000, _mask))
+            _cam = Camera.main;
+        }
+
+        private void Update()
+        {
+            if (Input.GetMouseButton(1))
             {
-                OnInputDrag?.Invoke(hitInfo.point);
+                var ray = _cam.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hitInfo, 1000, _mask))
+                {
+                    OnInputDrag?.Invoke(hitInfo.point);
+                }
             }
         }
     }
