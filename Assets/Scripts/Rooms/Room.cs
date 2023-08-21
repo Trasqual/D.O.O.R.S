@@ -168,25 +168,27 @@ public class Room : MonoBehaviour
         {
             GameObject generatedPiece = null;
 
+            Vector2 doorSide = Vector2.zero;
             if (cell.Y == _length - 1 && _selectedDoorDirections.Contains(new Vector2(0, 1)))
             {
                 generatedPiece = _prefabProvider.GetFullHeightDoor(transform);
-                generatedPiece.GetComponent<Door>().Init(new Vector2(0, 1), RoomType.Creature);
+                doorSide = new Vector2(0, 1);
+
             }
             else if (cell.X == _width - 1 && _selectedDoorDirections.Contains(new Vector2(1, 0)))
             {
                 generatedPiece = _prefabProvider.GetFullHeightDoor(transform);
-                generatedPiece.GetComponent<Door>().Init(new Vector2(1, 0), RoomType.Creature);
+                doorSide = new Vector2(1, 0);
             }
             else if (cell.Y == 0 && _selectedDoorDirections.Contains(new Vector2(0, -1)))
             {
                 generatedPiece = _prefabProvider.GetShortDoor(transform);
-                generatedPiece.GetComponent<Door>().Init(new Vector2(0, -1), RoomType.Creature);
+                doorSide = new Vector2(0, -1);
             }
             else if (cell.X == 0 && _selectedDoorDirections.Contains(new Vector2(-1, 0)))
             {
                 generatedPiece = _prefabProvider.GetShortDoor(transform);
-                generatedPiece.GetComponent<Door>().Init(new Vector2(-1, 0), RoomType.Creature);
+                doorSide = new Vector2(-1, 0);
             }
             else
             {
@@ -195,6 +197,14 @@ public class Room : MonoBehaviour
             }
             if (generatedPiece != null)
             {
+                var door = generatedPiece.GetComponent<Door>();
+                bool doorIsActive = true;
+                if (_previousRoomDirection != Vector2.zero && doorSide == -_previousRoomDirection)
+                {
+                    doorIsActive = false;
+                }
+                door.Init(doorSide, RoomType.Creature, doorIsActive);
+
                 Doors.Add(generatedPiece);
 
                 var rot = generatedPiece.transform.eulerAngles;

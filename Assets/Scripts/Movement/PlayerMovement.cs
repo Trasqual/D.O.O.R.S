@@ -23,6 +23,8 @@ public class PlayerMovement : MovementBase
     private void OnRoomsAreSliding(object data)
     {
         _canMove = false;
+        _agent.isStopped = true;
+        _agent.enabled = false;
         var moveAmount = ((RoomsAreSlidingEvent)data).SlideAmount;
         transform.DOMove(moveAmount, 3f).SetRelative();
     }
@@ -30,6 +32,8 @@ public class PlayerMovement : MovementBase
     private void OnRoomSlidingEnded(object data)
     {
         _canMove = true;
+        _agent.enabled = true;
+        _agent.isStopped = false;
     }
 
     public override void Move()
