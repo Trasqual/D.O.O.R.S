@@ -10,6 +10,8 @@ namespace MovementSystem.PlayerMovements
     {
         [SerializeField] private NavMeshAgent _agent;
 
+        private Vector3 _moveAmount;
+
         protected override void Awake()
         {
             base.Awake();
@@ -27,16 +29,26 @@ namespace MovementSystem.PlayerMovements
         {
             _canMove = false;
             _agent.isStopped = true;
+            _agent.ResetPath();
             _agent.enabled = false;
-            var moveAmount = ((RoomsAreSlidingEvent)data).SlideAmount;
-            transform.DOMove(moveAmount, 3f).SetRelative();
+            _movementVector = Vector3.zero;
+            _moveAmount = ((RoomsAreSlidingEvent)data).SlideAmount;
+            transform.DOMove(_moveAmount, 3f).SetRelative();
         }
 
         private void OnRoomSlidingEnded(object data)
         {
-            _canMove = true;
-            _agent.enabled = true;
-            _agent.isStopped = false;
+            if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 1, 1))
+            {
+
+                transform.DOMove(hit.position - _moveAmount.normalized * 2f, 1f).OnComplete(() =>
+                {
+                    _canMove = true;
+                    _agent.enabled = true;
+                    _agent.isStopped = false;
+                    _moveAmount = Vector3.zero;
+                });
+            }
         }
 
         public override void Move()

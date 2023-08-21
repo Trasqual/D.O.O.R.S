@@ -10,17 +10,17 @@ namespace CameraSystem
 
         private void Start()
         {
-            EventManager.Instance.AddListener<RoomsAreSlidingEvent>(OnRoomsAreSliding);
+            EventManager.Instance.AddListener<DoorSelectedEvent>(OnDoorSelected);
             EventManager.Instance.AddListener<RoomSlidingEndedEvent>(OnRoomSlidingEnded);
         }
 
         private void OnDestroy()
         {
-            EventManager.Instance.RemoveListener<RoomsAreSlidingEvent>(OnRoomsAreSliding);
+            EventManager.Instance.RemoveListener<DoorSelectedEvent>(OnDoorSelected);
             EventManager.Instance.RemoveListener<RoomSlidingEndedEvent>(OnRoomSlidingEnded);
         }
 
-        private void OnRoomsAreSliding(object data)
+        private void OnDoorSelected(object data)
         {
             _playerCam.gameObject.SetActive(false);
             _roomCam.gameObject.SetActive(true);
@@ -31,5 +31,5 @@ namespace CameraSystem
             _roomCam.gameObject.SetActive(false);
             _playerCam.gameObject.SetActive(true);
         }
-    } 
+    }
 }

@@ -26,6 +26,11 @@ namespace RoomSystem.Rooms
         private List<Vector2> _possibleDirections = new() { new Vector2(-1, 0), new Vector2(1, 0), new Vector2(0, -1), new Vector2(0, 1) };
         private List<Vector2> _selectedDoorDirections = new();
 
+        private void Awake()
+        {
+            EventManager.Instance.AddListener<DoorSelectedEvent>(DeActivateRoom);
+        }
+
         public void Init(int width, int length, int doorCount, Vector2 previousRoomDirection, PropFactory prefabProvider)
         {
             _width = width;
@@ -210,7 +215,7 @@ namespace RoomSystem.Rooms
                     {
                         doorIsActive = false;
                     }
-                    door.Init(doorSide, RoomType.Creature, doorIsActive);
+                    door.Init(doorSide, RoomType.Creature, this, doorIsActive);
 
                     Doors.Add(generatedPiece);
 
@@ -306,6 +311,13 @@ namespace RoomSystem.Rooms
             }
         }
 
+        public void DeActivateRoom(object data)
+        {
+            var room = ((DoorSelectedEvent)data).DoorData.Room;
+            if (room == this)
+                gameObject.SetActive(false);
+        }
+
         private void GenerateProps()
         {
 
@@ -314,6 +326,11 @@ namespace RoomSystem.Rooms
         public virtual void AnimateRoomUnlock()
         {
 
+        }
+
+        private void OnDisable()
+        {
+            EventManager.Instance.RemoveListener<DoorSelectedEvent>(DeActivateRoom);
         }
     }
 }

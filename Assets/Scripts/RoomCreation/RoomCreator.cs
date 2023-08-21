@@ -28,6 +28,7 @@ namespace RoomSystem.Creation
 
         private DoorData _selectedDoorData;
         private Room _lastRoom;
+        private Room _currentRoom;
 
         private void Awake()
         {
@@ -35,10 +36,9 @@ namespace RoomSystem.Creation
             EventManager.Instance.AddListener<DoorSelectedEvent>(OnDoorSelected);
         }
 
-        private IEnumerator Start()
+        private void Start()
         {
-            yield return new WaitForSeconds(1f);
-            CreateCreatureRoom();
+            CreateInitialRoom();
         }
 
         private void OnDisable()
@@ -50,13 +50,14 @@ namespace RoomSystem.Creation
         {
             _selectedDoorData = ((DoorSelectedEvent)data).DoorData;
             _exitSide = _selectedDoorData.DoorSide;
+            _lastRoom = _selectedDoorData.Room;
             CreateRoom(_selectedDoorData.RoomType);
+            StartCoroutine(SlideRooms());
         }
 
-        [ContextMenu("CreateRoom")]
-        public void CreateCreatureRoom()
+        public void CreateInitialRoom()
         {
-            CreateRoom(RoomType.Creature);
+            CreateRoom(RoomType.Initial);
         }
 
         public void CreateRoom(RoomType type)
@@ -78,35 +79,35 @@ namespace RoomSystem.Creation
                 case RoomType.Treasure:
                     spawnedRoom.AddComponent<TreasureRoom>();
                     break;
+                case RoomType.Initial:
+                    spawnedRoom.AddComponent<InitialRoom>();
+                    break;
             };
 
-            var curRoom = spawnedRoom.GetComponent<Room>();
-            curRoom.Init(roomWidth, roomLength, roomDoorCount, _exitSide, _prefabProvider);
+            _currentRoom = spawnedRoom.GetComponent<Room>();
+            _currentRoom.Init(roomWidth, roomLength, roomDoorCount, _exitSide, _prefabProvider);
 
             if (_lastRoom != null)
             {
-                curRoom.transform.position = _lastRoom.transform.position +
+                _currentRoom.transform.position = _lastRoom.transform.position +
                     new Vector3(_selectedDoorData.DoorSide.x * _lastRoom.Size.x / 2f,
                     0f,
-                    _selectedDoorData.DoorSide.y * _lastRoom.Size.y / 2f) + new Vector3(_selectedDoorData.DoorSide.x * curRoom.Size.x / 2f, 0f, _selectedDoorData.DoorSide.y * curRoom.Size.y / 2f);
+                    _selectedDoorData.DoorSide.y * _lastRoom.Size.y / 2f) + new Vector3(_selectedDoorData.DoorSide.x * _currentRoom.Size.x / 2f, 0f, _selectedDoorData.DoorSide.y * _currentRoom.Size.y / 2f);
             }
 
-            _lastRoom = curRoom;
-
-            _generatedRooms.Add(_lastRoom);
-
-            StartCoroutine(SlideRooms());
+            _generatedRooms.Add(_currentRoom);
         }
 
         private IEnumerator SlideRooms()
         {
-            EventManager.Instance.TriggerEvent<RoomsAreSlidingEvent>(new RoomsAreSlidingEvent() { SlideAmount = -_lastRoom.transform.position });
+            yield return new WaitForSeconds(1f);
+            EventManager.Instance.TriggerEvent<RoomsAreSlidingEvent>(new RoomsAreSlidingEvent() { SlideAmount = -_currentRoom.transform.position });
             foreach (var room in _generatedRooms)
             {
-                room.transform.DOMove(-_lastRoom.transform.position, 3f).SetRelative();
+                room.transform.DOMove(-_currentRoom.transform.position, 3f).SetRelative();
             }
             yield return new WaitForSeconds(3f);
-            EventManager.Instance.TriggerEvent<RoomSlidingEndedEvent>(new RoomsAreSlidingEvent() { SlideAmount = -_lastRoom.transform.position });
+            EventManager.Instance.TriggerEvent<RoomSlidingEndedEvent>(new RoomsAreSlidingEvent() { SlideAmount = -_currentRoom.transform.position });
         }
     }
 }
