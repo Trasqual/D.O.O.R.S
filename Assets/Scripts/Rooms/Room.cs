@@ -132,7 +132,7 @@ namespace RoomSystem.Rooms
             wallData.Side = WallSide.Left;
             for (int i = startIndex; i < _length; i++)
             {
-                var curCell = _grid.Cells[GetIndex(0, i, _length)];
+                var curCell = _grid.Cells[GetIndex(0, i, _width)];
 
                 if (wallData.StartCell == null && curCell.Type == GridCellType.Edge)
                 {
@@ -141,7 +141,7 @@ namespace RoomSystem.Rooms
 
                 if (i != startIndex && curCell.Type != GridCellType.Edge)
                 {
-                    wallData.EndCell = _grid.Cells[GetIndex(0, i - 1, _length)];
+                    wallData.EndCell = _grid.Cells[GetIndex(0, i - 1, _width)];
                     _wallDatas.Add(wallData);
                     //if (i != _length - 1)
                     //SearchLeftWall(i - 1);
@@ -157,16 +157,19 @@ namespace RoomSystem.Rooms
 
             for (int i = startIndex; i < _length; i++)
             {
-                var curCell = _grid.Cells[GetIndex(_width - 1, i, _length)];
+                var curCell = _grid.Cells[GetIndex(_width - 1, i, _width)];
+                var test = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                test.transform.position = curCell.Position;
 
                 if (wallData.StartCell == null && curCell.Type == GridCellType.Edge)
                 {
+                    Debug.LogWarning(curCell);
                     wallData.StartCell = curCell;
                 }
 
                 if (i != startIndex && curCell.Type != GridCellType.Edge)
                 {
-                    wallData.EndCell = _grid.Cells[GetIndex(_width - 1, i - 1, _length)];
+                    wallData.EndCell = _grid.Cells[GetIndex(_width - 1, i - 1, _width)];
                     _wallDatas.Add(wallData);
 
                     //if (i != _length - 1)
