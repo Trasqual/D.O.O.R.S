@@ -47,21 +47,9 @@ namespace GridSystem
                     {
                         cellType = GridCellType.DoorSecondary;
                     }
-                    else if (i == 0)
+                    else if (i == 0 || i == _width - 1 || j == 0 || j == _length - 1)
                     {
-                        cellType = GridCellType.BackEdge;
-                    }
-                    else if (i == _width - 1)
-                    {
-                        cellType = GridCellType.FrontEdge;
-                    }
-                    else if (j == 0)
-                    {
-                        cellType = GridCellType.LeftEdge;
-                    }
-                    else if (j == _length - 1)
-                    {
-                        cellType = GridCellType.RightEdge;
+                        cellType = GridCellType.Edge;
                     }
                     else
                     {

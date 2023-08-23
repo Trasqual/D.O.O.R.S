@@ -26,6 +26,8 @@ namespace RoomSystem.Rooms
         private List<Vector2> _possibleDirections = new() { new Vector2(-1, 0), new Vector2(1, 0), new Vector2(0, -1), new Vector2(0, 1) };
         private List<Vector2> _selectedDoorDirections = new();
 
+        private List<WallData> _wallDatas = new();
+
         private void Awake()
         {
             EventManager.Instance.AddListener<DoorSelectedEvent>(DeActivateRoom);
@@ -91,10 +93,11 @@ namespace RoomSystem.Rooms
                 var cell = _grid.Cells[i];
 
                 CreateCornerPiece(cell);
-                CreateWallPiece(cell);
                 CreateDoorPiece(cell);
                 CreateDoorSecondaryPiece(cell);
             }
+
+            CalculateWallDatas();
         }
 
         private void CreateCornerPiece(GridCell cell)
@@ -113,64 +116,148 @@ namespace RoomSystem.Rooms
             }
         }
 
-        private void CreateWallPiece(GridCell cell)
+        private void CalculateWallDatas()
         {
-            if (cell.Type == GridCellType.FrontEdge || cell.Type == GridCellType.RightEdge)
+            SearchLeftWall(0);
+            SearchRightWall(0);
+            SearchFrontWall(0);
+            SearchBackWall(0);
+
+            GenerateWalls();
+        }
+
+        private void SearchLeftWall(int startIndex)
+        {
+            WallData wallData = new();
+            wallData.Side = WallSide.Left;
+            for (int i = startIndex; i < _length; i++)
             {
-                var generatedEdgePiece = _prefabProvider.GetFullHeightWall(transform);
+                var curCell = _grid.Cells[GetIndex(0, i, _length)];
 
-                var rot = generatedEdgePiece.transform.eulerAngles;
-                if (cell.X == 0)
+                if (wallData.StartCell == null && curCell.Type == GridCellType.Edge)
                 {
-                    rot.y = 90;
+                    wallData.StartCell = curCell;
                 }
-                else if (cell.X == _width - 1)
-                {
-                    rot.y = 270;
-                }
-                else if (cell.Y == 0)
-                {
-                    rot.y = 0;
-                }
-                else if (cell.Y == _length - 1)
-                {
-                    rot.y = 180;
-                }
-                generatedEdgePiece.transform.eulerAngles = rot;
-                generatedEdgePiece.transform.localPosition = cell.Position;
-                IPlaceable item = generatedEdgePiece.GetComponent<IPlaceable>();
 
-                //cell.PlaceItem(item);
-                Visuals.Add(item);
+                if (i != startIndex && curCell.Type != GridCellType.Edge)
+                {
+                    wallData.EndCell = _grid.Cells[GetIndex(0, i - 1, _length)];
+                    _wallDatas.Add(wallData);
+                    //if (i != _length - 1)
+                    //SearchLeftWall(i - 1);
+                    break;
+                }
             }
-            else if (cell.Type == GridCellType.BackEdge || cell.Type == GridCellType.LeftEdge)
+        }
+
+        private void SearchRightWall(int startIndex)
+        {
+            WallData wallData = new();
+            wallData.Side = WallSide.Right;
+
+            for (int i = startIndex; i < _length; i++)
             {
-                var generatedEdgePiece = _prefabProvider.GetShortWall(transform);
+                var curCell = _grid.Cells[GetIndex(_width - 1, i, _length)];
 
-                var rot = generatedEdgePiece.transform.eulerAngles;
-                if (cell.X == 0)
+                if (wallData.StartCell == null && curCell.Type == GridCellType.Edge)
                 {
-                    rot.y = 90;
+                    wallData.StartCell = curCell;
                 }
-                else if (cell.X == _width - 1)
-                {
-                    rot.y = 270;
-                }
-                else if (cell.Y == 0)
-                {
-                    rot.y = 0;
-                }
-                else if (cell.Y == _length - 1)
-                {
-                    rot.y = 180;
-                }
-                generatedEdgePiece.transform.eulerAngles = rot;
-                generatedEdgePiece.transform.localPosition = cell.Position;
-                IPlaceable item = generatedEdgePiece.GetComponent<IPlaceable>();
 
-                //cell.PlaceItem(item);
-                Visuals.Add(item);
+                if (i != startIndex && curCell.Type != GridCellType.Edge)
+                {
+                    wallData.EndCell = _grid.Cells[GetIndex(_width - 1, i - 1, _length)];
+                    _wallDatas.Add(wallData);
 
+                    //if (i != _length - 1)
+                    //SearchRightWall(i - 1);
+                    break;
+                }
+            }
+        }
+
+        private void SearchFrontWall(int startIndex)
+        {
+            WallData wallData = new();
+            wallData.Side = WallSide.Front;
+            for (int i = startIndex; i < _width; i++)
+            {
+                var curCell = _grid.Cells[GetIndex(i, _length - 1, _width)];
+
+                if (wallData.StartCell == null && curCell.Type == GridCellType.Edge)
+                {
+                    wallData.StartCell = curCell;
+                }
+
+                if (i != startIndex && curCell.Type != GridCellType.Edge)
+                {
+                    wallData.EndCell = _grid.Cells[GetIndex(i - 1, _length - 1, _width)];
+                    _wallDatas.Add(wallData);
+
+                    //if (i != _width - 1)
+                    //SearchFrontWall(i - 1);
+                    break;
+                }
+            }
+        }
+
+        private void SearchBackWall(int startIndex)
+        {
+            WallData wallData = new();
+            wallData.Side = WallSide.Back;
+
+            for (int i = startIndex; i < _width; i++)
+            {
+                var curCell = _grid.Cells[GetIndex(i, 0, _width)];
+
+                if (wallData.StartCell == null && curCell.Type == GridCellType.Edge)
+                {
+                    wallData.StartCell = curCell;
+                }
+
+                if (i != startIndex && curCell.Type != GridCellType.Edge)
+                {
+                    wallData.EndCell = _grid.Cells[GetIndex(i - 1, 0, _width)];
+                    _wallDatas.Add(wallData);
+
+                    //if (i != _width - 1)
+                    //SearchBackWall(i - 1);
+                    break;
+                }
+            }
+        }
+
+        private int GetIndex(int x, int y, int size)
+        {
+            return x + y * size;
+        }
+
+        private void GenerateWalls()
+        {
+            for (int i = 0; i < _wallDatas.Count; i++)
+            {
+                GameObject wall = null;
+                var wallSize = _wallDatas[i].GetWallSize();
+                switch (_wallDatas[i].Side)
+                {
+                    case WallSide.Left:
+                        wall = _prefabProvider.GetShortWall(transform);
+                        wall.transform.eulerAngles = new Vector3(0, 90, 0);
+                        break;
+                    case WallSide.Back:
+                        wall = _prefabProvider.GetShortWall(transform);
+                        wall.transform.eulerAngles = new Vector3(0, 0, 0);
+                        break;
+                    case WallSide.Right:
+                        wall = _prefabProvider.GetFullHeightWall(transform);
+                        wall.transform.eulerAngles = new Vector3(0, 270, 0);
+                        break;
+                    case WallSide.Front:
+                        wall = _prefabProvider.GetFullHeightWall(transform);
+                        wall.transform.eulerAngles = new Vector3(0, 180, 0);
+                        break;
+                };
+                wall.transform.localScale = new Vector3(wallSize, 1, 1);
             }
         }
 
@@ -185,7 +272,6 @@ namespace RoomSystem.Rooms
                 {
                     generatedPiece = _prefabProvider.GetFullHeightDoor(transform);
                     doorSide = new Vector2(0, 1);
-
                 }
                 else if (cell.X == _width - 1 && _selectedDoorDirections.Contains(new Vector2(1, 0)))
                 {
@@ -205,7 +291,6 @@ namespace RoomSystem.Rooms
                 else
                 {
                     ChangeCellType(cell);
-                    CreateWallPiece(cell);
                 }
                 if (generatedPiece != null)
                 {
@@ -259,7 +344,6 @@ namespace RoomSystem.Rooms
                     cell.Y == 0 && !_selectedDoorDirections.Contains(new Vector2(0, -1)) || cell.X == 0 && !_selectedDoorDirections.Contains(new Vector2(-1, 0)))
                 {
                     ChangeCellType(cell);
-                    CreateWallPiece(cell);
                 }
 
                 if (generatedPiece != null)
@@ -293,22 +377,7 @@ namespace RoomSystem.Rooms
 
         private void ChangeCellType(GridCell cell)
         {
-            if (cell.X == 0)
-            {
-                cell.ChangeCellType(GridCellType.LeftEdge);
-            }
-            else if (cell.X == _width - 1)
-            {
-                cell.ChangeCellType(GridCellType.RightEdge);
-            }
-            else if (cell.Y == 0)
-            {
-                cell.ChangeCellType(GridCellType.BackEdge);
-            }
-            else if (cell.Y == _length - 1)
-            {
-                cell.ChangeCellType(GridCellType.FrontEdge);
-            }
+            cell.ChangeCellType(GridCellType.Edge);
         }
 
         public void DeActivateRoom(object data)
@@ -332,5 +401,26 @@ namespace RoomSystem.Rooms
         {
             EventManager.Instance.RemoveListener<DoorSelectedEvent>(DeActivateRoom);
         }
+    }
+
+    public struct WallData
+    {
+        public GridCell StartCell;
+        public GridCell EndCell;
+
+        public WallSide Side;
+
+        public float GetWallSize()
+        {
+            return Vector3.Distance(StartCell.Position, EndCell.Position);
+        }
+    }
+
+    public enum WallSide
+    {
+        Left,
+        Right,
+        Front,
+        Back
     }
 }

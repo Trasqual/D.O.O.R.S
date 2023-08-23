@@ -2,10 +2,7 @@ namespace GridSystem
 {
     public enum GridCellType
     {
-        FrontEdge,
-        BackEdge,
-        RightEdge,
-        LeftEdge,
+        Edge,
         FrontRightCorner,
         FrontLeftCorner,
         BackRightCorner,
