@@ -27,6 +27,7 @@ namespace RoomSystem.Rooms
         private List<Vector2> _selectedDoorDirections = new();
 
         private List<WallData> _wallDatas = new();
+        private List<GameObject> _walls = new();
 
         private void Awake()
         {
@@ -132,20 +133,22 @@ namespace RoomSystem.Rooms
             wallData.Side = WallSide.Left;
             for (int i = startIndex; i < _length; i++)
             {
-                var curCell = _grid.Cells[GetIndex(0, i, _width)];
+                var curCell = _grid.Cells[GetIndex(0, i)];
 
                 if (wallData.StartCell == null && curCell.Type == GridCellType.Edge)
                 {
                     wallData.StartCell = curCell;
                 }
 
-                if (i != startIndex && curCell.Type != GridCellType.Edge)
+                if (i != startIndex && wallData.StartCell != null && curCell.Type != GridCellType.Edge)
                 {
-                    wallData.EndCell = _grid.Cells[GetIndex(0, i - 1, _width)];
+                    wallData.EndCell = _grid.Cells[GetIndex(0, i - 1)];
                     _wallDatas.Add(wallData);
-                    //if (i != _length - 1)
-                    //SearchLeftWall(i - 1);
-                    break;
+                    if (i != _length - 1)
+                    {
+                        wallData = new();
+                        wallData.Side = WallSide.Left;
+                    }
                 }
             }
         }
@@ -157,24 +160,23 @@ namespace RoomSystem.Rooms
 
             for (int i = startIndex; i < _length; i++)
             {
-                var curCell = _grid.Cells[GetIndex(_width - 1, i, _width)];
-                var test = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                test.transform.position = curCell.Position;
+                var curCell = _grid.Cells[GetIndex(_width - 1, i)];
 
                 if (wallData.StartCell == null && curCell.Type == GridCellType.Edge)
                 {
-                    Debug.LogWarning(curCell);
                     wallData.StartCell = curCell;
                 }
 
-                if (i != startIndex && curCell.Type != GridCellType.Edge)
+                if (i != startIndex && wallData.StartCell != null && curCell.Type != GridCellType.Edge)
                 {
-                    wallData.EndCell = _grid.Cells[GetIndex(_width - 1, i - 1, _width)];
+                    wallData.EndCell = _grid.Cells[GetIndex(_width - 1, i - 1)];
                     _wallDatas.Add(wallData);
 
-                    //if (i != _length - 1)
-                    //SearchRightWall(i - 1);
-                    break;
+                    if (i != _length - 1)
+                    {
+                        wallData = new();
+                        wallData.Side = WallSide.Right;
+                    }
                 }
             }
         }
@@ -185,21 +187,23 @@ namespace RoomSystem.Rooms
             wallData.Side = WallSide.Front;
             for (int i = startIndex; i < _width; i++)
             {
-                var curCell = _grid.Cells[GetIndex(i, _length - 1, _width)];
+                var curCell = _grid.Cells[GetIndex(i, _length - 1)];
 
                 if (wallData.StartCell == null && curCell.Type == GridCellType.Edge)
                 {
                     wallData.StartCell = curCell;
                 }
 
-                if (i != startIndex && curCell.Type != GridCellType.Edge)
+                if (i != startIndex && wallData.StartCell != null && curCell.Type != GridCellType.Edge)
                 {
-                    wallData.EndCell = _grid.Cells[GetIndex(i - 1, _length - 1, _width)];
+                    wallData.EndCell = _grid.Cells[GetIndex(i - 1, _length - 1)];
                     _wallDatas.Add(wallData);
 
-                    //if (i != _width - 1)
-                    //SearchFrontWall(i - 1);
-                    break;
+                    if (i != _width - 1)
+                    {
+                        wallData = new();
+                        wallData.Side = WallSide.Front;
+                    }
                 }
             }
         }
@@ -211,28 +215,30 @@ namespace RoomSystem.Rooms
 
             for (int i = startIndex; i < _width; i++)
             {
-                var curCell = _grid.Cells[GetIndex(i, 0, _width)];
+                var curCell = _grid.Cells[GetIndex(i, 0)];
 
                 if (wallData.StartCell == null && curCell.Type == GridCellType.Edge)
                 {
                     wallData.StartCell = curCell;
                 }
 
-                if (i != startIndex && curCell.Type != GridCellType.Edge)
+                if (i != startIndex && wallData.StartCell != null && curCell.Type != GridCellType.Edge)
                 {
-                    wallData.EndCell = _grid.Cells[GetIndex(i - 1, 0, _width)];
+                    wallData.EndCell = _grid.Cells[GetIndex(i - 1, 0)];
                     _wallDatas.Add(wallData);
 
-                    //if (i != _width - 1)
-                    //SearchBackWall(i - 1);
-                    break;
+                    if (i != _width - 1)
+                    {
+                        wallData = new();
+                        wallData.Side = WallSide.Back;
+                    }
                 }
             }
         }
 
-        private int GetIndex(int x, int y, int size)
+        private int GetIndex(int x, int y)
         {
-            return x + y * size;
+            return y + x * _length;
         }
 
         private void GenerateWalls()
@@ -241,26 +247,33 @@ namespace RoomSystem.Rooms
             {
                 GameObject wall = null;
                 var wallSize = _wallDatas[i].GetWallSize();
+                var wallAngles = Vector3.zero;
                 switch (_wallDatas[i].Side)
                 {
                     case WallSide.Left:
                         wall = _prefabProvider.GetShortWall(transform);
-                        wall.transform.eulerAngles = new Vector3(0, 90, 0);
+                        wallAngles = new Vector3(0, 90, 0);
+
                         break;
                     case WallSide.Back:
                         wall = _prefabProvider.GetShortWall(transform);
-                        wall.transform.eulerAngles = new Vector3(0, 0, 0);
+                        wallAngles = new Vector3(0, 0, 0);
                         break;
                     case WallSide.Right:
                         wall = _prefabProvider.GetFullHeightWall(transform);
-                        wall.transform.eulerAngles = new Vector3(0, 270, 0);
+                        wallAngles = new Vector3(0, 270, 0);
                         break;
                     case WallSide.Front:
                         wall = _prefabProvider.GetFullHeightWall(transform);
-                        wall.transform.eulerAngles = new Vector3(0, 180, 0);
+                        wallAngles = new Vector3(0, 180, 0);
                         break;
                 };
                 wall.transform.localScale = new Vector3(wallSize, 1, 1);
+                wall.transform.eulerAngles = wallAngles;
+                wall.transform.position = _wallDatas[i].GetCenter();
+                wall.transform.parent = transform;
+                wall.gameObject.name += _wallDatas[i].Side.ToString();
+                _walls.Add(wall);
             }
         }
 
@@ -413,9 +426,14 @@ namespace RoomSystem.Rooms
 
         public WallSide Side;
 
+        public Vector3 GetCenter()
+        {
+            return (StartCell.Position + EndCell.Position) * 0.5f;
+        }
+
         public float GetWallSize()
         {
-            return Vector3.Distance(StartCell.Position, EndCell.Position);
+            return Vector3.Distance(StartCell.Position, EndCell.Position) + 1;
         }
     }
 

@@ -32,7 +32,7 @@ namespace RoomSystem.Creation
 
         private void Awake()
         {
-            Random.InitState(_randomSeed);
+            //Random.InitState(_randomSeed);
             EventManager.Instance.AddListener<DoorSelectedEvent>(OnDoorSelected);
         }
 

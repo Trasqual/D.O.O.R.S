@@ -55,8 +55,11 @@ namespace GridSystem
                     {
                         cellType = GridCellType.Central;
                     }
-
-                    Cells.Add(new GridCell(i, j, new Vector3(-_width / 2f + i + 0.5f, 0f, -_length / 2f + j + 0.5f), cellType));
+                    var cellToAdd = new GridCell(i, j, new Vector3(-_width / 2f + i + 0.5f, 0f, -_length / 2f + j + 0.5f), cellType);
+                    Cells.Add(cellToAdd);
+                    //var s = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    //s.transform.position = new Vector3(-_width / 2f + i + 0.5f, 0f, -_length / 2f + j + 0.5f);
+                    //s.name = Cells.IndexOf(cellToAdd).ToString();
                 }
             }
         }
