@@ -1,4 +1,4 @@
-namespace RoomSystem.Rooms
+namespace GamePlay.RoomSystem.Rooms
 {
     public class TreasureRoom : Room
     {

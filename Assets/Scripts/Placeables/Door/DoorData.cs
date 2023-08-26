@@ -1,8 +1,8 @@
-using RoomSystem.Creation;
-using RoomSystem.Rooms;
+using GamePlay.RoomSystem.Creation;
+using GamePlay.RoomSystem.Rooms;
 using UnityEngine;
 
-namespace RoomSystem.Doors
+namespace GamePlay.RoomSystem.Placeables.Doors
 {
     public struct DoorData
     {

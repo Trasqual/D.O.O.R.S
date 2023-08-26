@@ -1,8 +1,10 @@
-
-public enum DirectionType
+namespace GridSystem.Directions
 {
-    Up,
-    Down,
-    Left,
-    Right
+    public enum DirectionType
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
 }

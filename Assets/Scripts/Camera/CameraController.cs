@@ -1,7 +1,8 @@
 using Cinemachine;
+using GamePlay.EventSystem;
 using UnityEngine;
 
-namespace CameraSystem
+namespace GamePlay.CameraSystem
 {
     public class CameraController : MonoBehaviour
     {

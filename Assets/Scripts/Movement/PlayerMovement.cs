@@ -1,9 +1,9 @@
 using DG.Tweening;
-using MovementSystem;
+using GamePlay.EventSystem;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace MovementSystem.PlayerMovements
+namespace GamePlay.MovementSystem.PlayerMovements
 {
     [RequireComponent(typeof(NavMeshAgent))]
     public class PlayerMovement : MovementBase
@@ -45,6 +45,7 @@ namespace MovementSystem.PlayerMovements
                     _canMove = true;
                     _agent.enabled = true;
                     _agent.isStopped = false;
+                    _movementVector = Vector3.zero;
                     _moveAmount = Vector3.zero;
                 });
             }

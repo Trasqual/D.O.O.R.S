@@ -1,14 +1,14 @@
+using GamePlay.EventSystem;
 using GridSystem;
-using RoomSystem.Creation;
-using RoomSystem.Doors;
-using RoomSystem.Props;
+using GamePlay.RoomSystem.Creation;
+using GamePlay.RoomSystem.Placeables.Doors;
+using GamePlay.RoomSystem.Placeables;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Grid = GridSystem.Grid;
 
-namespace RoomSystem.Rooms
+namespace GamePlay.RoomSystem.Rooms
 {
     public class Room : MonoBehaviour
     {

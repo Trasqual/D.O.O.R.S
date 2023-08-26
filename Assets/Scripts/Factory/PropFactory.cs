@@ -1,7 +1,7 @@
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
-namespace RoomSystem.Props
+namespace GamePlay.RoomSystem.Placeables
 {
     public class PropFactory : MonoBehaviour
     {

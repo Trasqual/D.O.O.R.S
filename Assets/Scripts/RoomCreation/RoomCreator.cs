@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
-using RoomSystem.Rooms;
-using RoomSystem.Doors;
-using RoomSystem.Props;
+using GamePlay.RoomSystem.Rooms;
+using GamePlay.RoomSystem.Placeables.Doors;
+using GamePlay.RoomSystem.Placeables;
+using GamePlay.EventSystem;
 
-namespace RoomSystem.Creation
+namespace GamePlay.RoomSystem.Creation
 {
     public class RoomCreator : MonoBehaviour
     {

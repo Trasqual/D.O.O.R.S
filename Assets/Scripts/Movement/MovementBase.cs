@@ -1,7 +1,7 @@
 using InputSystem;
 using UnityEngine;
 
-namespace MovementSystem
+namespace GamePlay.MovementSystem
 {
     public abstract class MovementBase : MonoBehaviour
     {

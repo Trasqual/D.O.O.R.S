@@ -2,7 +2,10 @@ using GridSystem;
 using UnityEngine;
 using System.Collections.Generic;
 
-public class CornerWall : MonoBehaviour, IPlaceable
+namespace GamePlay.RoomSystem.Placeables
 {
-    public List<GridCell> GridCells { get; set; } = new();
+    public class CornerWall : MonoBehaviour, IPlaceable
+    {
+        public List<GridCell> GridCells { get; set; } = new();
+    }
 }

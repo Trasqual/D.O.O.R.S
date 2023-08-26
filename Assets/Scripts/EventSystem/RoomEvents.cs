@@ -1,16 +1,19 @@
-using RoomSystem.Doors;
+using GamePlay.RoomSystem.Placeables.Doors;
 using UnityEngine;
 
-public class DoorSelectedEvent
+namespace GamePlay.EventSystem
 {
-    public DoorData DoorData;
-}
+    public class DoorSelectedEvent
+    {
+        public DoorData DoorData;
+    }
 
-public class RoomsAreSlidingEvent
-{
-    public Vector3 SlideAmount;
-}
+    public class RoomsAreSlidingEvent
+    {
+        public Vector3 SlideAmount;
+    }
 
-public class RoomSlidingEndedEvent
-{
+    public class RoomSlidingEndedEvent
+    {
+    }
 }

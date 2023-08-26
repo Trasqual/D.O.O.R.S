@@ -1,4 +1,4 @@
-namespace RoomSystem.Creation
+namespace GamePlay.RoomSystem.Creation
 {
     public enum RoomType
     {

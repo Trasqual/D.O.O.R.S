@@ -1,11 +1,12 @@
+using GamePlay.EventSystem;
 using GridSystem;
-using MovementSystem.PlayerMovements;
-using RoomSystem.Creation;
-using RoomSystem.Rooms;
+using GamePlay.MovementSystem.PlayerMovements;
+using GamePlay.RoomSystem.Creation;
+using GamePlay.RoomSystem.Rooms;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RoomSystem.Doors
+namespace GamePlay.RoomSystem.Placeables.Doors
 {
     public class Door : MonoBehaviour, IPlaceable
     {
