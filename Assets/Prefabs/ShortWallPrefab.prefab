@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2158811561456249589}
   - component: {fileID: 7791440005094304402}
+  - component: {fileID: -4693974834861620158}
   m_Layer: 0
   m_Name: ShortWallPrefab
   m_TagString: Untagged
@@ -49,6 +50,18 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &-4693974834861620158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2158811561456249586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca4af5204a132e48834594c17c8c138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2158811561803996438
 GameObject:
   m_ObjectHideFlags: 0
