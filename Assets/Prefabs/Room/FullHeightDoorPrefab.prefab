@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848916825660716084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9, y: 1, z: 0}
+  m_LocalPosition: {x: 0.9, y: 5, z: 0}
   m_LocalScale: {x: 0.2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4833492352765351221}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9, y: 1, z: 0}
+  m_LocalPosition: {x: -0.9, y: 5, z: 0}
   m_LocalScale: {x: 0.2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 6046338321817723897}
   - component: {fileID: 7539891460186630076}
   - component: {fileID: 505703178891941614}
+  - component: {fileID: -1095525587844929409}
   m_Layer: 0
   m_Name: FullHeightDoorPrefab
   m_TagString: Untagged
@@ -243,3 +244,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f92aeca79f0624ab8cb8a616813d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 0}
+--- !u!114 &-1095525587844929409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5304694142301615059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff0a46cc8ae813a49a13fb105cdfbd1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fadeInTime: 0.25
+  _fallDuration: 0.5
+  _fallEase: 30
+  _wallAppearParticlePrefab: {fileID: 0}
+  _minParticleDistance: 3
+  _meshes: []

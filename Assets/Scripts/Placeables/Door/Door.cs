@@ -5,11 +5,14 @@ using GamePlay.RoomSystem.Creation;
 using GamePlay.RoomSystem.Rooms;
 using System.Collections.Generic;
 using UnityEngine;
+using GamePlay.AnimationSystem;
 
 namespace GamePlay.RoomSystem.Placeables.Doors
 {
-    public class Door : MonoBehaviour, IPlaceable
+    public class Door : MonoBehaviour, IPlaceable, IAnimateable
     {
+        [SerializeField] private AnimationBase _animation;
+
         private Vector2 _doorSide;
         private RoomType _roomType;
         private Room _room;
@@ -39,6 +42,11 @@ namespace GamePlay.RoomSystem.Placeables.Doors
             {
                 SelectDoor();
             }
+        }
+
+        public void Animate()
+        {
+            _animation.Animate();
         }
     }
 }

@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9075670557622030065}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 9075670557835802898}
   - component: {fileID: -875106648372361012}
   - component: {fileID: 18416309459521590}
+  - component: {fileID: 749177428662572304}
   m_Layer: 0
   m_Name: FullHeightWallPrefab
   m_TagString: Untagged
@@ -159,3 +160,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ca4af5204a132e48834594c17c8c138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &749177428662572304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9075670557835802901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff0a46cc8ae813a49a13fb105cdfbd1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fadeInTime: 0.25
+  _fallDuration: 0.5
+  _fallEase: 30
+  _wallAppearParticlePrefab: {fileID: 0}
+  _minParticleDistance: 3
+  _meshes: []

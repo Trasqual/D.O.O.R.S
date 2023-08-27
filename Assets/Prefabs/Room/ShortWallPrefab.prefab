@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2158811561456249589}
   - component: {fileID: 7791440005094304402}
   - component: {fileID: -4693974834861620158}
+  - component: {fileID: 1302828556200302449}
   m_Layer: 0
   m_Name: ShortWallPrefab
   m_TagString: Untagged
@@ -62,6 +63,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ca4af5204a132e48834594c17c8c138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1302828556200302449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2158811561456249586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff0a46cc8ae813a49a13fb105cdfbd1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fadeInTime: 0.25
+  _fallDuration: 0.5
+  _fallEndPosition: 0.1
+  _fallEase: 30
+  _wallAppearParticlePrefab: {fileID: 0}
+  _minParticleDistance: 3
+  _meshes: []
 --- !u!1 &2158811561803996438
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2158811561803996438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
