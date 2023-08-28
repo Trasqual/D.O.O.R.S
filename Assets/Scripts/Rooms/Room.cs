@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Grid = GridSystem.Grid;
+using GamePlay.AnimationSystem;
+using System.Collections;
 
 namespace GamePlay.RoomSystem.Rooms
 {
@@ -22,7 +24,6 @@ namespace GamePlay.RoomSystem.Rooms
 
         public List<IPlaceable> Items = new();
         public List<GameObject> Doors = new();
-        public List<IPlaceable> Visuals = new();
 
         private List<Vector2> _possibleDirections = new() { new Vector2(-1, 0), new Vector2(1, 0), new Vector2(0, -1), new Vector2(0, 1) };
         private List<Vector2> _selectedDoorDirections = new();
@@ -33,6 +34,7 @@ namespace GamePlay.RoomSystem.Rooms
         private void Awake()
         {
             EventManager.Instance.AddListener<DoorSelectedEvent>(DeActivateRoom);
+            EventManager.Instance.AddListener<RoomSlidingEndedEvent>(AnimateRoomUnlock);
         }
 
         public void Init(int width, int length, int doorCount, Vector2 previousRoomDirection, PropFactory prefabProvider)
@@ -375,7 +377,7 @@ namespace GamePlay.RoomSystem.Rooms
                     IPlaceable item = generatedPiece.GetComponent<IPlaceable>();
 
                     cell.TryPlaceItem(item);
-                    Visuals.Add(item);
+                    Items.Add(item);
                 }
             }
         }
@@ -413,14 +415,29 @@ namespace GamePlay.RoomSystem.Rooms
 
         }
 
-        public virtual void AnimateRoomUnlock()
+        public virtual void AnimateRoomUnlock(object eventData)
         {
+            StartCoroutine(SpawnAnimationCo());
+        }
 
+        private IEnumerator SpawnAnimationCo()
+        {
+            foreach (var item in Items)
+            {
+                if (item is IAnimateable animateableItem)
+                {
+                    animateableItem.Animate();
+                    yield return new WaitForSeconds(0.2f);
+                }
+            }
+
+            EventManager.Instance.TriggerEvent<RoomSpawnAnimationFinishedEvent>();
         }
 
         private void OnDisable()
         {
             EventManager.Instance.RemoveListener<DoorSelectedEvent>(DeActivateRoom);
+            EventManager.Instance.RemoveListener<RoomSlidingEndedEvent>(AnimateRoomUnlock);
         }
     }
 

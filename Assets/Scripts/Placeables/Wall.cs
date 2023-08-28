@@ -7,9 +7,9 @@ namespace GamePlay.RoomSystem.Placeables
 {
     public class Wall : MonoBehaviour, IPlaceable, IAnimateable
     {
-        public List<GridCell> GridCells { get; set; } = new();
+        [SerializeField] private AnimationBase _animation;
 
-        private AnimationBase _animation;
+        public List<GridCell> GridCells { get; set; } = new();
 
         public void Animate()
         {

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9075670557622030078}
   - component: {fileID: 9075670557622030077}
   - component: {fileID: 9075670557622030076}
-  - component: {fileID: 9075670557622030079}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9075670557622030079
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9075670557622030065}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9075670557835802901
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,6 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9075670557835802898}
+  - component: {fileID: 6749226215250161014}
   - component: {fileID: -875106648372361012}
   - component: {fileID: 18416309459521590}
   - component: {fileID: 749177428662572304}
@@ -132,6 +119,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6749226215250161014
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9075670557835802901}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &-875106648372361012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ca4af5204a132e48834594c17c8c138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 749177428662572304}
 --- !u!114 &749177428662572304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +175,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fadeInTime: 0.25
   _fallDuration: 0.5
+  _fallEndPosition: 1
   _fallEase: 30
-  _wallAppearParticlePrefab: {fileID: 0}
+  _wallAppearParticlePrefab: {fileID: 19865610, guid: a07608802ac497743a7f19f6633fdd70,
+    type: 3}
   _minParticleDistance: 3
-  _meshes: []
+  _meshes:
+  - {fileID: 9075670557622030076}

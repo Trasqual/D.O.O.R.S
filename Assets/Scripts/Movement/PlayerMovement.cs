@@ -16,13 +16,13 @@ namespace GamePlay.MovementSystem.PlayerMovements
         {
             base.Awake();
             EventManager.Instance.AddListener<RoomsAreSlidingEvent>(OnRoomsAreSliding);
-            EventManager.Instance.AddListener<RoomSlidingEndedEvent>(OnRoomSlidingEnded);
+            EventManager.Instance.AddListener<RoomSpawnAnimationFinishedEvent>(OnRoomSpawnAnimationFinished);
         }
 
         private void OnDestroy()
         {
             EventManager.Instance.RemoveListener<RoomsAreSlidingEvent>(OnRoomsAreSliding);
-            EventManager.Instance.RemoveListener<RoomSlidingEndedEvent>(OnRoomSlidingEnded);
+            EventManager.Instance.RemoveListener<RoomSpawnAnimationFinishedEvent>(OnRoomSpawnAnimationFinished);
         }
 
         private void OnRoomsAreSliding(object data)
@@ -36,7 +36,7 @@ namespace GamePlay.MovementSystem.PlayerMovements
             transform.DOMove(_moveAmount, 3f).SetRelative();
         }
 
-        private void OnRoomSlidingEnded(object data)
+        private void OnRoomSpawnAnimationFinished(object data)
         {
             if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 1, 1))
             {
