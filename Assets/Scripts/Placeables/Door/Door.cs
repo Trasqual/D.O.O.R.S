@@ -6,6 +6,7 @@ using GamePlay.RoomSystem.Rooms;
 using System.Collections.Generic;
 using UnityEngine;
 using GamePlay.AnimationSystem;
+using System;
 
 namespace GamePlay.RoomSystem.Placeables.Doors
 {
@@ -20,7 +21,7 @@ namespace GamePlay.RoomSystem.Placeables.Doors
 
         public List<GridCell> GridCells { get; set; } = new();
 
-        public void Init(Vector2 doorSide, RoomType roomType, Room room, bool isActive)
+        public void Initialize(Vector2 doorSide, RoomType roomType, Room room, bool isActive)
         {
             _doorSide = doorSide;
             _roomType = roomType;
@@ -44,9 +45,13 @@ namespace GamePlay.RoomSystem.Placeables.Doors
             }
         }
 
-        public void Animate()
+        public void Animate(Action OnComplete)
         {
-            _animation.Animate();
+            _animation.Animate(() =>
+            {
+                OnComplete?.Invoke();
+                //PlayParticles
+            });
         }
 
         public void PrepareForAnimation()

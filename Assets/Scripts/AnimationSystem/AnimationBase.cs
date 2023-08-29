@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace GamePlay.AnimationSystem
@@ -5,6 +6,6 @@ namespace GamePlay.AnimationSystem
     public abstract class AnimationBase : MonoBehaviour, IAnimateable
     {
         public abstract void PrepareForAnimation();
-        public abstract void Animate();
+        public abstract void Animate(Action OnComplete);
     }
 }

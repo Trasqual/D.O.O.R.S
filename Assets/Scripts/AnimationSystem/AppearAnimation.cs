@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -43,7 +44,7 @@ namespace GamePlay.AnimationSystem
             }
         }
 
-        public override void Animate()
+        public override void Animate(Action OnComplete)
         {
             _sequence = DOTween.Sequence();
             for (int i = 0; i < _meshes.Length; i++)

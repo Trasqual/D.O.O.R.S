@@ -302,7 +302,7 @@ namespace GamePlay.RoomSystem.Rooms
                     }
                 }
 
-                wall.transform.localScale = new Vector3(wallSize, 1, 1);
+                wall.GetComponent<Wall>().Initialize(wallSize);
                 wall.transform.eulerAngles = wallAngles;
                 wall.transform.position = _wallDatas[i].GetCenter();
                 wall.transform.parent = transform;
@@ -351,7 +351,7 @@ namespace GamePlay.RoomSystem.Rooms
                     {
                         doorIsActive = false;
                     }
-                    door.Init(doorSide, RoomType.Creature, this, doorIsActive);
+                    door.Initialize(doorSide, RoomType.Creature, this, doorIsActive);
 
                     Doors.Add(generatedPiece);
 
@@ -440,7 +440,7 @@ namespace GamePlay.RoomSystem.Rooms
             {
                 if (item is IAnimateable animateableItem)
                 {
-                    animateableItem.Animate();
+                    animateableItem.Animate(null);
                     yield return new WaitForSeconds(0.07f);
                 }
             }

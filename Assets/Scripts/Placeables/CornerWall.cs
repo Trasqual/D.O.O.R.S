@@ -2,6 +2,7 @@ using GridSystem;
 using UnityEngine;
 using System.Collections.Generic;
 using GamePlay.AnimationSystem;
+using System;
 
 namespace GamePlay.RoomSystem.Placeables
 {
@@ -11,9 +12,13 @@ namespace GamePlay.RoomSystem.Placeables
 
         public List<GridCell> GridCells { get; set; } = new();
 
-        public void Animate()
+        public void Animate(Action OnComplete)
         {
-            _animation.Animate();
+            _animation.Animate(() =>
+            {
+                OnComplete?.Invoke();
+                //PlayParticles
+            });
         }
 
         public void PrepareForAnimation()
