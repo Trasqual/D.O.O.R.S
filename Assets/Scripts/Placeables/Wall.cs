@@ -22,7 +22,6 @@ namespace GamePlay.RoomSystem.Placeables
             var colSize = _collider.size;
             colSize.x *= size;
             _collider.size = colSize;
-            PrepareForAnimation();
         }
 
         public void Animate(Action OnComplete)

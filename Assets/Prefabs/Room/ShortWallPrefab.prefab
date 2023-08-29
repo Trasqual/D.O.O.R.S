@@ -78,6 +78,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: 1302828556200302449}
+  _wallVisual: {fileID: 2158811561803996441}
+  _collider: {fileID: 5892525085192471981}
 --- !u!114 &1302828556200302449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,11 +94,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fadeInTime: 0.25
   _fallDuration: 0.5
+  _fallStartPosition: 5
   _fallEndPosition: 0.1
   _fallEase: 30
-  _wallAppearParticlePrefab: {fileID: 19865610, guid: a07608802ac497743a7f19f6633fdd70,
-    type: 3}
-  _minParticleDistance: 3
   _meshes:
   - {fileID: 2158811561803996443}
 --- !u!1 &2158811561803996438

@@ -60,6 +60,7 @@ namespace GamePlay.RoomSystem.Creation
         public void CreateInitialRoom()
         {
             CreateRoom(RoomType.Initial);
+            _currentRoom.GenerateNavMesh();
         }
 
         public void CreateRoom(RoomType type)

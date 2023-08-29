@@ -9,6 +9,7 @@ using UnityEngine.AI;
 using Grid = GridSystem.Grid;
 using GamePlay.AnimationSystem;
 using System.Collections;
+using DG.Tweening;
 
 namespace GamePlay.RoomSystem.Rooms
 {
@@ -34,7 +35,7 @@ namespace GamePlay.RoomSystem.Rooms
         private void Awake()
         {
             EventManager.Instance.AddListener<DoorSelectedEvent>(DeActivateRoom);
-            EventManager.Instance.AddListener<RoomSlidingEndedEvent>(AnimateRoomUnlock);
+            EventManager.Instance.AddListener<RoomSlidingEndedEvent>(OnRoomSlidingFinished);
         }
 
         public void Init(int width, int length, int doorCount, Vector2 previousRoomDirection, PropFactory prefabProvider)
@@ -47,7 +48,6 @@ namespace GamePlay.RoomSystem.Rooms
             _grid = new Grid(width, length);
             GetDoorDirections();
             FillRoom();
-            GetComponent<NavMeshSurface>().BuildNavMesh();
         }
 
         private void GetDoorDirections()
@@ -410,12 +410,20 @@ namespace GamePlay.RoomSystem.Rooms
         {
             var room = ((DoorSelectedEvent)data).DoorData.Room;
             if (room == this)
+            {
                 gameObject.SetActive(false);
+                GetComponent<NavMeshSurface>().RemoveData();
+            }
         }
 
         private void GenerateProps()
         {
 
+        }
+
+        public void GenerateNavMesh()
+        {
+            GetComponent<NavMeshSurface>().BuildNavMesh();
         }
 
         public void PrepareForAnimation()
@@ -429,7 +437,7 @@ namespace GamePlay.RoomSystem.Rooms
             }
         }
 
-        public virtual void AnimateRoomUnlock(object eventData)
+        public virtual void OnRoomSlidingFinished(object eventData)
         {
             StartCoroutine(SpawnAnimationCo());
         }
@@ -444,14 +452,17 @@ namespace GamePlay.RoomSystem.Rooms
                     yield return new WaitForSeconds(0.07f);
                 }
             }
-
-            EventManager.Instance.TriggerEvent<RoomSpawnAnimationFinishedEvent>();
+            DOVirtual.DelayedCall(0.5f, () =>
+            {
+                GenerateNavMesh();
+                EventManager.Instance.TriggerEvent<RoomSpawnAnimationFinishedEvent>();
+            });
         }
 
         private void OnDisable()
         {
             EventManager.Instance.RemoveListener<DoorSelectedEvent>(DeActivateRoom);
-            EventManager.Instance.RemoveListener<RoomSlidingEndedEvent>(AnimateRoomUnlock);
+            EventManager.Instance.RemoveListener<RoomSlidingEndedEvent>(OnRoomSlidingFinished);
         }
     }
 
