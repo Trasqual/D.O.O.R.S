@@ -12,13 +12,13 @@ namespace GamePlay.CameraSystem
         private void Start()
         {
             EventManager.Instance.AddListener<DoorSelectedEvent>(OnDoorSelected);
-            EventManager.Instance.AddListener<RoomSlidingEndedEvent>(OnRoomSlidingEnded);
+            EventManager.Instance.AddListener<RoomSpawnAnimationFinishedEvent>(OnRoomSpawnAnimationFinished);
         }
 
         private void OnDestroy()
         {
             EventManager.Instance.RemoveListener<DoorSelectedEvent>(OnDoorSelected);
-            EventManager.Instance.RemoveListener<RoomSlidingEndedEvent>(OnRoomSlidingEnded);
+            EventManager.Instance.RemoveListener<RoomSpawnAnimationFinishedEvent>(OnRoomSpawnAnimationFinished);
         }
 
         private void OnDoorSelected(object data)
@@ -27,7 +27,7 @@ namespace GamePlay.CameraSystem
             _roomCam.gameObject.SetActive(true);
         }
 
-        private void OnRoomSlidingEnded(object data)
+        private void OnRoomSpawnAnimationFinished(object data)
         {
             _roomCam.gameObject.SetActive(false);
             _playerCam.gameObject.SetActive(true);

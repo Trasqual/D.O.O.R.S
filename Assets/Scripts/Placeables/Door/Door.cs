@@ -48,5 +48,10 @@ namespace GamePlay.RoomSystem.Placeables.Doors
         {
             _animation.Animate();
         }
+
+        public void PrepareForAnimation()
+        {
+            _animation.PrepareForAnimation();
+        }
     }
 }

@@ -53,6 +53,7 @@ namespace GamePlay.RoomSystem.Creation
             _exitSide = _selectedDoorData.DoorSide;
             _lastRoom = _selectedDoorData.Room;
             CreateRoom(_selectedDoorData.RoomType);
+            _currentRoom.PrepareForAnimation();
             StartCoroutine(SlideRooms());
         }
 

@@ -15,5 +15,10 @@ namespace GamePlay.RoomSystem.Placeables
         {
             _animation.Animate();
         }
+
+        public void PrepareForAnimation()
+        {
+            _animation.PrepareForAnimation();
+        }
     }
 }

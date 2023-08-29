@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950548967366119234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9, y: 5, z: 0}
+  m_LocalPosition: {x: 0.9, y: 0.1, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6308884053447831107}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9, y: 5, z: 0}
+  m_LocalPosition: {x: -0.9, y: 0.1, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -259,6 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fadeInTime: 0.25
   _fallDuration: 0.5
+  _fallStartPosition: 5
   _fallEndPosition: 0.1
   _fallEase: 30
   _wallAppearParticlePrefab: {fileID: 19865610, guid: a07608802ac497743a7f19f6633fdd70,

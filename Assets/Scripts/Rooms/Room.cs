@@ -106,18 +106,20 @@ namespace GamePlay.RoomSystem.Rooms
 
         private void CreateCornerPiece(GridCell cell)
         {
+            GameObject generatedCornerPiece = null;
             if (cell.Type == GridCellType.FrontRightCorner || cell.Type == GridCellType.FrontLeftCorner || cell.Type == GridCellType.BackRightCorner)
             {
-                var generatedCornerPiece = _prefabProvider.GetFullHeightWallCorner(transform);
-                generatedCornerPiece.transform.localPosition = cell.Position;
-                cell.TryPlaceItem(generatedCornerPiece.GetComponent<IPlaceable>());
+                generatedCornerPiece = _prefabProvider.GetFullHeightWallCorner(transform);
             }
             else if (cell.Type == GridCellType.BackLeftCorner)
             {
-                var generatedCornerPiece = _prefabProvider.GetShortWallCorner(transform);
-                generatedCornerPiece.transform.localPosition = cell.Position;
-                cell.TryPlaceItem(generatedCornerPiece.GetComponent<IPlaceable>());
+                generatedCornerPiece = _prefabProvider.GetShortWallCorner(transform);
             }
+            if (generatedCornerPiece == null) return;
+            generatedCornerPiece.transform.localPosition = cell.Position;
+            var placeable = generatedCornerPiece.GetComponent<IPlaceable>();
+            cell.TryPlaceItem(placeable);
+            Items.Add(placeable);
         }
 
         private void CalculateWallDatas()
@@ -306,6 +308,7 @@ namespace GamePlay.RoomSystem.Rooms
                 wall.transform.parent = transform;
                 wall.gameObject.name += _wallDatas[i].Side.ToString();
                 _walls.Add(wall);
+                Items.Add(wall.GetComponent<IPlaceable>());
             }
         }
 
@@ -415,6 +418,17 @@ namespace GamePlay.RoomSystem.Rooms
 
         }
 
+        public void PrepareForAnimation()
+        {
+            foreach (var item in Items)
+            {
+                if (item is IAnimateable animateableItem)
+                {
+                    animateableItem.PrepareForAnimation();
+                }
+            }
+        }
+
         public virtual void AnimateRoomUnlock(object eventData)
         {
             StartCoroutine(SpawnAnimationCo());
@@ -427,7 +441,7 @@ namespace GamePlay.RoomSystem.Rooms
                 if (item is IAnimateable animateableItem)
                 {
                     animateableItem.Animate();
-                    yield return new WaitForSeconds(0.2f);
+                    yield return new WaitForSeconds(0.07f);
                 }
             }
 
