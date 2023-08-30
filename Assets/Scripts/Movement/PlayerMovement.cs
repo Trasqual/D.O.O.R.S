@@ -38,21 +38,17 @@ namespace GamePlay.MovementSystem.PlayerMovements
 
         private void OnRoomSpawnAnimationFinished(object data)
         {
-            DOVirtual.DelayedCall(1.5f, () =>
+            if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 100, 1))
             {
-                if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 1, 1))
+                transform.DOMove(hit.position - _moveAmount.normalized * 2f, 1f).OnComplete(() =>
                 {
-                    Debug.LogWarning("found navmesh");
-                    transform.DOMove(hit.position - _moveAmount.normalized * 2f, 1f).OnComplete(() =>
-                    {
-                        _canMove = true;
-                        _agent.enabled = true;
-                        _agent.isStopped = false;
-                        _movementVector = Vector3.zero;
-                        _moveAmount = Vector3.zero;
-                    });
-                }
-            });
+                    _canMove = true;
+                    _agent.enabled = true;
+                    _agent.isStopped = false;
+                    _movementVector = Vector3.zero;
+                    _moveAmount = Vector3.zero;
+                });
+            }
         }
 
         public override void Move()
