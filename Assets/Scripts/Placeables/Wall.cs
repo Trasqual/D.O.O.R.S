@@ -1,4 +1,5 @@
 using GamePlay.AnimationSystem;
+using GamePlay.Particles;
 using GridSystem;
 using System;
 using System.Collections.Generic;
@@ -29,13 +30,28 @@ namespace GamePlay.RoomSystem.Placeables
             _animation.Animate(() =>
             {
                 OnComplete?.Invoke();
-                //PlayParticles
+                PlaySpawnParticles();
             });
         }
 
         public void PrepareForAnimation()
         {
             _animation.PrepareForAnimation();
+        }
+
+        private void PlaySpawnParticles()
+        {
+            var size = _wallVisual.transform.localScale.x;
+            var count = Mathf.CeilToInt(size / 3f);
+            var particlePositions = ObjectSpreader.GetLineSpreadPosition(size, count);
+
+            for (int i = 0; i < count; i++)
+            {
+                var particle = ParticleManager.Instance.GetWallSpawnParticle();
+                particle.transform.SetParent(transform);
+                particle.transform.localPosition = new Vector3(particlePositions[i], 0f, 0f);
+                particle.Play();
+            }
         }
     }
 }
