@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GamePlay.AnimationSystem;
 using System;
+using GamePlay.Particles;
 
 namespace GamePlay.RoomSystem.Placeables.Doors
 {
@@ -50,13 +51,21 @@ namespace GamePlay.RoomSystem.Placeables.Doors
             _animation.Animate(() =>
             {
                 OnComplete?.Invoke();
-                //PlayParticles
+                PlaySpawnParticles();
             });
         }
 
         public void PrepareForAnimation()
         {
             _animation.PrepareForAnimation();
+        }
+
+        private void PlaySpawnParticles()
+        {
+            var particle = ParticleManager.Instance.GetWallSpawnParticle();
+            particle.transform.SetParent(transform);
+            particle.transform.localPosition = Vector3.zero;
+            particle.Play();
         }
     }
 }

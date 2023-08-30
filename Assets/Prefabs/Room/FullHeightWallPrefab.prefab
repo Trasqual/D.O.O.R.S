@@ -179,6 +179,6 @@ MonoBehaviour:
   _fallDuration: 0.5
   _fallStartPosition: 5
   _fallEndPosition: 1
-  _fallEase: 30
+  _fallEase: 11
   _meshes:
   - {fileID: 9075670557622030076}

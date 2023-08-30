@@ -177,9 +177,6 @@ MonoBehaviour:
   _fallDuration: 0.5
   _fallStartPosition: 5
   _fallEndPosition: 0.1
-  _fallEase: 30
-  _wallAppearParticlePrefab: {fileID: 19865610, guid: a07608802ac497743a7f19f6633fdd70,
-    type: 3}
-  _minParticleDistance: 3
+  _fallEase: 11
   _meshes:
   - {fileID: 6329156333050121273}
