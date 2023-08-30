@@ -30,8 +30,8 @@ namespace GamePlay.AnimationSystem
             _sequence = DOTween.Sequence();
             for (int i = 0; i < _meshes.Length; i++)
             {
-                _sequence.Append(_meshes[i].material.DOFade(1f, _fadeInTime));
-                _sequence.Join(_meshes[i].transform.DOLocalMoveY(_fallEndPosition, _fallDuration).SetEase(_fallEase));
+                _sequence.Insert(0f, _meshes[i].material.DOFade(1f, _fadeInTime));
+                _sequence.Insert(0f, _meshes[i].transform.DOLocalMoveY(_fallEndPosition, _fallDuration).SetEase(_fallEase));
             }
             _sequence.OnComplete(() => OnComplete?.Invoke());
         }
