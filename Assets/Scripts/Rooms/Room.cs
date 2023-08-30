@@ -455,6 +455,9 @@ namespace GamePlay.RoomSystem.Rooms
             DOVirtual.DelayedCall(0.5f, () =>
             {
                 GenerateNavMesh();
+            });
+            DOVirtual.DelayedCall(1.5f, () =>
+            {
                 EventManager.Instance.TriggerEvent<RoomSpawnAnimationFinishedEvent>();
             });
         }

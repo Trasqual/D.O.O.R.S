@@ -20,4 +20,8 @@ namespace GamePlay.EventSystem
     public class RoomSpawnAnimationFinishedEvent
     {
     }
+
+    public class CameraIsInPositionForRoomCreationEvent
+    {
+    }
 }
