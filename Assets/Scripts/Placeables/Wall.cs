@@ -42,16 +42,26 @@ namespace GamePlay.RoomSystem.Placeables
         private void PlaySpawnParticles()
         {
             var size = _wallVisual.transform.localScale.x;
-            var count = Mathf.CeilToInt(size / 3f);
-            var particlePositions = ObjectSpreader.GetLineSpreadPosition(size, count);
 
-            for (int i = 0; i < count; i++)
+            var particle = ParticleManager.Instance.GetWallSpawnParticle();
+            particle.transform.SetParent(transform);
+            particle.transform.localPosition = Vector3.zero;
+            particle.transform.rotation = transform.rotation;
+
+            var childSystems = particle.GetComponentsInChildren<ParticleSystem>();
+            foreach (var part in childSystems)
             {
-                var particle = ParticleManager.Instance.GetWallSpawnParticle();
-                particle.transform.SetParent(transform);
-                particle.transform.localPosition = new Vector3(particlePositions[i], 0f, 0f);
-                particle.Play();
+                var t = Mathf.InverseLerp(1, 70, size);
+                var emission = part.emission;
+                var burst = emission.GetBurst(0);
+                burst.count = Mathf.CeilToInt(Mathf.Lerp(30f, 200f, t));
+                emission.SetBurst(0, burst);
+
+                var shape = part.shape;
+                shape.scale = new Vector3(size, 2f, 0f);
             }
+
+            particle.Play();
         }
     }
 }
