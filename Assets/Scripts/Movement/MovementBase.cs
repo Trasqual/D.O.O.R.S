@@ -1,4 +1,4 @@
-using InputSystem;
+using GamePlay.InputSystem;
 using UnityEngine;
 
 namespace GamePlay.MovementSystem
@@ -12,12 +12,7 @@ namespace GamePlay.MovementSystem
 
         protected virtual void Awake()
         {
-            _inputManager.OnInputDrag += OnInputDrag;
-        }
 
-        private void OnInputDrag(Vector3 input)
-        {
-            _movementVector = input;
         }
 
         public abstract void Move();

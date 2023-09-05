@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 
-namespace InputSystem
+namespace GamePlay.InputSystem
 {
     public abstract class InputBase : MonoBehaviour
     {
-        public abstract Action<Vector3> OnInputDrag { get; set; }
+        public abstract Vector3 Movement();
     }
 }
