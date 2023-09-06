@@ -5,10 +5,11 @@ using UnityEngine.AI;
 
 namespace GamePlay.MovementSystem.PlayerMovements
 {
-    [RequireComponent(typeof(NavMeshAgent))]
+    [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MovementBase
     {
-        [SerializeField] private NavMeshAgent _agent;
+        [SerializeField] private CharacterController _controller;
+        [SerializeField] private float _movementSpeed = 8f;
 
         private Vector3 _moveAmount;
 
@@ -28,10 +29,6 @@ namespace GamePlay.MovementSystem.PlayerMovements
         private void OnRoomsAreSliding(object data)
         {
             _canMove = false;
-            _agent.isStopped = true;
-            _agent.ResetPath();
-            _agent.enabled = false;
-            _movementVector = Vector3.zero;
             _moveAmount = ((RoomsAreSlidingEvent)data).SlideAmount;
             transform.DOMove(_moveAmount, 3f).SetRelative();
         }
@@ -43,9 +40,6 @@ namespace GamePlay.MovementSystem.PlayerMovements
                 transform.DOMove(hit.position - _moveAmount.normalized * 2f, 1f).OnComplete(() =>
                 {
                     _canMove = true;
-                    _agent.enabled = true;
-                    _agent.isStopped = false;
-                    _movementVector = Vector3.zero;
                     _moveAmount = Vector3.zero;
                 });
             }
@@ -53,18 +47,15 @@ namespace GamePlay.MovementSystem.PlayerMovements
 
         public override void Move()
         {
-            _agent.SetDestination(_movementVector);
+            if (_canMove)
+            {
+                _controller.Move(_inputManager.Movement() * _movementSpeed * Time.deltaTime);
+            }
         }
 
         private void Update()
         {
-            if (_agent != null && _agent.enabled == true)
-            {
-                if (_movementVector != Vector3.zero && _canMove)
-                {
-                    Move();
-                }
-            }
+            Move();
         }
     }
 }
