@@ -16,19 +16,25 @@ namespace GamePlay.MovementSystem.PlayerMovements
         protected override void Awake()
         {
             base.Awake();
+            EventManager.Instance.AddListener<DoorSelectedEvent>(OnDoorSelected);
             EventManager.Instance.AddListener<RoomsAreSlidingEvent>(OnRoomsAreSliding);
             EventManager.Instance.AddListener<RoomSpawnAnimationFinishedEvent>(OnRoomSpawnAnimationFinished);
         }
 
         private void OnDestroy()
         {
+            EventManager.Instance.RemoveListener<DoorSelectedEvent>(OnDoorSelected);
             EventManager.Instance.RemoveListener<RoomsAreSlidingEvent>(OnRoomsAreSliding);
             EventManager.Instance.RemoveListener<RoomSpawnAnimationFinishedEvent>(OnRoomSpawnAnimationFinished);
         }
 
-        private void OnRoomsAreSliding(object data)
+        private void OnDoorSelected(object data)
         {
             _canMove = false;
+        }
+
+        private void OnRoomsAreSliding(object data)
+        {
             _moveAmount = ((RoomsAreSlidingEvent)data).SlideAmount;
             transform.DOMove(_moveAmount, 3f).SetRelative();
         }

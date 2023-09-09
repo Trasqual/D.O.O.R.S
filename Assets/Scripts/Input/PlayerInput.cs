@@ -33,8 +33,8 @@ namespace GamePlay.InputSystem
         public override Vector3 Movement()
         {
             var movement = _playerInput.Player.Movement.ReadValue<Vector2>();
-
-            return UseMouseMovement ? Look() : new Vector3(movement.x, 0f, movement.y);
+            var calculatedVector = UseMouseMovement ? Look() : new Vector3(movement.x, 0f, movement.y);
+            return Quaternion.Euler(0f, 45f, 0f) * calculatedVector;
         }
 
         public Vector3 Look()
