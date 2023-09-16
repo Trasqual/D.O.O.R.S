@@ -1,25 +1,57 @@
 using GamePlay.EventSystem;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using Utilities;
 
-public class CommandManager : Singleton<CommandManager>
+namespace GamePlay.CommandSystem
 {
-    private Queue<ICommand> _commands = new();
-
-    public void StartExecution()
+    public class CommandManager : Singleton<CommandManager>
     {
-        if (_commands.Count <= 0)
+        private readonly Queue<ICommand> _commands = new();
+        private bool _executionInProgress;
+
+        private void StartExecution()
         {
-            EventManager.Instance.TriggerEvent<AllCommandsCompleted>();
-            return;
+            if (_executionInProgress) return;
+            _executionInProgress = true;
+            ExecuteCommands();
         }
-        var firstCommand = _commands.Dequeue();
 
-        firstCommand.Execute(StartExecution);
-    }
+        private void ExecuteCommands()
+        {
+            if (_commands.Count <= 0)
+            {
+                _executionInProgress = false;
+                EventManager.Instance.TriggerEvent<AllCommandsCompleted>();
+                return;
+            }
+            SortQueue();
+            var firstCommand = _commands.Dequeue();
 
-    public void AddCommand(ICommand command)
-    {
-        _commands.Enqueue(command);
+            firstCommand.Execute(ExecuteCommands);
+        }
+
+        public void AddCommand(ICommand command)
+        {
+            Debug.Log("Adde Command: " + command.GetType().ToString());
+            _commands.Enqueue(command);
+            if (command.Priority == RoomCreationPriority.PlayerToNewRoom)
+                StartExecution();
+        }
+
+        private void SortQueue()
+        {
+            var commandList = new List<ICommand>();
+            foreach (var command in _commands)
+            {
+                commandList.Add(command);
+            }
+            commandList.OrderBy(x => x.Priority);
+            foreach (var command in commandList)
+            {
+                _commands.Enqueue(command);
+            }
+        }
     }
 }

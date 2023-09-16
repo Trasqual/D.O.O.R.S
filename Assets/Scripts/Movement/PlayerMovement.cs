@@ -1,7 +1,7 @@
 using DG.Tweening;
+using GamePlay.CommandSystem;
 using GamePlay.EventSystem;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace GamePlay.MovementSystem.PlayerMovements
 {
@@ -18,19 +18,23 @@ namespace GamePlay.MovementSystem.PlayerMovements
             base.Awake();
             EventManager.Instance.AddListener<DoorSelectedEvent>(OnDoorSelected);
             EventManager.Instance.AddListener<RoomsAreSlidingEvent>(OnRoomsAreSliding);
-            EventManager.Instance.AddListener<RoomSpawnAnimationFinishedEvent>(OnRoomSpawnAnimationFinished);
         }
 
         private void OnDestroy()
         {
             EventManager.Instance.RemoveListener<DoorSelectedEvent>(OnDoorSelected);
             EventManager.Instance.RemoveListener<RoomsAreSlidingEvent>(OnRoomsAreSliding);
-            EventManager.Instance.RemoveListener<RoomSpawnAnimationFinishedEvent>(OnRoomSpawnAnimationFinished);
         }
 
         private void OnDoorSelected(object data)
         {
             _canMove = false;
+            var movePlayerToNewRoomCommand = new MovePlayerToNewRoomCommand(transform, _moveAmount, () =>
+            {
+                OnPlayerInPosition();
+            }, RoomCreationPriority.PlayerToNewRoom);
+
+            CommandManager.Instance.AddCommand(movePlayerToNewRoomCommand);
         }
 
         private void OnRoomsAreSliding(object data)
@@ -39,16 +43,10 @@ namespace GamePlay.MovementSystem.PlayerMovements
             transform.DOMove(_moveAmount, 3f).SetRelative();
         }
 
-        private void OnRoomSpawnAnimationFinished(object data)
+        private void OnPlayerInPosition()
         {
-            if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 100, 1))
-            {
-                transform.DOMove(hit.position - _moveAmount.normalized * 2f, 1f).OnComplete(() =>
-                {
-                    _canMove = true;
-                    _moveAmount = Vector3.zero;
-                });
-            }
+            _canMove = true;
+            _moveAmount = Vector3.zero;
         }
 
         public override void Move()

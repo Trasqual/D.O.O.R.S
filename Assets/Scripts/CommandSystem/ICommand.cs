@@ -1,6 +1,10 @@
 using System;
 
-public interface ICommand
+namespace GamePlay.CommandSystem
 {
-    public void Execute(Action OnComplete);
+    public interface ICommand
+    {
+        public RoomCreationPriority Priority { get; set; }
+        public void Execute(Action OnComplete);
+    }
 }

@@ -10,6 +10,7 @@ using Grid = GridSystem.Grid;
 using GamePlay.AnimationSystem;
 using System.Collections;
 using DG.Tweening;
+using GamePlay.CommandSystem;
 
 namespace GamePlay.RoomSystem.Rooms
 {
@@ -35,7 +36,6 @@ namespace GamePlay.RoomSystem.Rooms
         private void Awake()
         {
             EventManager.Instance.AddListener<DoorSelectedEvent>(DeActivateRoom);
-            EventManager.Instance.AddListener<RoomSlidingEndedEvent>(OnRoomSlidingFinished);
         }
 
         public void Init(int width, int length, int doorCount, Vector2 previousRoomDirection, PropFactory prefabProvider)
@@ -48,6 +48,7 @@ namespace GamePlay.RoomSystem.Rooms
             _grid = new Grid(width, length);
             GetDoorDirections();
             FillRoom();
+            var spawnAnimationCommand = new RoomSpawnAnimationCommand(Items, GenerateNavMesh, RoomCreationPriority.RoomCreate);
         }
 
         private void GetDoorDirections()
@@ -437,35 +438,9 @@ namespace GamePlay.RoomSystem.Rooms
             }
         }
 
-        public virtual void OnRoomSlidingFinished(object eventData)
-        {
-            StartCoroutine(SpawnAnimationCo());
-        }
-
-        private IEnumerator SpawnAnimationCo()
-        {
-            foreach (var item in Items)
-            {
-                if (item is IAnimateable animateableItem)
-                {
-                    animateableItem.Animate(null);
-                    yield return new WaitForSeconds(0.07f);
-                }
-            }
-            DOVirtual.DelayedCall(0.5f, () =>
-            {
-                GenerateNavMesh();
-            });
-            DOVirtual.DelayedCall(1.5f, () =>
-            {
-                EventManager.Instance.TriggerEvent<RoomSpawnAnimationFinishedEvent>();
-            });
-        }
-
         private void OnDisable()
         {
             EventManager.Instance.RemoveListener<DoorSelectedEvent>(DeActivateRoom);
-            EventManager.Instance.RemoveListener<RoomSlidingEndedEvent>(OnRoomSlidingFinished);
         }
     }
 
