@@ -1,6 +1,5 @@
 using Cinemachine;
 using DG.Tweening;
-using GamePlay.CommandSystem;
 using GamePlay.EventSystem;
 using UnityEngine;
 
@@ -14,27 +13,30 @@ namespace GamePlay.CameraSystem
         private void Start()
         {
             EventManager.Instance.AddListener<DoorSelectedEvent>(OnDoorSelected);
+            EventManager.Instance.AddListener<RoomSpawnAnimationFinishedEvent>(OnRoomSpawnAnimationFinished);
         }
 
         private void OnDestroy()
         {
             EventManager.Instance.RemoveListener<DoorSelectedEvent>(OnDoorSelected);
+            EventManager.Instance.RemoveListener<RoomSpawnAnimationFinishedEvent>(OnRoomSpawnAnimationFinished);
         }
 
         private void OnDoorSelected(object data)
         {
-            var cameraToRoomCreationCommand = new ChangeCameraCommand(_playerCam.gameObject, _roomCam.gameObject, () =>
+            _playerCam.gameObject.SetActive(false);
+            _roomCam.gameObject.SetActive(true);
+
+            DOVirtual.DelayedCall(1.5f, () =>
             {
-                DOVirtual.DelayedCall(1.5f, () =>
-                {
-                    EventManager.Instance.TriggerEvent<CameraIsInPositionForRoomCreationEvent>();
-                });
-            }, 0);
-            CommandManager.Instance.AddCommand(cameraToRoomCreationCommand);
+                EventManager.Instance.TriggerEvent<CameraIsInPositionForRoomCreationEvent>();
+            });
+        }
 
-
-            var cameraToPlayerCommand = new ChangeCameraCommand(_roomCam.gameObject, _playerCam.gameObject, null, 0);
-            CommandManager.Instance.AddCommand(cameraToPlayerCommand);
+        private void OnRoomSpawnAnimationFinished(object data)
+        {
+            _roomCam.gameObject.SetActive(false);
+            _playerCam.gameObject.SetActive(true);
         }
     }
 }

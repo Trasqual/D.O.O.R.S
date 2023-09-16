@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using System.Collections;
 using GamePlay.RoomSystem.Rooms;
 using GamePlay.RoomSystem.Placeables.Doors;
 using GamePlay.RoomSystem.Placeables;
 using GamePlay.EventSystem;
-using GamePlay.CommandSystem;
 
 namespace GamePlay.RoomSystem.Creation
 {
@@ -32,7 +33,9 @@ namespace GamePlay.RoomSystem.Creation
 
         private void Awake()
         {
+            //Random.InitState(_randomSeed);
             EventManager.Instance.AddListener<DoorSelectedEvent>(OnDoorSelected);
+            EventManager.Instance.AddListener<CameraIsInPositionForRoomCreationEvent>(OnCameraInPositionForCreation);
         }
 
         private void Start()
@@ -43,6 +46,7 @@ namespace GamePlay.RoomSystem.Creation
         private void OnDisable()
         {
             EventManager.Instance.RemoveListener<DoorSelectedEvent>(OnDoorSelected);
+            EventManager.Instance.RemoveListener<CameraIsInPositionForRoomCreationEvent>(OnCameraInPositionForCreation);
         }
 
         private void OnDoorSelected(object data)
@@ -52,9 +56,13 @@ namespace GamePlay.RoomSystem.Creation
             _lastRoom = _selectedDoorData.Room;
             CreateRoom(_selectedDoorData.RoomType);
             _currentRoom.PrepareForAnimation();
+        }
 
-            var roomSlideCommand = new RoomSlideCommand(_generatedRooms, _currentRoom, RoomCreationPriority.RoomSlide);
+        private void OnCameraInPositionForCreation(object data)
+        {
+            var roomSlideCommand = new RoomSlideCommand(_generatedRooms, _currentRoom);
             CommandManager.Instance.AddCommand(roomSlideCommand);
+            CommandManager.Instance.StartExecution();
         }
 
         public void CreateInitialRoom()
