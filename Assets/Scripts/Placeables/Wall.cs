@@ -10,12 +10,13 @@ namespace GamePlay.RoomSystem.Placeables
     public class Wall : MonoBehaviour, IPlaceable, IAnimateable
     {
         [SerializeField] private AnimationBase _animation;
-        [SerializeField] private Transform _wallVisual;
+        [SerializeField] protected Transform _wallVisual;
         [SerializeField] private BoxCollider _collider;
+
 
         public List<GridCell> GridCells { get; set; } = new();
 
-        public void Initialize(float size)
+        public virtual void Initialize(float size)
         {
             var scale = _wallVisual.transform.localScale;
             scale.x *= size;
@@ -34,12 +35,12 @@ namespace GamePlay.RoomSystem.Placeables
             });
         }
 
-        public void PrepareForAnimation()
+        public virtual void PrepareForAnimation()
         {
             _animation.PrepareForAnimation();
         }
 
-        private void PlaySpawnParticles()
+        protected virtual void PlaySpawnParticles()
         {
             var size = _wallVisual.transform.localScale.x;
 
