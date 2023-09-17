@@ -65,10 +65,10 @@ namespace GamePlay.AttackSystem
             Stats.Add(new ArmorStat("Armor"));
         }
 
-        [ContextMenu(nameof(AddTowerSpellStat))]
-        public void AddTowerSpellStat()
+        [ContextMenu(nameof(AddProjectileStat))]
+        public void AddProjectileStat()
         {
-            //Stats.Add(new TowerSpellStat("TowerSpell"));
+            Stats.Add(new ProjectileStat("Projectile"));
         }
 
         [ContextMenu(nameof(AddAreaStat))]

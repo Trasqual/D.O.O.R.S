@@ -1,4 +1,5 @@
 using DG.Tweening;
+using GamePlay.AnimationSystem.CharacterAnimations;
 using GamePlay.EventSystem;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,7 +10,9 @@ namespace GamePlay.MovementSystem.PlayerMovements
     public class PlayerMovement : MovementBase
     {
         [SerializeField] private CharacterController _controller;
+        [SerializeField] private PlayerAnimationManager _anim;
         [SerializeField] private float _movementSpeed = 8f;
+        [SerializeField] private float _rotationSpeed = 50f;
 
         private Vector3 _moveAmount;
 
@@ -43,20 +46,30 @@ namespace GamePlay.MovementSystem.PlayerMovements
         {
             if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 100, 1))
             {
-                transform.DOMove(hit.position - _moveAmount.normalized * 2f, 1f).OnComplete(() =>
+                transform.DOMove(hit.position - _moveAmount.normalized * 2f, 1f).OnUpdate(() =>
+                {
+                    _anim.SetMovement(1f);
+
+                }).OnComplete(() =>
                 {
                     _canMove = true;
                     _moveAmount = Vector3.zero;
+                    _anim.SetMovement(0f);
                 });
             }
         }
 
         public override void Move()
         {
+            var movementAmount = Vector3.zero;
             if (_canMove)
             {
-                _controller.Move(_inputManager.Movement() * _movementSpeed * Time.deltaTime);
+                movementAmount = _inputManager.Movement() * _movementSpeed;
+                _controller.Move(movementAmount * Time.deltaTime);
+                if (movementAmount != Vector3.zero)
+                    _controller.transform.rotation = Quaternion.Lerp(_controller.transform.rotation, Quaternion.LookRotation(movementAmount), _rotationSpeed * Time.deltaTime);
             }
+            _anim.SetMovement(movementAmount.magnitude);
         }
 
         private void Update()
