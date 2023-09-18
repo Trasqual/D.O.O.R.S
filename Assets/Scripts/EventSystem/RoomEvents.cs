@@ -1,4 +1,5 @@
 using GamePlay.RoomSystem.Placeables.Doors;
+using GamePlay.RoomSystem.Rooms;
 using UnityEngine;
 
 namespace GamePlay.EventSystem
@@ -19,6 +20,7 @@ namespace GamePlay.EventSystem
 
     public class RoomSpawnAnimationFinishedEvent
     {
+        public Room CurrentRoom;
     }
 
     public class CameraIsInPositionForRoomCreationEvent

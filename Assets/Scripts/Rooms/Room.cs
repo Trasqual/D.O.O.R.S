@@ -15,13 +15,16 @@ namespace GamePlay.RoomSystem.Rooms
 {
     public class Room : MonoBehaviour
     {
+        public NavMeshSurface NavMeshSurface { get; private set; }
+        public Vector2 Size => new Vector2(_width, _length);
+
+
         protected Grid _grid;
         private int _width;
         private int _length;
         private int _doorCount;
         private Vector2 _previousRoomDirection;
         private PropFactory _prefabProvider;
-        public Vector2 Size => new Vector2(_width, _length);
 
         public List<IPlaceable> Items = new();
         public List<GameObject> Doors = new();
@@ -32,8 +35,11 @@ namespace GamePlay.RoomSystem.Rooms
         private List<WallData> _wallDatas = new();
         private List<GameObject> _walls = new();
 
+
         private void Awake()
         {
+            NavMeshSurface = GetComponent<NavMeshSurface>();
+
             EventManager.Instance.AddListener<DoorSelectedEvent>(DeActivateRoom);
             EventManager.Instance.AddListener<RoomSlidingEndedEvent>(OnRoomSlidingFinished);
         }
@@ -412,7 +418,7 @@ namespace GamePlay.RoomSystem.Rooms
             if (room == this)
             {
                 gameObject.SetActive(false);
-                GetComponent<NavMeshSurface>().RemoveData();
+                NavMeshSurface.RemoveData();
             }
         }
 
@@ -423,7 +429,7 @@ namespace GamePlay.RoomSystem.Rooms
 
         public void GenerateNavMesh()
         {
-            GetComponent<NavMeshSurface>().BuildNavMesh();
+            NavMeshSurface.BuildNavMesh();
         }
 
         public void PrepareForAnimation()
@@ -458,7 +464,7 @@ namespace GamePlay.RoomSystem.Rooms
             });
             DOVirtual.DelayedCall(1.5f, () =>
             {
-                EventManager.Instance.TriggerEvent<RoomSpawnAnimationFinishedEvent>();
+                EventManager.Instance.TriggerEvent<RoomSpawnAnimationFinishedEvent>(new RoomSpawnAnimationFinishedEvent() { CurrentRoom = this });
             });
         }
 
