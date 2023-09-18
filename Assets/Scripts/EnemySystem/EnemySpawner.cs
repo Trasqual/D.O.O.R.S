@@ -14,7 +14,7 @@ namespace GamePlay.EnemySystem
 
         private Room _currentRoom;
 
-        private void Awake()
+        private void Start()
         {
             EventManager.Instance.AddListener<RoomSpawnAnimationFinishedEvent>(SetCurrentRoom);
         }
@@ -45,7 +45,7 @@ namespace GamePlay.EnemySystem
         {
             _currentRoom = ((RoomSpawnAnimationFinishedEvent)data).CurrentRoom;
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 500; i++)
             {
                 SpawnEnemy();
             }
