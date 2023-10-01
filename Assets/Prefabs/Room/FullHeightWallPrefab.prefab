@@ -163,7 +163,7 @@ MonoBehaviour:
   _animation: {fileID: 749177428662572304}
   _wallVisual: {fileID: 9075670557622030078}
   _collider: {fileID: 6749226215250161014}
-  _torchPrefab: {fileID: 4929469248799940061, guid: e3c1864f9403dd647adc80fe8b492fea,
+  _torchPrefab: {fileID: 3508256842881675325, guid: e3c1864f9403dd647adc80fe8b492fea,
     type: 3}
   _minTorchInterval: 10
   _torchSpawnChance: 75
