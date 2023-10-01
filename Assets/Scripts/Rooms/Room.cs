@@ -32,16 +32,17 @@ namespace GamePlay.RoomSystem.Rooms
         private List<Vector2> _possibleDirections = new() { new Vector2(-1, 0), new Vector2(1, 0), new Vector2(0, -1), new Vector2(0, 1) };
         private List<Vector2> _selectedDoorDirections = new();
 
+        private FloorAppearAnimation _floor;
         private List<WallData> _wallDatas = new();
         private List<GameObject> _walls = new();
-
 
         private void Awake()
         {
             NavMeshSurface = GetComponent<NavMeshSurface>();
 
-            EventManager.Instance.AddListener<DoorSelectedEvent>(DeActivateRoom);
+            EventManager.Instance.AddListener<DoorSelectedEvent>(OnDoorSelected);
             EventManager.Instance.AddListener<RoomSlidingEndedEvent>(OnRoomSlidingFinished);
+            EventManager.Instance.AddListener<RoomSpawnAnimationFinishedEvent>(DeActivateRoom);
         }
 
         public void Init(int width, int length, int doorCount, Vector2 previousRoomDirection, PropFactory prefabProvider)
@@ -94,6 +95,7 @@ namespace GamePlay.RoomSystem.Rooms
         {
             var floor = _prefabProvider.GetFloor(transform);
             floor.transform.localScale = new Vector3(_width, 1f, _length);
+            _floor = floor.GetComponent<FloorAppearAnimation>();
         }
 
         private void GenerateWallsAndDoors()
@@ -414,11 +416,10 @@ namespace GamePlay.RoomSystem.Rooms
 
         public void DeActivateRoom(object data)
         {
-            var room = ((DoorSelectedEvent)data).DoorData.Room;
-            if (room == this)
+            var room = ((RoomSpawnAnimationFinishedEvent)data).CurrentRoom;
+            if (room != this)
             {
                 gameObject.SetActive(false);
-                NavMeshSurface.RemoveData();
             }
         }
 
@@ -434,6 +435,7 @@ namespace GamePlay.RoomSystem.Rooms
 
         public void PrepareForAnimation()
         {
+            _floor.PrepareForAnimation();
             foreach (var item in Items)
             {
                 if (item is IAnimateable animateableItem)
@@ -443,13 +445,32 @@ namespace GamePlay.RoomSystem.Rooms
             }
         }
 
+        public void OnDoorSelected(object eventData)
+        {
+            NavMeshSurface.RemoveData();
+            NavMeshSurface.enabled = false;
+            if (TryGetComponent<NavMeshModifier>(out var mod))
+            {
+                mod.ignoreFromBuild = true;
+            }
+            else
+            {
+                mod = gameObject.AddComponent<NavMeshModifier>();
+                mod.ignoreFromBuild = true;
+            }
+        }
+
         public virtual void OnRoomSlidingFinished(object eventData)
         {
-            StartCoroutine(SpawnAnimationCo());
+            if (((RoomSlidingEndedEvent)eventData).ActiveRoom == this)
+            {
+                StartCoroutine(SpawnAnimationCo());
+            }
         }
 
         private IEnumerator SpawnAnimationCo()
         {
+            _floor.Animate(null);
             foreach (var item in Items)
             {
                 if (item is IAnimateable animateableItem)
@@ -470,8 +491,14 @@ namespace GamePlay.RoomSystem.Rooms
 
         private void OnDisable()
         {
-            EventManager.Instance.RemoveListener<DoorSelectedEvent>(DeActivateRoom);
+            EventManager.Instance.RemoveListener<DoorSelectedEvent>(OnDoorSelected);
             EventManager.Instance.RemoveListener<RoomSlidingEndedEvent>(OnRoomSlidingFinished);
+            EventManager.Instance.RemoveListener<RoomSpawnAnimationFinishedEvent>(DeActivateRoom);
+            NavMeshSurface.enabled = true;
+            if (TryGetComponent<NavMeshModifier>(out var mod))
+            {
+                mod.ignoreFromBuild = false;
+            }
         }
     }
 

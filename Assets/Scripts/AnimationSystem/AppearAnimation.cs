@@ -1,6 +1,5 @@
 using DG.Tweening;
 using System;
-using System.Linq;
 using UnityEngine;
 
 namespace GamePlay.AnimationSystem

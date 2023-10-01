@@ -44,7 +44,6 @@ namespace GamePlay.EnemySystem
         private void SetCurrentRoom(object data)
         {
             _currentRoom = ((RoomSpawnAnimationFinishedEvent)data).CurrentRoom;
-
             for (int i = 0; i < 500; i++)
             {
                 SpawnEnemy();

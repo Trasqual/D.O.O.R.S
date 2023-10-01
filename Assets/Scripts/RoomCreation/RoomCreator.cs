@@ -63,7 +63,7 @@ namespace GamePlay.RoomSystem.Creation
             StartCoroutine(SlideRooms());
         }
 
-        public void CreateInitialRoom()
+        private void CreateInitialRoom()
         {
             CreateRoom(RoomType.Initial);
             _currentRoom.GenerateNavMesh();
@@ -116,7 +116,7 @@ namespace GamePlay.RoomSystem.Creation
                 room.transform.DOMove(-_currentRoom.transform.position, 3f).SetRelative();
             }
             yield return new WaitForSeconds(3f);
-            EventManager.Instance.TriggerEvent<RoomSlidingEndedEvent>(new RoomsAreSlidingEvent() { SlideAmount = -_currentRoom.transform.position });
+            EventManager.Instance.TriggerEvent<RoomSlidingEndedEvent>(new RoomSlidingEndedEvent() { ActiveRoom = _currentRoom });
         }
     }
 }

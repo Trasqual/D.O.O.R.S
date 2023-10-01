@@ -16,6 +16,7 @@ namespace GamePlay.EventSystem
 
     public class RoomSlidingEndedEvent
     {
+        public Room ActiveRoom;
     }
 
     public class RoomSpawnAnimationFinishedEvent
