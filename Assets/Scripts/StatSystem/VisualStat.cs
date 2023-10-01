@@ -1,15 +1,15 @@
-using GamePlay.Projectiles;
+using GamePlay.Visuals;
 using GamePlay.EventSystem;
 using GamePlay.UpgradeSystem;
 using UnityEngine;
 
 namespace GamePlay.StatSystem
 {
-    public class ProjectileStat : StatBase
+    public class VisualStat : StatBase
     {
-        public ProjectileStat(string statName) : base(statName) { }
+        public VisualStat(string statName) : base(statName) { }
 
-        [field: SerializeField] public Projectile Prefab { get; private set; }
+        [field: SerializeField] public Visual Prefab { get; private set; }
 
         public override void AddUpgrade(object upgrade)
         {
