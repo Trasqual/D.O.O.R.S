@@ -1,6 +1,7 @@
 using GamePlay.EventSystem;
 using GamePlay.RoomSystem.Rooms;
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,7 +27,7 @@ namespace GamePlay.EnemySystem
 
         private void SpawnEnemy()
         {
-            var enemy = Instantiate(_enemyPrefab, GetRandomPositionOnNavmesh(), Quaternion.identity);
+            var enemy = Instantiate(_enemyPrefab, GetRandomPositionOnNavmesh(), Quaternion.identity, transform);
             OnEnemySpawned?.Invoke(enemy);
         }
 
@@ -44,9 +45,20 @@ namespace GamePlay.EnemySystem
         private void SetCurrentRoom(object data)
         {
             _currentRoom = ((RoomSpawnAnimationFinishedEvent)data).CurrentRoom;
-            for (int i = 0; i < 500; i++)
+
+            SpawnEnemies();
+        }
+
+        private async void SpawnEnemies()
+        {
+            for (int i = 0; i < 5; i++)
             {
-                SpawnEnemy();
+                for (int j = 0; j < 10; j++)
+                {
+                    SpawnEnemy();
+                }
+
+                await Task.Delay(30000);
             }
         }
     }
