@@ -13,8 +13,10 @@ namespace GamePlay.MovementSystem.PlayerMovements
         [SerializeField] private PlayerAnimationManager _anim;
         [SerializeField] private float _movementSpeed = 8f;
         [SerializeField] private float _rotationSpeed = 50f;
+        [SerializeField] private float _gravity = -10f;
 
-        private Vector3 _moveAmount;
+        private Vector3 _slideWithRoomAmount;
+        private Vector3 _movement;
 
         protected override void Awake()
         {
@@ -38,22 +40,22 @@ namespace GamePlay.MovementSystem.PlayerMovements
 
         private void OnRoomsAreSliding(object data)
         {
-            _moveAmount = ((RoomsAreSlidingEvent)data).SlideAmount;
-            transform.DOMove(_moveAmount, 3f).SetRelative();
+            _slideWithRoomAmount = ((RoomsAreSlidingEvent)data).SlideAmount;
+            transform.DOMove(_slideWithRoomAmount, 3f).SetRelative();
         }
 
         private void OnRoomSpawnAnimationFinished(object data)
         {
             if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 100, 1))
             {
-                transform.DOMove(hit.position - _moveAmount.normalized * 2f, 1f).OnUpdate(() =>
+                transform.DOMove(hit.position - _slideWithRoomAmount.normalized * 2f, 1f).OnUpdate(() =>
                 {
                     _anim.SetMovement(1f);
 
                 }).OnComplete(() =>
                 {
                     _canMove = true;
-                    _moveAmount = Vector3.zero;
+                    _slideWithRoomAmount = Vector3.zero;
                     _anim.SetMovement(0f);
                 });
             }
@@ -61,15 +63,25 @@ namespace GamePlay.MovementSystem.PlayerMovements
 
         public override void Move()
         {
-            var movementAmount = Vector3.zero;
             if (_canMove)
             {
-                movementAmount = _inputManager.Movement() * _movementSpeed;
-                _controller.Move(movementAmount * Time.deltaTime);
-                if (movementAmount != Vector3.zero)
-                    _controller.transform.rotation = Quaternion.Lerp(_controller.transform.rotation, Quaternion.LookRotation(movementAmount), _rotationSpeed * Time.deltaTime);
+                _movement = new Vector3(_inputManager.Movement().x * _movementSpeed, _movement.y, _inputManager.Movement().z * _movementSpeed);
+
+                if (_controller.isGrounded)
+                {
+                    _movement.y = -0.1f;
+                }
+                else
+                {
+                    _movement.y += _gravity * Time.deltaTime;
+                }
+
+                _controller.Move(_movement * Time.deltaTime);
+
+                if (_inputManager.Movement() != Vector3.zero)
+                    _controller.transform.rotation = Quaternion.Lerp(_controller.transform.rotation, Quaternion.LookRotation(_inputManager.Movement()), _rotationSpeed * Time.deltaTime);
             }
-            _anim.SetMovement(movementAmount.magnitude);
+            _anim.SetMovement(_inputManager.Movement().magnitude);
         }
 
         private void Update()

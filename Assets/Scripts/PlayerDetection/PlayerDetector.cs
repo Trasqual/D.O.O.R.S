@@ -42,7 +42,7 @@ public class PlayerDetector : MonoBehaviour
 
         for (int i = 0; i < _enemies.Count; i++)
         {
-            var sqrMgt = (transform.position - _enemies[0].transform.position).sqrMagnitude;
+            var sqrMgt = (transform.position - _enemies[i].transform.position).sqrMagnitude;
             if (sqrMgt < closestDist)
             {
                 closestDist = sqrMgt;

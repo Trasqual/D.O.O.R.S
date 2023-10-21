@@ -1197,6 +1197,7 @@ MonoBehaviour:
   _anim: {fileID: 1277379624}
   _movementSpeed: 5
   _rotationSpeed: 50
+  _gravity: -10
 --- !u!114 &1277379622
 MonoBehaviour:
   m_ObjectHideFlags: 0
