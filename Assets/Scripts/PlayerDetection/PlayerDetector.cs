@@ -12,7 +12,10 @@ public class PlayerDetector : MonoBehaviour
         if (other.TryGetComponent(out Enemy enemy))
         {
             if (!_enemies.Contains(enemy))
+            {
                 _enemies.Add(enemy);
+                enemy.OnDeath += RemoveEnemy;
+            }
         }
     }
 
@@ -21,8 +24,14 @@ public class PlayerDetector : MonoBehaviour
         if (other.TryGetComponent(out Enemy enemy))
         {
             if (_enemies.Contains(enemy))
-                _enemies.Remove(enemy);
+                RemoveEnemy(enemy);
         }
+    }
+
+    private void RemoveEnemy(Enemy enemy)
+    {
+        enemy.OnDeath -= RemoveEnemy;
+        _enemies.Remove(enemy);
     }
 
 

@@ -1,7 +1,7 @@
 using GamePlay.EventSystem;
 using GamePlay.RoomSystem.Rooms;
 using System;
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -46,10 +46,10 @@ namespace GamePlay.EnemySystem
         {
             _currentRoom = ((RoomSpawnAnimationFinishedEvent)data).CurrentRoom;
 
-            SpawnEnemies();
+            StartCoroutine(SpawnEnemies());
         }
 
-        private async void SpawnEnemies()
+        private IEnumerator SpawnEnemies()
         {
             for (int i = 0; i < 5; i++)
             {
@@ -58,7 +58,7 @@ namespace GamePlay.EnemySystem
                     SpawnEnemy();
                 }
 
-                await Task.Delay(30000);
+                yield return new WaitForSeconds(13f);
             }
         }
     }

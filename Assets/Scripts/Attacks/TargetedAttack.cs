@@ -1,5 +1,5 @@
 using GamePlay.Visuals;
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 
 public class TargetedAttack : MonoBehaviour
@@ -8,7 +8,7 @@ public class TargetedAttack : MonoBehaviour
     [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private float _cooldown = 1f;
     [SerializeField] private int _count = 1;
-    [SerializeField] private int _delayBetweenProjectilesInMiliseconds = 100;
+    [SerializeField] private float _delayBetweenProjectiles = 0.1f;
 
     private float _timer;
     private bool _isActive;
@@ -36,19 +36,19 @@ public class TargetedAttack : MonoBehaviour
         _timer -= Time.deltaTime;
         if (_timer <= 0)
         {
-            Perform();
+            StartCoroutine(Perform());
             _timer = _cooldown;
         }
     }
 
-    private async void Perform()
+    private IEnumerator Perform()
     {
         for (int i = 0; i < _count; i++)
         {
             var projectile = Instantiate(_projectilePrefab);
             projectile.transform.position = transform.position + Vector3.up * 2f;
             ((TargetedProjectile)projectile).Init(_detector.GetClosestEnemy().transform);
-            await Task.Delay(_delayBetweenProjectilesInMiliseconds);
+            yield return new WaitForSeconds(_delayBetweenProjectiles);
         }
     }
 }

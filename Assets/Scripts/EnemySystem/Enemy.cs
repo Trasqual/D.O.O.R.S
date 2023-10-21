@@ -9,14 +9,13 @@ namespace GamePlay.EnemySystem
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private HealthManager _healthManager;
 
-        private Action<Enemy> _onDeath;
+        public Action<Enemy> OnDeath;
         private Transform _target;
 
-        public void Init(Transform target, Action<Enemy> deathAction)
+        public void Init(Transform target)
         {
-            _onDeath = deathAction;
-            _healthManager.OnDeath += OnDeath;
             _target = target;
+            _healthManager.OnDeath += OnDeathCallback;
         }
 
         public void UpdateEnemy()
@@ -24,14 +23,14 @@ namespace GamePlay.EnemySystem
             _agent.SetDestination(_target.position);
         }
 
-        private void OnDeath()
+        private void OnDeathCallback()
         {
-            _onDeath?.Invoke(this);
+            OnDeath?.Invoke(this);
         }
 
         private void OnDestroy()
         {
-            _healthManager.OnDeath -= OnDeath;
+            _healthManager.OnDeath -= OnDeathCallback;
         }
     }
 }

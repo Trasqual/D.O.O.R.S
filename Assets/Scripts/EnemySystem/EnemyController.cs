@@ -26,12 +26,14 @@ namespace GamePlay.EnemySystem
 
         public void AddEnemy(Enemy enemy)
         {
-            enemy.Init(_player.transform, (enemy) => RemoveEnemy(enemy));
+            enemy.Init(_player.transform);
+            enemy.OnDeath += RemoveEnemy;
             _spawnedEnemies.Add(enemy);
         }
 
         public void RemoveEnemy(Enemy enemy)
         {
+            enemy.OnDeath -= RemoveEnemy;
             _spawnedEnemies.Remove(enemy);
         }
     }

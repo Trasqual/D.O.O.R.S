@@ -18,9 +18,18 @@ public class TargetedProjectile : Projectile
     {
         if (_target != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
-            transform.LookAt(_target.position);
+            var targetPos = _target.position + Vector3.up * 0.25f;
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, _speed * Time.deltaTime);
+            transform.LookAt(targetPos);
             _targetsLastKnownPosition = _target.position;
+            if (Vector3.Distance(transform.position, targetPos) < 0.1f)
+            {
+                if (_target.TryGetComponent(out HealthManager healthManager))
+                {
+                    healthManager.TakeDamage(_damage);
+                }
+                Destroy(gameObject);
+            }
         }
         else if (_targetsLastKnownPosition != Vector3.zero)
         {
@@ -31,14 +40,6 @@ public class TargetedProjectile : Projectile
             {
                 Destroy(gameObject);
             }
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent(out HealthManager healthManager))
-        {
-            healthManager.TakeDamage(_damage);
         }
     }
 }
