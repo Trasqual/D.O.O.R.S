@@ -301,7 +301,7 @@ MonoBehaviour:
     type: 3}
   _cooldown: 1
   _count: 2
-  _delayBetweenProjectilesInMiliseconds: 100
+  _delayBetweenProjectiles: 0.1
 --- !u!1 &479170561
 GameObject:
   m_ObjectHideFlags: 0
