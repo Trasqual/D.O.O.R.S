@@ -6,6 +6,7 @@ public class PlayerDetector : MonoBehaviour
 {
     private List<Enemy> _enemies = new();
     public int EnemyCount => _enemies.Count;
+    public List<Enemy> Enemies => _enemies;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -33,7 +34,6 @@ public class PlayerDetector : MonoBehaviour
         enemy.OnDeath -= RemoveEnemy;
         _enemies.Remove(enemy);
     }
-
 
     public Enemy GetClosestEnemy()
     {

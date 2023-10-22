@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class TargetedProjectile : Projectile
 {
-    [SerializeField] private float _damage = 5;
     [SerializeField] private float _speed = 20f;
 
     private Transform _target;
@@ -26,7 +25,7 @@ public class TargetedProjectile : Projectile
             {
                 if (_target.TryGetComponent(out HealthManager healthManager))
                 {
-                    healthManager.TakeDamage(_damage);
+                    healthManager.TakeDamage(Damage);
                 }
                 Destroy(gameObject);
             }
