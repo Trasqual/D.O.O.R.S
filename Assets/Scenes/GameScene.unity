@@ -296,7 +296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e8b4af6ebbf564bb93dd9e406809e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detector: {fileID: 5407014}
   _projectilePrefab: {fileID: 869450306891391882, guid: 61c0633485f5c094dbe8cc1be2bd3193,
     type: 3}
   _cooldown: 1
@@ -345,10 +344,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 591898329135977488584338ae7db795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detector: {fileID: 5407014}
   _projectilePrefab: {fileID: 350587643964612034, guid: 5eb597169279b4b4aa452693d09ac5d7,
     type: 3}
   _cooldown: 1
+  _detector: {fileID: 5407014}
   _count: 1
   _delayBetweenProjectiles: 0.1
 --- !u!1 &479170561

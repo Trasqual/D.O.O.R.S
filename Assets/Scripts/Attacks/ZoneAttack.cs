@@ -9,6 +9,7 @@ namespace GamePlay.Attacks
 
         protected override void ActivateAttack()
         {
+            base.ActivateAttack();
             _visual = Instantiate(_projectilePrefab, transform.position, transform.rotation, transform);
             _detector = _visual.GetComponentInChildren<PlayerDetector>();
         }

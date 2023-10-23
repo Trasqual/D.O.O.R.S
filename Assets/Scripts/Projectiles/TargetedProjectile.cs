@@ -8,6 +8,8 @@ namespace GamePlay.Projectiles
 
         private Transform _target;
         private Vector3 _targetsLastKnownPosition;
+        private float _lifeTime = 3f;
+        private float _timePassed = 0f;
 
         public void Init(Transform target)
         {
@@ -30,6 +32,7 @@ namespace GamePlay.Projectiles
                     }
                     Destroy(gameObject);
                 }
+
             }
             else if (_targetsLastKnownPosition != Vector3.zero)
             {
@@ -40,6 +43,12 @@ namespace GamePlay.Projectiles
                 {
                     Destroy(gameObject);
                 }
+            }
+
+            _timePassed += Time.deltaTime;
+            if (_timePassed >= _lifeTime)
+            {
+                Destroy(gameObject);
             }
         }
     }

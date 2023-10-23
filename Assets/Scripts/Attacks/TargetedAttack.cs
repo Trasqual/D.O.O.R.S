@@ -32,11 +32,13 @@ namespace GamePlay.Attacks
         {
             for (int i = 0; i < _count; i++)
             {
-                if (_detector.EnemyCount <= 0) yield return null;
-                var projectile = Instantiate(_projectilePrefab);
-                projectile.transform.position = transform.position + Vector3.up * 2f;
-                ((TargetedProjectile)projectile).Init(_detector.GetClosestEnemy().transform);
-                yield return new WaitForSeconds(_delayBetweenProjectiles);
+                if (_detector.EnemyCount > 0)
+                {
+                    var projectile = Instantiate(_projectilePrefab);
+                    projectile.transform.position = transform.position + Vector3.up * 2f;
+                    ((TargetedProjectile)projectile).Init(_detector.GetClosestEnemy().transform);
+                    yield return new WaitForSeconds(_delayBetweenProjectiles);
+                }
             }
         }
     }
