@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace GamePlay.Visuals
+namespace GamePlay.Projectiles
 {
-    public class Projectile : Visual
+    public class Projectile : MonoBehaviour
     {
         [field: SerializeField] public float Damage { get; protected set; }
     }

@@ -1,55 +1,43 @@
-using GamePlay.Visuals;
+using GamePlay.Projectiles;
 using System.Collections;
 using UnityEngine;
 
-public class TargetedAttack : MonoBehaviour
+namespace GamePlay.Attacks
 {
-    [SerializeField] private PlayerDetector _detector;
-    [SerializeField] private Projectile _projectilePrefab;
-    [SerializeField] private float _cooldown = 1f;
-    [SerializeField] private int _count = 1;
-    [SerializeField] private float _delayBetweenProjectiles = 0.1f;
-
-    private float _timer;
-    private bool _isActive;
-
-    private void Start()
+    public class TargetedAttack : AttackBase
     {
-        ActivateAttack();
-    }
+        [SerializeField] private PlayerDetector _detector;
+        [SerializeField] private int _count = 1;
+        [SerializeField] private float _delayBetweenProjectiles = 0.1f;
 
-    public void ActivateAttack()
-    {
-        _isActive = true;
-        _timer = _cooldown;
-    }
-
-    private void Update()
-    {
-        if (!_isActive) return;
-
-        if (_detector.EnemyCount <= 0)
+        protected override void Update()
         {
-            _timer = _cooldown;
-            return;
+            base.Update();
+
+            if (_detector.EnemyCount <= 0)
+            {
+                _timer = _cooldown;
+                return;
+            }
+
+            base.Update();
         }
-        _timer -= Time.deltaTime;
-        if (_timer <= 0)
-        {
-            StartCoroutine(Perform());
-            _timer = _cooldown;
-        }
-    }
 
-    private IEnumerator Perform()
-    {
-        for (int i = 0; i < _count; i++)
+        protected override void Perform()
         {
-            if (_detector.EnemyCount <= 0) yield return null;
-            var projectile = Instantiate(_projectilePrefab);
-            projectile.transform.position = transform.position + Vector3.up * 2f;
-            ((TargetedProjectile)projectile).Init(_detector.GetClosestEnemy().transform);
-            yield return new WaitForSeconds(_delayBetweenProjectiles);
+            StartCoroutine(PerformCo());
+        }
+
+        private IEnumerator PerformCo()
+        {
+            for (int i = 0; i < _count; i++)
+            {
+                if (_detector.EnemyCount <= 0) yield return null;
+                var projectile = Instantiate(_projectilePrefab);
+                projectile.transform.position = transform.position + Vector3.up * 2f;
+                ((TargetedProjectile)projectile).Init(_detector.GetClosestEnemy().transform);
+                yield return new WaitForSeconds(_delayBetweenProjectiles);
+            }
         }
     }
 }

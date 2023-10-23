@@ -1,48 +1,26 @@
-using GamePlay.Visuals;
-using UnityEngine;
+using GamePlay.Projectiles;
 
-public class ZoneAttack : MonoBehaviour
+namespace GamePlay.Attacks
 {
-    [SerializeField] private Projectile _projectilePrefab;
-    [SerializeField] private float _cooldown = 0.5f;
-
-    private PlayerDetector _detector;
-    private float _timer;
-    private bool _isActive;
-    private Projectile _visual;
-
-    private void Start()
+    public class ZoneAttack : AttackBase
     {
-        ActivateAttack();
-    }
+        private PlayerDetector _detector;
+        private Projectile _visual;
 
-    public void ActivateAttack()
-    {
-        _isActive = true;
-        _timer = _cooldown;
-        _visual = Instantiate(_projectilePrefab, transform.position, transform.rotation, transform);
-        _detector = _visual.GetComponentInChildren<PlayerDetector>();
-    }
-
-    private void Update()
-    {
-        if (!_isActive) return;
-
-        _timer -= Time.deltaTime;
-        if (_timer <= 0)
+        protected override void ActivateAttack()
         {
-            Perform();
-            _timer = _cooldown;
+            _visual = Instantiate(_projectilePrefab, transform.position, transform.rotation, transform);
+            _detector = _visual.GetComponentInChildren<PlayerDetector>();
         }
-    }
 
-    private void Perform()
-    {
-        for (int i = 0; i < _detector.EnemyCount; i++)
+        protected override void Perform()
         {
-            if(_detector.Enemies[i].TryGetComponent(out HealthManager healthManager))
+            for (int i = 0; i < _detector.EnemyCount; i++)
             {
-                healthManager.TakeDamage(_visual.Damage);
+                if (_detector.Enemies[i].TryGetComponent(out HealthManager healthManager))
+                {
+                    healthManager.TakeDamage(_visual.Damage);
+                }
             }
         }
     }
