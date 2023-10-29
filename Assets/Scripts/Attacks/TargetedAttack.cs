@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GamePlay.Attacks
 {
-    public class TargetedAttack : AttackBase
+    public class TargetedAttack : AbilityBase
     {
         [SerializeField] private PlayerDetector _detector;
         [SerializeField] private int _count = 1;

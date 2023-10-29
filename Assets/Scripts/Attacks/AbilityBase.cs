@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GamePlay.Attacks
 {
-    public abstract class AttackBase : MonoBehaviour
+    public abstract class AbilityBase : MonoBehaviour
     {
         [SerializeField] protected Projectile _projectilePrefab;
         [SerializeField] protected float _cooldown = 0.5f;

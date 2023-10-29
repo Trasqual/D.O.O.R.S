@@ -2,7 +2,7 @@ using GamePlay.Projectiles;
 
 namespace GamePlay.Attacks
 {
-    public class ZoneAttack : AttackBase
+    public class ZoneAttack : AbilityBase
     {
         private PlayerDetector _detector;
         private Projectile _visual;

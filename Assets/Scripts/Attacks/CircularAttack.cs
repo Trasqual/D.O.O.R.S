@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GamePlay.Attacks
 {
-    public class CircularAttack : AttackBase
+    public class CircularAttack : AbilityBase
     {
         [SerializeField] private int _count = 5;
 
