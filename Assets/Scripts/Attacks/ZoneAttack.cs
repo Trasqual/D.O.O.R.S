@@ -1,4 +1,5 @@
 using GamePlay.Projectiles;
+using GamePlay.StatSystem;
 
 namespace GamePlay.Attacks
 {
@@ -10,7 +11,8 @@ namespace GamePlay.Attacks
         protected override void ActivateAttack()
         {
             base.ActivateAttack();
-            _visual = Instantiate(_projectilePrefab, transform.position, transform.rotation, transform);
+            var visual = Instantiate(_statController.GetStat<VisualStat>().Prefab, transform.position, transform.rotation, transform);
+            _visual = visual.GetComponent<Projectile>();
             _detector = _visual.GetComponentInChildren<PlayerDetector>();
         }
 

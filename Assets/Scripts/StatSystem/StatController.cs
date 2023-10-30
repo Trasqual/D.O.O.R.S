@@ -38,10 +38,10 @@ public class StatController : MonoBehaviour
         Stats.Add(new DamageStat("Damage"));
     }
 
-    [ContextMenu(nameof(AddFireRateStat))]
-    public void AddFireRateStat()
+    [ContextMenu(nameof(AddCooldownStat))]
+    public void AddCooldownStat()
     {
-        Stats.Add(new FireRateStat("FireRate"));
+        Stats.Add(new CooldownStat("Cooldown"));
     }
 
     [ContextMenu(nameof(AddRangeStat))]
@@ -62,10 +62,10 @@ public class StatController : MonoBehaviour
         Stats.Add(new ArmorStat("Armor"));
     }
 
-    [ContextMenu(nameof(AddProjectileStat))]
-    public void AddProjectileStat()
+    [ContextMenu(nameof(AddVisualStat))]
+    public void AddVisualStat()
     {
-        Stats.Add(new VisualStat("Projectile"));
+        Stats.Add(new VisualStat("Visual"));
     }
 
     [ContextMenu(nameof(AddAreaStat))]

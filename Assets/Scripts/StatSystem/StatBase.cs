@@ -1,4 +1,4 @@
-﻿using GamePlay.UpgradeSystem;
+﻿using GamePlay.Rewards.Upgrades;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace GamePlay.StatSystem
     public abstract class StatBase
     {
         [SerializeField] private string StatName;
-        [SerializeField] private UpgradeTargetType Type;
+        [SerializeField] protected UpgradeTargetType UpgradeType;
         protected List<UpgradeBase> _upgrades;
 
         public StatBase(string statName)

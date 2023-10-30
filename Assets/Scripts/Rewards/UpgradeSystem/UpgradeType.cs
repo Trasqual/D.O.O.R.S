@@ -1,4 +1,4 @@
-namespace GamePlay.UpgradeSystem
+namespace GamePlay.Rewards.Upgrades
 {
     public enum UpgradeAdditionType
     {

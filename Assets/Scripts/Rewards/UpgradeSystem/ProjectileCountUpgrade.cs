@@ -1,14 +1,13 @@
 ﻿using GamePlay.EventSystem;
 using UnityEngine;
 
-namespace GamePlay.UpgradeSystem
+namespace GamePlay.Rewards.Upgrades
 {
-    [CreateAssetMenu(menuName = "Upgrades/Projectile Count Upgrade")]
+    [CreateAssetMenu(menuName = "Rewards/Upgrades/Projectile Count Upgrade")]
     public class ProjectileCountUpgrade : UpgradeBase
     {
-        public override void BuyUpgrade()
+        public override void GiveReward()
         {
-            base.BuyUpgrade();
             EventManager.Instance.TriggerEvent<ProjectileCountUpgrade>(this);
         }
     }

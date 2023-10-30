@@ -1,14 +1,13 @@
 ﻿using GamePlay.EventSystem;
 using UnityEngine;
 
-namespace GamePlay.UpgradeSystem
+namespace GamePlay.Rewards.Upgrades
 {
-    [CreateAssetMenu(menuName = "Upgrades/Armor Upgrade")]
+    [CreateAssetMenu(menuName = "Rewards/Upgrades/Armor Upgrade")]
     public class ArmorUpgrade : UpgradeBase
     {
-        public override void BuyUpgrade()
+        public override void GiveReward()
         {
-            base.BuyUpgrade();
             EventManager.Instance.TriggerEvent<ArmorUpgrade>(this);
         }
     }

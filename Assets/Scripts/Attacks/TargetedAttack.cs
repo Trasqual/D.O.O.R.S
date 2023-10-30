@@ -1,4 +1,5 @@
 using GamePlay.Projectiles;
+using GamePlay.StatSystem;
 using System.Collections;
 using UnityEngine;
 
@@ -7,8 +8,14 @@ namespace GamePlay.Attacks
     public class TargetedAttack : AbilityBase
     {
         [SerializeField] private PlayerDetector _detector;
-        [SerializeField] private int _count = 1;
         [SerializeField] private float _delayBetweenProjectiles = 0.1f;
+
+        private WaitForSeconds wait;
+
+        private void Awake()
+        {
+            wait = new WaitForSeconds(_delayBetweenProjectiles);
+        }
 
         protected override void Update()
         {
@@ -16,7 +23,7 @@ namespace GamePlay.Attacks
 
             if (_detector.EnemyCount <= 0)
             {
-                _timer = _cooldown;
+                _timer = _statController.GetStat<CooldownStat>().CurrentValue;
                 return;
             }
 
@@ -30,14 +37,15 @@ namespace GamePlay.Attacks
 
         private IEnumerator PerformCo()
         {
-            for (int i = 0; i < _count; i++)
+            for (int i = 0; i < _statController.GetStat<ProjectileCountStat>().CurrentValue; i++)
             {
                 if (_detector.EnemyCount > 0)
                 {
-                    var projectile = Instantiate(_projectilePrefab);
+                    var visual = Instantiate(_statController.GetStat<VisualStat>().Prefab);
+                    var projectile = visual.GetComponent<Projectile>();
                     projectile.transform.position = transform.position + Vector3.up * 2f;
                     ((TargetedProjectile)projectile).Init(_detector.GetClosestEnemy().transform);
-                    yield return new WaitForSeconds(_delayBetweenProjectiles);
+                    yield return wait;
                 }
             }
         }

@@ -1,4 +1,4 @@
-using GamePlay.UpgradeSystem;
+using GamePlay.Rewards.Upgrades;
 using System;
 using UnityEngine;
 
@@ -23,6 +23,9 @@ namespace GamePlay.StatSystem
         public override void AddUpgrade(object upgrade)
         {
             UpgradeBase upgradeBase = upgrade as UpgradeBase;
+
+            if (upgradeBase.TargetType != UpgradeType) return;
+
             _upgrades.Add(upgradeBase);
             CalculateValue();
         }
@@ -30,6 +33,9 @@ namespace GamePlay.StatSystem
         public override void RemoveUpgrade(object upgrade)
         {
             UpgradeBase upgradeBase = upgrade as UpgradeBase;
+
+            if (upgradeBase.TargetType != UpgradeType) return;
+
             if (_upgrades.Contains(upgradeBase))
             {
                 _upgrades.Remove(upgradeBase);

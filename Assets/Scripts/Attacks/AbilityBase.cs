@@ -1,12 +1,11 @@
-using GamePlay.Projectiles;
+using GamePlay.StatSystem;
 using UnityEngine;
 
 namespace GamePlay.Attacks
 {
     public abstract class AbilityBase : MonoBehaviour
     {
-        [SerializeField] protected Projectile _projectilePrefab;
-        [SerializeField] protected float _cooldown = 0.5f;
+        [SerializeField] protected StatController _statController;
 
         protected float _timer;
         protected bool _isActive;
@@ -19,7 +18,7 @@ namespace GamePlay.Attacks
         protected virtual void ActivateAttack()
         {
             _isActive = true;
-            _timer = _cooldown;
+            _timer = _statController.GetStat<CooldownStat>().CurrentValue;
         }
 
         protected virtual void Update()
@@ -30,7 +29,7 @@ namespace GamePlay.Attacks
             if (_timer <= 0)
             {
                 Perform();
-                _timer = _cooldown;
+                _timer = _statController.GetStat<CooldownStat>().CurrentValue;
             }
         }
 

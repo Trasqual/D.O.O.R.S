@@ -1,5 +1,5 @@
 using GamePlay.EventSystem;
-using GamePlay.UpgradeSystem;
+using GamePlay.Rewards.Upgrades;
 
 namespace GamePlay.StatSystem
 {
