@@ -24,11 +24,13 @@ namespace UI.Indication
         public void Activate()
         {
             _img.enabled = true;
+            _active = true;
         }
 
         public void Deactivate()
         {
             _img.enabled = false;
+            _active = false;
         }
 
         public void FixUpdate()
@@ -37,14 +39,14 @@ namespace UI.Indication
 
             var doorPos = _cam.WorldToScreenPoint(_door.transform.position);
 
-            if (!IsInScreen(doorPos) && _active)
+            if (!IsInScreen(doorPos) && !_active)
+            {
+                Activate();
+            }
+            else if (IsInScreen(doorPos) && _active)
             {
                 Deactivate();
                 return;
-            }
-            else if (IsInScreen(doorPos) && !_active)
-            {
-                Activate();
             }
 
             var doorPosOrigin = doorPos - new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
@@ -55,7 +57,7 @@ namespace UI.Indication
 
         private bool IsInScreen(Vector3 position)
         {
-            return position.x > 0 && position.x < Screen.width || position.y > 0 && position.y < Screen.height;
+            return position.x > 0 && position.x < Screen.width && position.y > 0 && position.y < Screen.height;
         }
 
         public void Clear()
