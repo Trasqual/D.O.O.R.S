@@ -27,7 +27,7 @@ namespace GamePlay.CameraSystem
             _playerCam.gameObject.SetActive(false);
             _roomCam.gameObject.SetActive(true);
 
-            DOVirtual.DelayedCall(1.5f, () =>
+            DOVirtual.DelayedCall(.5f, () =>
             {
                 EventManager.Instance.TriggerEvent<CameraIsInPositionForRoomCreationEvent>();
             });

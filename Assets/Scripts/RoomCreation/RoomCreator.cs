@@ -109,13 +109,13 @@ namespace GamePlay.RoomSystem.Creation
 
         private IEnumerator SlideRooms()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.3f);
             EventManager.Instance.TriggerEvent<RoomsAreSlidingEvent>(new RoomsAreSlidingEvent() { SlideAmount = -_currentRoom.transform.position });
             foreach (var room in _generatedRooms)
             {
-                room.transform.DOMove(-_currentRoom.transform.position, 3f).SetRelative();
+                room.transform.DOMove(-_currentRoom.transform.position, 1f).SetRelative();
             }
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(1f);
             EventManager.Instance.TriggerEvent<RoomSlidingEndedEvent>(new RoomSlidingEndedEvent() { ActiveRoom = _currentRoom });
         }
     }

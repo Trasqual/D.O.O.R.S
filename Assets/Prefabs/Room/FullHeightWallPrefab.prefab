@@ -179,8 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff0a46cc8ae813a49a13fb105cdfbd1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fadeInTime: 0.25
-  _fallDuration: 0.5
+  _fadeInTime: 0.15
+  _fallDuration: 0.3
   _fallStartPosition: 5
   _fallEndPosition: 1
   _fallEase: 11

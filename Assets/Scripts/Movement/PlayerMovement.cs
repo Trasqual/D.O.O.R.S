@@ -41,14 +41,14 @@ namespace GamePlay.MovementSystem.PlayerMovements
         private void OnRoomsAreSliding(object data)
         {
             _slideWithRoomAmount = ((RoomsAreSlidingEvent)data).SlideAmount;
-            transform.DOMove(_slideWithRoomAmount, 3f).SetRelative();
+            transform.DOMove(_slideWithRoomAmount, 1f).SetRelative();
         }
 
         private void OnRoomSpawnAnimationFinished(object data)
         {
             if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 100, 1))
             {
-                transform.DOMove(hit.position - _slideWithRoomAmount.normalized * 2f, 1f).OnUpdate(() =>
+                transform.DOMove(hit.position - _slideWithRoomAmount.normalized * 2f,.5f).OnUpdate(() =>
                 {
                     _anim.SetMovement(1f);
 
