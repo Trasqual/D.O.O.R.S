@@ -8,13 +8,14 @@ namespace GamePlay.StatSystem
     public abstract class StatBase
     {
         [SerializeField] private string StatName;
-        [SerializeField] protected UpgradeTargetType UpgradeType;
+        protected UpgradeTargetType UpgradeType;
         protected List<UpgradeBase> _upgrades;
 
-        public StatBase(string statName)
+        public StatBase(string statName, UpgradeTargetType upgradeTargetType)
         {
             StatName = statName;
             _upgrades = new();
+            UpgradeType = upgradeTargetType;
         }
 
         public virtual void Init()

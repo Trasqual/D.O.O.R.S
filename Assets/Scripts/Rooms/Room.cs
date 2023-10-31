@@ -27,7 +27,7 @@ namespace GamePlay.RoomSystem.Rooms
         private PropFactory _prefabProvider;
 
         public List<IPlaceable> Items = new();
-        public List<GameObject> Doors = new();
+        public List<Door> Doors = new();
 
         private List<Vector2> _possibleDirections = new() { new Vector2(-1, 0), new Vector2(1, 0), new Vector2(0, -1), new Vector2(0, 1) };
         private List<Vector2> _selectedDoorDirections = new();
@@ -138,6 +138,7 @@ namespace GamePlay.RoomSystem.Rooms
             SearchBackWall(0);
 
             GenerateWalls();
+            EventManager.Instance.TriggerEvent<RoomCreatedEvent>(new RoomCreatedEvent() { CurrentRoom = this });
         }
 
         private void SearchLeftWall(int startIndex)
@@ -361,7 +362,7 @@ namespace GamePlay.RoomSystem.Rooms
                     }
                     door.Initialize(doorSide, RoomType.Creature, this, doorIsActive);
 
-                    Doors.Add(generatedPiece);
+                    Doors.Add(generatedPiece.GetComponent<Door>());
 
                     var rot = generatedPiece.transform.eulerAngles;
                     if (cell.X == 0)

@@ -1,19 +1,22 @@
+using GamePlay.StatSystem;
 using UnityEngine;
 
-namespace GamePlay.Projectiles
+namespace GamePlay.Visuals.Projectiles
 {
     public class TargetedProjectile : Projectile
     {
         [SerializeField] private float _speed = 20f;
 
+        private StatController _stats;
         private Transform _target;
         private Vector3 _targetsLastKnownPosition;
         private float _lifeTime = 3f;
         private float _timePassed = 0f;
 
-        public void Init(Transform target)
+        public void Init(Transform target, StatController stats)
         {
             _target = target;
+            _stats = stats;
         }
 
         private void Update()
@@ -28,7 +31,7 @@ namespace GamePlay.Projectiles
                 {
                     if (_target.TryGetComponent(out HealthManager healthManager))
                     {
-                        healthManager.TakeDamage(Damage);
+                        healthManager.TakeDamage(_stats.GetStat<DamageStat>().CurrentValue);
                     }
                     Destroy(gameObject);
                 }

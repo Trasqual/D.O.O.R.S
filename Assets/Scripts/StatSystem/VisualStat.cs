@@ -6,7 +6,7 @@ namespace GamePlay.StatSystem
 {
     public class VisualStat : StatBase
     {
-        public VisualStat(string statName) : base(statName) { }
+        public VisualStat(string statName, UpgradeTargetType upgradeTargetType) : base(statName, upgradeTargetType) { }
 
         [field: SerializeField] public GameObject Prefab { get; private set; }
 

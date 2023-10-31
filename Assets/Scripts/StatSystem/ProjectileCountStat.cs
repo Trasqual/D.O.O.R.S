@@ -5,7 +5,7 @@ namespace GamePlay.StatSystem
 {
     public class ProjectileCountStat : FloatStat
     {
-        public ProjectileCountStat(string statName) : base(statName) { }
+        public ProjectileCountStat(string statName, UpgradeTargetType upgradeTargetType) : base(statName, upgradeTargetType) { }
 
         public override void SubscribeToUpgrade()
         {

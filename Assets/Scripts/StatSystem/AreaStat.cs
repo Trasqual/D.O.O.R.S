@@ -5,7 +5,7 @@ namespace GamePlay.StatSystem
 {
     public class AreaStat : FloatStat
     {
-        public AreaStat(string statName) : base(statName) { }
+        public AreaStat(string statName, UpgradeTargetType upgradeTargetType) : base(statName, upgradeTargetType) { }
 
         public override void SubscribeToUpgrade()
         {

@@ -1,6 +1,7 @@
-using GamePlay.Projectiles;
+using GamePlay.Visuals.Projectiles;
 using GamePlay.StatSystem;
 using UnityEngine;
+using GamePlay.Abilities.Attacks;
 
 namespace GamePlay.Attacks
 {
@@ -14,7 +15,7 @@ namespace GamePlay.Attacks
                 var visual = Instantiate(_statController.GetStat<VisualStat>().Prefab);
                 var projectile = visual.GetComponent<Projectile>();
                 projectile.transform.position = transform.position + Vector3.up * 2f;
-                ((DirectProjectile)projectile).Init(Quaternion.AngleAxis(360f / count * i, Vector3.up) * Vector3.forward);
+                ((DirectProjectile)projectile).Init(Quaternion.AngleAxis(360f / count * i, Vector3.up) * Vector3.forward, _statController);
             }
         }
     }

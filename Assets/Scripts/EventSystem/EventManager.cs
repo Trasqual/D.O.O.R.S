@@ -6,6 +6,7 @@ using Utilities;
 
 namespace GamePlay.EventSystem
 {
+    [DefaultExecutionOrder(-50)]
     public class EventManager : Singleton<EventManager>
     {
         public delegate void EventHandlerDelegate(object eventData);

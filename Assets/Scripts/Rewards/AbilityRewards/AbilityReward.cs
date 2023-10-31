@@ -1,4 +1,4 @@
-using GamePlay.Attacks;
+using GamePlay.Abilities.Attacks;
 using GamePlay.EventSystem;
 using UnityEngine;
 

@@ -1,7 +1,8 @@
-using GamePlay.Projectiles;
+using GamePlay.Visuals.Projectiles;
 using GamePlay.StatSystem;
 using System.Collections;
 using UnityEngine;
+using GamePlay.Abilities.Attacks;
 
 namespace GamePlay.Attacks
 {
@@ -44,7 +45,7 @@ namespace GamePlay.Attacks
                     var visual = Instantiate(_statController.GetStat<VisualStat>().Prefab);
                     var projectile = visual.GetComponent<Projectile>();
                     projectile.transform.position = transform.position + Vector3.up * 2f;
-                    ((TargetedProjectile)projectile).Init(_detector.GetClosestEnemy().transform);
+                    ((TargetedProjectile)projectile).Init(_detector.GetClosestEnemy().transform, _statController);
                     yield return wait;
                 }
             }

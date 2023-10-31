@@ -1,20 +1,23 @@
 using GamePlay.EnemySystem;
+using GamePlay.StatSystem;
 using UnityEngine;
 
-namespace GamePlay.Projectiles
+namespace GamePlay.Visuals.Projectiles
 {
     public class DirectProjectile : Projectile
     {
         [SerializeField] private float _speed = 20f;
         [SerializeField] private float _maxDistance = 50f;
 
+        private StatController _stats;
         private Vector3 _startPos;
         private Vector3 _direction;
 
-        public void Init(Vector3 direction)
+        public void Init(Vector3 direction, StatController stats)
         {
             _direction = direction;
             _startPos = transform.position;
+            _stats = stats;
         }
 
         private void Update()
@@ -34,7 +37,7 @@ namespace GamePlay.Projectiles
             {
                 if (enemy.TryGetComponent(out HealthManager healthManager))
                 {
-                    healthManager.TakeDamage(Damage);
+                    healthManager.TakeDamage(_stats.GetStat<DamageStat>().CurrentValue);
                     Destroy(gameObject);
                 }
             }

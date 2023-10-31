@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class PlayerDetector : MonoBehaviour
 {
+    [SerializeField] private SphereCollider _collider;
+
     private List<Enemy> _enemies = new();
     public int EnemyCount => _enemies.Count;
     public List<Enemy> Enemies => _enemies;
+
+    public void UpdateSize(float range)
+    {
+        _collider.radius = range;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

@@ -5,7 +5,7 @@ namespace GamePlay.StatSystem
 {
     public class CooldownStat : FloatStat
     {
-        public CooldownStat(string statName) : base(statName) { }
+        public CooldownStat(string statName, UpgradeTargetType upgradeTargetType) : base(statName, upgradeTargetType) { }
 
         public override void SubscribeToUpgrade()
         {

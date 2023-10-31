@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ce6eb4a4c78ae4e9b76f6810c71162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 473023161777407174}
 --- !u!135 &473023161777407174
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -105,6 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 1
+  _visualParticle: {fileID: 477128231001242676}
+  _detector: {fileID: 473023161777407173}
 --- !u!1001 &473023162732067894
 PrefabInstance:
   m_ObjectHideFlags: 0

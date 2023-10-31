@@ -6,7 +6,7 @@ namespace GamePlay.StatSystem
 {
     public abstract class FloatStat : StatBase
     {
-        public FloatStat(string statName) : base(statName) { }
+        public FloatStat(string statName, UpgradeTargetType upgradeTargetType) : base(statName, upgradeTargetType) { }
 
         public Action<float> OnStatChanged;
 

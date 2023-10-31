@@ -1,7 +1,7 @@
 using GamePlay.StatSystem;
 using UnityEngine;
 
-namespace GamePlay.Attacks
+namespace GamePlay.Abilities.Attacks
 {
     public abstract class AbilityBase : MonoBehaviour
     {

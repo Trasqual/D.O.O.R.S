@@ -7,6 +7,7 @@ using UnityEngine;
 public class StatController : MonoBehaviour
 {
     public Action OnInitialized;
+    [SerializeField] private UpgradeTargetType UpgradeTargetType;
     [SerializeReference] public List<StatBase> Stats = new();
 
     private void Start()
@@ -35,48 +36,48 @@ public class StatController : MonoBehaviour
     [ContextMenu(nameof(AddDamageStat))]
     public void AddDamageStat()
     {
-        Stats.Add(new DamageStat("Damage"));
+        Stats.Add(new DamageStat("Damage", UpgradeTargetType));
     }
 
     [ContextMenu(nameof(AddCooldownStat))]
     public void AddCooldownStat()
     {
-        Stats.Add(new CooldownStat("Cooldown"));
+        Stats.Add(new CooldownStat("Cooldown", UpgradeTargetType));
     }
 
     [ContextMenu(nameof(AddRangeStat))]
     public void AddRangeStat()
     {
-        Stats.Add(new RangeStat("Range"));
+        Stats.Add(new RangeStat("Range", UpgradeTargetType));
     }
 
     [ContextMenu(nameof(AddHealthStat))]
     public void AddHealthStat()
     {
-        Stats.Add(new HealthStat("Health"));
+        Stats.Add(new HealthStat("Health", UpgradeTargetType));
     }
 
     [ContextMenu(nameof(AddArmorStat))]
     public void AddArmorStat()
     {
-        Stats.Add(new ArmorStat("Armor"));
+        Stats.Add(new ArmorStat("Armor", UpgradeTargetType));
     }
 
     [ContextMenu(nameof(AddVisualStat))]
     public void AddVisualStat()
     {
-        Stats.Add(new VisualStat("Visual"));
+        Stats.Add(new VisualStat("Visual", UpgradeTargetType));
     }
 
     [ContextMenu(nameof(AddAreaStat))]
     public void AddAreaStat()
     {
-        Stats.Add(new AreaStat("Area"));
+        Stats.Add(new AreaStat("Area", UpgradeTargetType));
     }
 
     [ContextMenu(nameof(AddProjectileCountStat))]
     public void AddProjectileCountStat()
     {
-        Stats.Add(new ProjectileCountStat("ProjectileCount"));
+        Stats.Add(new ProjectileCountStat("ProjectileCount", UpgradeTargetType));
     }
 }

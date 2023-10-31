@@ -5,7 +5,7 @@ namespace GamePlay.StatSystem
 {
     public class HealthStat : FloatStat
     {
-        public HealthStat(string statName) : base(statName) { }
+        public HealthStat(string statName, UpgradeTargetType upgradeTargetType) : base(statName, upgradeTargetType) { }
 
         public override void SubscribeToUpgrade()
         {

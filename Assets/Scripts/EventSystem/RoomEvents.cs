@@ -9,6 +9,11 @@ namespace GamePlay.EventSystem
         public DoorData DoorData;
     }
 
+    public class RoomCreatedEvent
+    {
+        public Room CurrentRoom;
+    }
+
     public class RoomsAreSlidingEvent
     {
         public Vector3 SlideAmount;

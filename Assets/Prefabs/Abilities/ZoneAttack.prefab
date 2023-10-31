@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82913492ec00b2e4f91dd8124683bc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UpgradeTargetType: 4
   Stats:
   - rid: 5457624567506010115
   - rid: 5457624567506010116
@@ -70,24 +71,20 @@ MonoBehaviour:
       type: {class: DamageStat, ns: GamePlay.StatSystem, asm: Assembly-CSharp}
       data:
         StatName: Damage
-        UpgradeType: 0
         _baseValue: 1
     - rid: 5457624567506010116
       type: {class: CooldownStat, ns: GamePlay.StatSystem, asm: Assembly-CSharp}
       data:
         StatName: Cooldown
-        UpgradeType: 0
-        _baseValue: 0.15
+        _baseValue: 0.2
     - rid: 5457624567506010117
       type: {class: VisualStat, ns: GamePlay.StatSystem, asm: Assembly-CSharp}
       data:
         StatName: Visual
-        UpgradeType: 0
         <Prefab>k__BackingField: {fileID: 473023162915660904, guid: d3ec3cb900712974bb72b34c91e65fea,
           type: 3}
     - rid: 5457624567506010118
       type: {class: RangeStat, ns: GamePlay.StatSystem, asm: Assembly-CSharp}
       data:
         StatName: Range
-        UpgradeType: 0
-        _baseValue: 8
+        _baseValue: 5
