@@ -57,6 +57,7 @@ namespace GamePlay.MovementSystem.PlayerMovements
                     _canMove = true;
                     _slideWithRoomAmount = Vector3.zero;
                     _anim.SetMovement(0f);
+                    EventManager.Instance.TriggerEvent<CharacterEnteredNewRoomEvent>();
                 });
             }
         }

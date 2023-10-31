@@ -18,10 +18,14 @@ namespace GamePlay.Attacks
             wait = new WaitForSeconds(_delayBetweenProjectiles);
         }
 
+        public override void Init(PlayerController owner)
+        {
+            base.Init(owner);
+            _detector = owner.PlayerDetector;
+        }
+
         protected override void Update()
         {
-            base.Update();
-
             if (_detector.EnemyCount <= 0)
             {
                 _timer = _statController.GetStat<CooldownStat>().CurrentValue;

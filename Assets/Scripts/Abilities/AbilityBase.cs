@@ -7,18 +7,24 @@ namespace GamePlay.Abilities.Attacks
     {
         [SerializeField] protected StatController _statController;
 
+        protected PlayerController _owner;
         protected float _timer;
         protected bool _isActive;
 
-        protected void Start()
+        public virtual void Init(PlayerController owner)
         {
-            ActivateAttack();
+            _owner = owner;
         }
 
-        protected virtual void ActivateAttack()
+        public virtual void ActivateAbility()
         {
             _isActive = true;
             _timer = _statController.GetStat<CooldownStat>().CurrentValue;
+        }
+
+        public virtual void DeactivateAbility()
+        {
+            _isActive = false;
         }
 
         protected virtual void Update()

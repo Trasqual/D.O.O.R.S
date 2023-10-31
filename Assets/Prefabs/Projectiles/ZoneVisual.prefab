@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 473023162915660950}
   - component: {fileID: 473023162915660951}
   m_Layer: 0
-  m_Name: ZoneProjectile
+  m_Name: ZoneVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,9 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe29c397bf6cdd40ae28601df60df2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 1
-  _visualParticle: {fileID: 477128231001242676}
   _detector: {fileID: 473023161777407173}
+  _visualParticle: {fileID: 311460337640860894}
 --- !u!1001 &473023162732067894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -177,6 +176,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 509f626f2e431b048817f04971ce6741, type: 3}
+--- !u!198 &311460337640860894 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198725222979457256, guid: 509f626f2e431b048817f04971ce6741,
+    type: 3}
+  m_PrefabInstance: {fileID: 473023162732067894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &477128231001242676 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4395393564442626, guid: 509f626f2e431b048817f04971ce6741,

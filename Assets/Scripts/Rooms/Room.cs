@@ -10,6 +10,7 @@ using Grid = GridSystem.Grid;
 using GamePlay.AnimationSystem;
 using System.Collections;
 using DG.Tweening;
+using GamePlay.Rewards.Management;
 
 namespace GamePlay.RoomSystem.Rooms
 {
@@ -360,7 +361,7 @@ namespace GamePlay.RoomSystem.Rooms
                     {
                         doorIsActive = false;
                     }
-                    door.Initialize(doorSide, RoomType.Creature, this, doorIsActive);
+                    door.Initialize(doorSide, RoomType.Creature, this, doorIsActive, RewardProvider.Instance.GetRandomAbilityReward());
 
                     Doors.Add(generatedPiece.GetComponent<Door>());
 

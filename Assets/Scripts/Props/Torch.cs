@@ -10,7 +10,7 @@ namespace GamePlay.RoomSystem.Props
         [SerializeField] private ParticleSystem _flameParticle;
         [SerializeField] private Light _flameLight;
 
-        public void Animate(Action OnComplete)
+        public void Animate(Action OnStart = null, Action OnComplete = null)
         {
             transform.localScale = Vector3.zero;
             transform.DOScale(Vector3.one, 0.25f).SetEase(Ease.OutBack).OnComplete(() =>

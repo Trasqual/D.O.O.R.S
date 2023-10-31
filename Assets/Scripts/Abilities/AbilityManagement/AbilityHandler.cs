@@ -10,16 +10,22 @@ namespace GamePlay.Abilities.Management
 {
     public class AbilityHandler : MonoBehaviour
     {
+        [SerializeField] private PlayerController _owner;
+
         private List<AbilityBase> _abilities = new();
 
         private void Awake()
         {
             EventManager.Instance.AddListener<AbilityReward>(GainAbility);
+            EventManager.Instance.AddListener<DoorSelectedEvent>(StopAbilities);
+            EventManager.Instance.AddListener<CharacterEnteredNewRoomEvent>(StartAbilities);
         }
 
         private void OnDisable()
         {
             EventManager.Instance.RemoveListener<AbilityReward>(GainAbility);
+            EventManager.Instance.RemoveListener<DoorSelectedEvent>(StopAbilities);
+            EventManager.Instance.RemoveListener<CharacterEnteredNewRoomEvent>(StartAbilities);
         }
 
         private void GainAbility(object data)
@@ -30,6 +36,7 @@ namespace GamePlay.Abilities.Management
             {
                 var abilityInstance = Instantiate(ability.AbilityPrefab, transform.position, transform.rotation, transform);
                 _abilities.Add(abilityInstance);
+                abilityInstance.Init(_owner);
             }
         }
 
@@ -40,6 +47,22 @@ namespace GamePlay.Abilities.Management
             {
                 _abilities.Remove(existingAbility);
                 Destroy(existingAbility.gameObject);
+            }
+        }
+
+        private void StopAbilities(object data)
+        {
+            for (int i = 0; i < _abilities.Count; i++)
+            {
+                _abilities[i].DeactivateAbility();
+            }
+        }
+
+        private void StartAbilities(object data)
+        {
+            for (int i = 0; i < _abilities.Count; i++)
+            {
+                _abilities[i].ActivateAbility();
             }
         }
     }

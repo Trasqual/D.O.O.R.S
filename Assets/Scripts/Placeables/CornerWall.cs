@@ -13,7 +13,7 @@ namespace GamePlay.RoomSystem.Placeables
 
         public List<GridCell> GridCells { get; set; } = new();
 
-        public void Animate(Action OnComplete)
+        public void Animate(Action OnStart = null, Action OnComplete = null)
         {
             _animation.Animate(() =>
             {

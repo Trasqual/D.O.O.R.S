@@ -1,4 +1,6 @@
+using GamePlay.Rewards.AbilityRewards;
 using GamePlay.RoomSystem.Placeables.Doors;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +9,7 @@ namespace UI.Indication
     public class DoorIndicator : MonoBehaviour
     {
         [SerializeField] private Image _img;
+        [SerializeField] private TMP_Text _text;
 
         private Door _door;
         private Camera _cam;
@@ -19,17 +22,21 @@ namespace UI.Indication
         {
             _door = door;
             _cam = cam;
+            if (door.Reward != null)
+                _text.SetText(((AbilityReward)door.Reward).AbilityPrefab.name);
         }
 
         public void Activate()
         {
             _img.enabled = true;
+            _text.enabled = true;
             _active = true;
         }
 
         public void Deactivate()
         {
             _img.enabled = false;
+            _text.enabled = false;
             _active = false;
         }
 
@@ -63,6 +70,7 @@ namespace UI.Indication
         public void Clear()
         {
             _door = null;
+            Deactivate();
         }
     }
 }

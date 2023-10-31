@@ -24,7 +24,7 @@ namespace GamePlay.AnimationSystem
             }
         }
 
-        public override void Animate(Action OnComplete)
+        public override void Animate(Action OnStart = null, Action OnComplete = null)
         {
             _sequence = DOTween.Sequence();
             for (int i = 0; i < _meshes.Length; i++)
@@ -32,7 +32,7 @@ namespace GamePlay.AnimationSystem
                 _sequence.Insert(0f, _meshes[i].material.DOFade(1f, _fadeInTime));
                 _sequence.Insert(0f, _meshes[i].transform.DOLocalMoveY(_fallEndPosition, _fallDuration).SetEase(_fallEase));
             }
-            _sequence.OnComplete(() => OnComplete?.Invoke());
+            _sequence.OnStart(() => OnStart?.Invoke()).OnComplete(() => OnComplete?.Invoke());
         }
     }
 }

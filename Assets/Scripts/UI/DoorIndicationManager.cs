@@ -36,7 +36,8 @@ namespace UI.Indication
 
             for (int i = 0; i < doors.Count; i++)
             {
-                _doorIndicators[i].Initialize(doors[i], _cam);
+                if (doors[i].IsActive)
+                    _doorIndicators[i].Initialize(doors[i], _cam);
             }
         }
 

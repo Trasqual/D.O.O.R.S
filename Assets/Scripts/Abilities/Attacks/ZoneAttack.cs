@@ -10,13 +10,29 @@ namespace GamePlay.Attacks
         private PlayerDetector _detector;
         private Visual _visual;
 
-        protected override void ActivateAttack()
+        public override void ActivateAbility()
         {
-            base.ActivateAttack();
-            var visual = Instantiate(_statController.GetStat<VisualStat>().Prefab, transform.position, transform.rotation, transform);
-            _visual = visual.GetComponent<Visual>();
-            _detector = _visual.GetComponentInChildren<PlayerDetector>();
-            ((ZoneProjectile)_visual).UpdateSize(_statController.GetStat<RangeStat>().CurrentValue);
+            base.ActivateAbility();
+            if (_visual == null)
+            {
+                var visual = Instantiate(_statController.GetStat<VisualStat>().Prefab, transform.position, transform.rotation, transform);
+                _visual = visual.GetComponent<Visual>();
+                _detector = _visual.GetComponentInChildren<PlayerDetector>();
+                ((ZoneProjectile)_visual).UpdateSize(_statController.GetStat<RangeStat>().CurrentValue);
+            }
+            else
+            {
+                ((ZoneProjectile)_visual).Enable(true);
+            }
+        }
+
+        public override void DeactivateAbility()
+        {
+            base.DeactivateAbility();
+
+            if (_visual == null) return;
+
+            ((ZoneProjectile)_visual).Enable(false);
         }
 
         protected override void Perform()

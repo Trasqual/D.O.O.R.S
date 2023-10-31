@@ -8,7 +8,7 @@ namespace GamePlay.AnimationSystem
     {
         private Vector3 _originalScale;
 
-        public override void Animate(Action OnComplete)
+        public override void Animate(Action OnStart = null, Action OnComplete = null)
         {
             transform.DOScale(_originalScale, 0.5f).SetEase(Ease.OutBack).OnComplete(() => OnComplete?.Invoke());
         }

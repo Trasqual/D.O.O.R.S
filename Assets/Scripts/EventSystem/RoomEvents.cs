@@ -32,4 +32,8 @@ namespace GamePlay.EventSystem
     public class CameraIsInPositionForRoomCreationEvent
     {
     }
+
+    public class CharacterEnteredNewRoomEvent
+    {
+    }
 }
