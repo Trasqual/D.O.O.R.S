@@ -472,12 +472,12 @@ namespace GamePlay.RoomSystem.Rooms
 
         private IEnumerator SpawnAnimationCo()
         {
-            _floor.Animate(null);
+            _floor.Animate();
             foreach (var item in Items)
             {
                 if (item is IAnimateable animateableItem)
                 {
-                    animateableItem.Animate(null);
+                    animateableItem.Animate();
                     yield return new WaitForSeconds(0.07f);
                 }
             }

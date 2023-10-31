@@ -28,7 +28,7 @@ namespace GamePlay.RoomSystem.Placeables
 
         public void Animate(Action OnStart = null, Action OnComplete = null)
         {
-            _animation.Animate(() =>
+            _animation.Animate(null, () =>
             {
                 OnComplete?.Invoke();
                 PlaySpawnParticles();

@@ -59,7 +59,7 @@ namespace GamePlay.RoomSystem.Placeables.Doors
 
         public void Animate(Action OnStart = null, Action OnComplete = null)
         {
-            _animation.Animate(() => _text.enabled = false, () =>
+            _animation.Animate(null, () =>
             {
                 OnComplete?.Invoke();
                 PlaySpawnParticles();
@@ -70,6 +70,7 @@ namespace GamePlay.RoomSystem.Placeables.Doors
         public void PrepareForAnimation()
         {
             _animation.PrepareForAnimation();
+            _text.enabled = false;
         }
 
         private void PlaySpawnParticles()
