@@ -10,6 +10,7 @@ using System;
 using GamePlay.Particles;
 using GamePlay.Rewards;
 using TMPro;
+using GamePlay.AnimationSystem.DoorAnimations;
 
 namespace GamePlay.RoomSystem.Placeables.Doors
 {
@@ -17,6 +18,8 @@ namespace GamePlay.RoomSystem.Placeables.Doors
     {
         [SerializeField] private AnimationBase _animation;
         [SerializeField] private TMP_Text _text;
+        [SerializeField] private DoorOpenCloseAnimations _doorAnims;
+
 
         private Vector2 _doorSide;
         private RoomType _roomType;
@@ -42,7 +45,7 @@ namespace GamePlay.RoomSystem.Placeables.Doors
         private void SelectDoor()
         {
             if (Reward != null) Reward.GiveReward();
-
+            _doorAnims.Animate();
             var doorData = new DoorData() { DoorSide = _doorSide, RoomType = _roomType, Room = _room };
             IsActive = false;
             EventManager.Instance.TriggerEvent<DoorSelectedEvent>(new DoorSelectedEvent() { DoorData = doorData });
@@ -64,6 +67,8 @@ namespace GamePlay.RoomSystem.Placeables.Doors
                 OnComplete?.Invoke();
                 PlaySpawnParticles();
                 _text.enabled = true;
+                if (!IsActive)
+                    _doorAnims.Animate();
             });
         }
 
@@ -71,6 +76,10 @@ namespace GamePlay.RoomSystem.Placeables.Doors
         {
             _animation.PrepareForAnimation();
             _text.enabled = false;
+            if (!IsActive)
+            {
+                _doorAnims.PrepareForAnimation();
+            }
         }
 
         private void PlaySpawnParticles()
