@@ -1,3 +1,4 @@
+using GamePlay.DetectionSystem;
 using UnityEngine;
 
 namespace GamePlay.Visuals.Projectiles

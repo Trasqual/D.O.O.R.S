@@ -2,6 +2,7 @@ using GamePlay.Visuals.Projectiles;
 using GamePlay.StatSystem;
 using GamePlay.Visuals;
 using GamePlay.Abilities.Attacks;
+using GamePlay.DetectionSystem;
 
 namespace GamePlay.Attacks
 {
@@ -37,9 +38,9 @@ namespace GamePlay.Attacks
 
         protected override void Perform()
         {
-            for (int i = 0; i < _detector.EnemyCount; i++)
+            for (int i = 0; i < _detector.DetectedCount; i++)
             {
-                if (_detector.Enemies[i].TryGetComponent(out HealthManager healthManager))
+                if (_detector.Detecteds[i].TryGetComponent(out HealthManager healthManager))
                 {
                     healthManager.TakeDamage(_statController.GetStat<DamageStat>().CurrentValue);
                 }

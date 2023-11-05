@@ -3,6 +3,7 @@ using GamePlay.StatSystem;
 using System.Collections;
 using UnityEngine;
 using GamePlay.Abilities.Attacks;
+using GamePlay.DetectionSystem;
 
 namespace GamePlay.Attacks
 {
@@ -26,7 +27,7 @@ namespace GamePlay.Attacks
 
         protected override void Update()
         {
-            if (_detector.EnemyCount <= 0)
+            if (_detector.DetectedCount <= 0)
             {
                 _timer = _statController.GetStat<CooldownStat>().CurrentValue;
                 return;
@@ -44,12 +45,12 @@ namespace GamePlay.Attacks
         {
             for (int i = 0; i < _statController.GetStat<ProjectileCountStat>().CurrentValue; i++)
             {
-                if (_detector.EnemyCount > 0)
+                if (_detector.DetectedCount > 0)
                 {
                     var visual = Instantiate(_statController.GetStat<VisualStat>().Prefab);
                     var projectile = visual.GetComponent<Projectile>();
                     projectile.transform.position = transform.position + Vector3.up * 2f;
-                    ((TargetedProjectile)projectile).Init(_detector.GetClosestEnemy().transform, _statController);
+                    ((TargetedProjectile)projectile).Init(_detector.GetClosestDetected().transform, _statController);
                     yield return wait;
                 }
             }

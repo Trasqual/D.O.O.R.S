@@ -1325,6 +1325,7 @@ GameObject:
   - component: {fileID: 1277379626}
   - component: {fileID: 1277379627}
   - component: {fileID: 1277379628}
+  - component: {fileID: 1277379629}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1467,7 +1468,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerInput: {fileID: 1277379622}
   _playerMovement: {fileID: 1277379621}
+  _healthManager: {fileID: 1277379629}
   <PlayerDetector>k__BackingField: {fileID: 5407014}
+--- !u!114 &1277379629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277379618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0971f1897d9ba084ab75d99a783ebe55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MaxHealth>k__BackingField: 300
 --- !u!95 &1459978358 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3112131838426035393, guid: b1d2eb3d3142f174db5093821f32f85a,

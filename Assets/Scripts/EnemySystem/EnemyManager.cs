@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GamePlay.EnemySystem
 {
-    public class EnemyController : MonoBehaviour
+    public class EnemyManager : MonoBehaviour
     {
         [SerializeField] private EnemySpawner _enemySpawner;
         [SerializeField] private PlayerMovement _player;
