@@ -25,36 +25,52 @@ namespace GamePlay.RoomSystem.Placeables.Doors
         private Vector2 _doorSide;
         private RoomType _roomType;
         private Room _room;
+        public bool IsUsable { get; private set; }
         public bool IsActive { get; private set; }
         public Reward Reward { get; private set; }
 
         public List<GridCell> GridCells { get; set; } = new();
 
-        public void Initialize(Vector2 doorSide, RoomType roomType, Room room, bool isActive, Reward reward)
+        public void Initialize(Vector2 doorSide, RoomType roomType, Room room, bool isUsable, Reward reward)
         {
             _doorSide = doorSide;
             _roomType = roomType;
             _room = room;
-            IsActive = isActive;
-            if (IsActive)
+            IsUsable = isUsable;
+            IsActive = false;
+            if (IsUsable)
             {
                 Reward = reward;
                 _text.SetText(Reward.name);
             }
+
+            EventManager.Instance.AddListener<AllEnemiesAreDeadEvent>(ActivateDoor);
+        }
+
+        private void OnDestroy()
+        {
+            EventManager.Instance.RemoveListener<AllEnemiesAreDeadEvent>(ActivateDoor);
+        }
+
+        private void ActivateDoor(object data)
+        {
+            IsActive = true;
         }
 
         private void SelectDoor()
         {
+            if (!IsActive) return;
+
             if (Reward != null) Reward.GiveReward();
             _doorAnim.Animate(true);
             var doorData = new DoorData() { DoorSide = _doorSide, RoomType = _roomType, Room = _room };
-            IsActive = false;
+            IsUsable = false;
             EventManager.Instance.TriggerEvent<DoorSelectedEvent>(new DoorSelectedEvent() { DoorData = doorData });
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!IsActive) return;
+            if (!IsUsable) return;
             if (other.TryGetComponent(out PlayerMovement player))
             {
                 SelectDoor();
@@ -68,7 +84,7 @@ namespace GamePlay.RoomSystem.Placeables.Doors
                 OnComplete?.Invoke();
                 PlaySpawnParticles();
                 _text.enabled = true;
-                if (!IsActive)
+                if (!IsUsable)
                 {
                     DOVirtual.DelayedCall(2f, () =>
                     {
@@ -83,7 +99,7 @@ namespace GamePlay.RoomSystem.Placeables.Doors
             _animation.PrepareForAnimation();
             _text.enabled = false;
 
-            _doorAnim.SetState(!IsActive);
+            _doorAnim.SetState(!IsUsable);
 
         }
 

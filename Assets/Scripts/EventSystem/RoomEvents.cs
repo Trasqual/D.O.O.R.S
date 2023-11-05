@@ -36,4 +36,8 @@ namespace GamePlay.EventSystem
     public class CharacterEnteredNewRoomEvent
     {
     }
+
+    public class AllEnemiesAreDeadEvent
+    {
+    }
 }

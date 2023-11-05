@@ -491,6 +491,11 @@ namespace GamePlay.RoomSystem.Rooms
             });
         }
 
+        public void ActivateDoors()
+        {
+            EventManager.Instance.TriggerEvent<AllEnemiesAreDeadEvent>();
+        }
+
         private void OnDisable()
         {
             EventManager.Instance.RemoveListener<DoorSelectedEvent>(OnDoorSelected);

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GamePlay.EventSystem;
 using GamePlay.MovementSystem.PlayerMovements;
 using UnityEngine;
 
@@ -35,6 +36,11 @@ namespace GamePlay.EnemySystem
         {
             enemy.OnDeath -= RemoveEnemy;
             _spawnedEnemies.Remove(enemy);
+
+            if(_spawnedEnemies.Count <= 0)
+            {
+                EventManager.Instance.TriggerEvent<AllEnemiesAreDeadEvent>();
+            }
         }
     }
 }
