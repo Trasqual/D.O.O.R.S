@@ -3,21 +3,22 @@ using UnityEngine;
 
 namespace GamePlay.AnimationSystem.DoorAnimations
 {
-    public class DoorOpenCloseAnimations : MonoBehaviour, IAnimateable
+    public class DoorOpenCloseAnimations : MonoBehaviour
     {
         [SerializeField] private Animator _anim;
 
-        private bool IsOpen = false;
-        private static int _isOpen = Animator.StringToHash("IsOpen");
+        private static int _isOpen = Animator.StringToHash("IsOpen"); 
+        private static int _setOpen = Animator.StringToHash("SetOpen");
 
-        public void Animate(Action OnStart = null, Action OnComplete = null)
+        public void Animate(bool isOpen)
         {
-            _anim.SetBool(_isOpen, IsOpen);
+            _anim.SetBool(_isOpen, isOpen);
         }
-
-        public void PrepareForAnimation()
+        
+        public void SetState(bool isOpen)
         {
-            _anim.SetBool(_isOpen, !IsOpen);
+            _anim.SetBool(_isOpen, isOpen);
+            _anim.SetBool(_setOpen, isOpen);
         }
     }
 }

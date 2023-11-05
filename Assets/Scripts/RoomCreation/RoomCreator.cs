@@ -54,7 +54,7 @@ namespace GamePlay.RoomSystem.Creation
             _selectedDoorData = ((DoorSelectedEvent)data).DoorData;
             _exitSide = _selectedDoorData.DoorSide;
             _lastRoom = _selectedDoorData.Room;
-            CreateRoom(_selectedDoorData.RoomType);
+            CreateRoom(_selectedDoorData.RoomType, Random.Range(_minRoomWidth, _maxRoomWidth), Random.Range(_minRoomLength, _maxRoomLength), Random.Range(_minRoomDoorCount, _maxRoomDoorCount + 1));
             _currentRoom.PrepareForAnimation();
         }
 
@@ -65,16 +65,12 @@ namespace GamePlay.RoomSystem.Creation
 
         private void CreateInitialRoom()
         {
-            CreateRoom(RoomType.Initial);
+            CreateRoom(RoomType.Initial,20,20, 3);
             _currentRoom.GenerateNavMesh();
         }
 
-        public void CreateRoom(RoomType type)
+        public void CreateRoom(RoomType type, int width, int length, int doorCount)
         {
-            var roomWidth = Random.Range(_minRoomWidth, _maxRoomWidth);
-            var roomLength = Random.Range(_minRoomLength, _maxRoomLength);
-            var roomDoorCount = Random.Range(_minRoomDoorCount, _maxRoomDoorCount + 1);
-
             var spawnedRoom = _prefabProvider.GetRoom(transform);
 
             switch (type)
@@ -94,7 +90,7 @@ namespace GamePlay.RoomSystem.Creation
             };
 
             _currentRoom = spawnedRoom.GetComponent<Room>();
-            _currentRoom.Init(roomWidth, roomLength, roomDoorCount, _exitSide, _prefabProvider);
+            _currentRoom.Init(width, length, doorCount, _exitSide, _prefabProvider);
 
             if (_lastRoom != null)
             {

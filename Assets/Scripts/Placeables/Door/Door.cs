@@ -11,6 +11,7 @@ using GamePlay.Particles;
 using GamePlay.Rewards;
 using TMPro;
 using GamePlay.AnimationSystem.DoorAnimations;
+using DG.Tweening;
 
 namespace GamePlay.RoomSystem.Placeables.Doors
 {
@@ -18,7 +19,7 @@ namespace GamePlay.RoomSystem.Placeables.Doors
     {
         [SerializeField] private AnimationBase _animation;
         [SerializeField] private TMP_Text _text;
-        [SerializeField] private DoorOpenCloseAnimations _doorAnims;
+        [SerializeField] private DoorOpenCloseAnimations _doorAnim;
 
 
         private Vector2 _doorSide;
@@ -45,7 +46,7 @@ namespace GamePlay.RoomSystem.Placeables.Doors
         private void SelectDoor()
         {
             if (Reward != null) Reward.GiveReward();
-            _doorAnims.Animate();
+            _doorAnim.Animate(true);
             var doorData = new DoorData() { DoorSide = _doorSide, RoomType = _roomType, Room = _room };
             IsActive = false;
             EventManager.Instance.TriggerEvent<DoorSelectedEvent>(new DoorSelectedEvent() { DoorData = doorData });
@@ -68,7 +69,12 @@ namespace GamePlay.RoomSystem.Placeables.Doors
                 PlaySpawnParticles();
                 _text.enabled = true;
                 if (!IsActive)
-                    _doorAnims.Animate();
+                {
+                    DOVirtual.DelayedCall(2f, () =>
+                    {
+                        _doorAnim.Animate(false);
+                    });
+                }
             });
         }
 
@@ -76,10 +82,9 @@ namespace GamePlay.RoomSystem.Placeables.Doors
         {
             _animation.PrepareForAnimation();
             _text.enabled = false;
-            if (!IsActive)
-            {
-                _doorAnims.PrepareForAnimation();
-            }
+
+            _doorAnim.SetState(!IsActive);
+
         }
 
         private void PlaySpawnParticles()
@@ -88,6 +93,11 @@ namespace GamePlay.RoomSystem.Placeables.Doors
             particle.transform.SetParent(transform);
             particle.transform.localPosition = Vector3.zero;
             particle.Play();
+        }
+
+        private void CloseInActiveDoor(object data)
+        {
+            _doorAnim.Animate(false);
         }
     }
 }

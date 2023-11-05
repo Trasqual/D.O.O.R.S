@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6853770308028598334}
   - component: {fileID: 1078871930591151922}
   - component: {fileID: 3598797632497838745}
+  - component: {fileID: 4211660878721550918}
   m_Layer: 0
   m_Name: DoorLeft (1)
   m_TagString: Untagged
@@ -26,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110399283033042860}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 0.8, y: 2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5247288628412749381}
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 9d2d588c93ef2814a8ea28b2aa10d6e3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,6 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4211660878721550918
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110399283033042860}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1848916825660716084
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +205,7 @@ Transform:
   m_GameObject: {fileID: 3529436631514025801}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.4, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4283484440735541847}
@@ -366,7 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animation: {fileID: -1095525587844929409}
   _text: {fileID: 3906225490696819228}
-  _doorAnims: {fileID: 1680993763132997417}
+  _doorAnim: {fileID: 1680993763132997417}
 --- !u!114 &-1095525587844929409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,6 +401,8 @@ MonoBehaviour:
   _meshes:
   - {fileID: 2190768438066061662}
   - {fileID: 8448805271544568396}
+  - {fileID: 3598797632497838745}
+  - {fileID: 5531963391111468664}
 --- !u!95 &5967105422905009393
 Animator:
   serializedVersion: 5
@@ -432,6 +448,7 @@ GameObject:
   - component: {fileID: 4283484440735541847}
   - component: {fileID: 7050893555966091466}
   - component: {fileID: 5531963391111468664}
+  - component: {fileID: 4869979564883004902}
   m_Layer: 0
   m_Name: DoorRight (1)
   m_TagString: Untagged
@@ -447,8 +464,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5465153136139727220}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 0.8, y: 2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6437014072114993849}
@@ -482,7 +499,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 9d2d588c93ef2814a8ea28b2aa10d6e3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -504,6 +521,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4869979564883004902
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5465153136139727220}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5917437683569765858
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,7 +559,7 @@ Transform:
   m_GameObject: {fileID: 5917437683569765858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.4, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6853770308028598334}
