@@ -9,9 +9,9 @@ namespace GamePlay.Attacks
 {
     public class TargetedAttack : AbilityBase
     {
-        [SerializeField] private PlayerDetector _detector;
         [SerializeField] private float _delayBetweenProjectiles = 0.1f;
 
+        private PlayerDetector _detector;
         private WaitForSeconds wait;
 
         private void Awake()
@@ -19,13 +19,13 @@ namespace GamePlay.Attacks
             wait = new WaitForSeconds(_delayBetweenProjectiles);
         }
 
-        public override void Init(PlayerController owner)
+        public override void Init(ControllerBase owner)
         {
             base.Init(owner);
-            _detector = owner.PlayerDetector;
+            _detector = ((PlayerController)owner).PlayerDetector;
         }
 
-        protected override void Update()
+        public override void UpdateAbility()
         {
             if (_detector.DetectedCount <= 0)
             {
@@ -33,7 +33,7 @@ namespace GamePlay.Attacks
                 return;
             }
 
-            base.Update();
+            base.UpdateAbility();
         }
 
         protected override void Perform()

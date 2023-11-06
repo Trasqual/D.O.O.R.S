@@ -7,11 +7,11 @@ namespace GamePlay.Abilities.Attacks
     {
         [SerializeField] protected StatController _statController;
 
-        protected PlayerController _owner;
+        protected ControllerBase _owner;
         protected float _timer;
         protected bool _isActive;
 
-        public virtual void Init(PlayerController owner)
+        public virtual void Init(ControllerBase owner)
         {
             _owner = owner;
         }
@@ -27,7 +27,7 @@ namespace GamePlay.Abilities.Attacks
             _isActive = false;
         }
 
-        protected virtual void Update()
+        public virtual void UpdateAbility()
         {
             if (!_isActive) return;
 

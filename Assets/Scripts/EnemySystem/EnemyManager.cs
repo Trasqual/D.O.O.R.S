@@ -10,7 +10,7 @@ namespace GamePlay.EnemySystem
         [SerializeField] private EnemySpawner _enemySpawner;
         [SerializeField] private PlayerMovement _player;
 
-        private List<Enemy> _spawnedEnemies = new();
+        private List<EnemyController> _spawnedEnemies = new();
 
         private void Awake()
         {
@@ -25,14 +25,14 @@ namespace GamePlay.EnemySystem
             }
         }
 
-        public void AddEnemy(Enemy enemy)
+        public void AddEnemy(EnemyController enemy)
         {
             enemy.Init(_player.transform);
             enemy.OnDeath += RemoveEnemy;
             _spawnedEnemies.Add(enemy);
         }
 
-        public void RemoveEnemy(Enemy enemy)
+        public void RemoveEnemy(EnemyController enemy)
         {
             enemy.OnDeath -= RemoveEnemy;
             _spawnedEnemies.Remove(enemy);

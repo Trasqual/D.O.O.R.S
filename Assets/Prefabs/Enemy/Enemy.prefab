@@ -94,7 +94,8 @@ GameObject:
   - component: {fileID: 5068711462689979193}
   - component: {fileID: 5068711462689979175}
   - component: {fileID: -4391502853622898890}
-  - component: {fileID: 1251839895236357936}
+  - component: {fileID: 3005604314652281636}
+  - component: {fileID: 3445181210564016075}
   - component: {fileID: 4900843198190694233}
   - component: {fileID: -294077515587673393}
   - component: {fileID: 1946442643049820147}
@@ -160,7 +161,7 @@ MonoBehaviour:
   m_Area: 0
   m_IgnoreFromBuild: 1
   m_AffectedAgents: ffffffff
---- !u!114 &1251839895236357936
+--- !u!114 &3005604314652281636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,11 +170,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 5068711462689979172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31025d846f7e8674fae9e64a7f3e3f8a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2577f6f97f365eb4bae17d32ab27673f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent: {fileID: 5068711462689979175}
   _healthManager: {fileID: 4900843198190694233}
+  _agent: {fileID: 5068711462689979175}
+  <EnemyDetector>k__BackingField: {fileID: 7533816308068744872}
+  _abilityHandler: {fileID: 3445181210564016075}
+  _attack: {fileID: 11400000, guid: 05b98a2ed82c9df47a1d48e68fe0bee0, type: 2}
+--- !u!114 &3445181210564016075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5068711462689979172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6185a6a74b7d5c7449039940d7017920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _owner: {fileID: 3005604314652281636}
 --- !u!114 &4900843198190694233
 MonoBehaviour:
   m_ObjectHideFlags: 0

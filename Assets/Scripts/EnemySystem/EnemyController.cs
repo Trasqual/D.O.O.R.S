@@ -1,21 +1,27 @@
+using GamePlay.Abilities.Attacks;
+using GamePlay.Abilities.Management;
+using GamePlay.DetectionSystem;
 using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace GamePlay.EnemySystem
 {
-    public class Enemy : MonoBehaviour
+    public class EnemyController : ControllerBase
     {
         [SerializeField] private NavMeshAgent _agent;
-        [SerializeField] private HealthManager _healthManager;
+        [field: SerializeField] public EnemyDetector EnemyDetector { get; private set; }
+        [SerializeField] private AbilityHandler _abilityHandler;
+        [SerializeField] private AbilityData _attack;
 
-        public Action<Enemy> OnDeath;
+        public Action<EnemyController> OnDeath;
         private Transform _target;
 
         public void Init(Transform target)
         {
             _target = target;
             _healthManager.OnDeath += OnDeathCallback;
+            _abilityHandler.GainAbility(_attack);
         }
 
         public void UpdateEnemy()

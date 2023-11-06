@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e647c709cf0b4a94d8a9aaa998ec5e71, type: 3}
   m_Name: TargetedAttackReward
   m_EditorClassIdentifier: 
-  <AbilityPrefab>k__BackingField: {fileID: 5297069898392201224, guid: f5229f60c09b4be42b63ef998b2cf1cf,
-    type: 3}
+  <AbilityData>k__BackingField: {fileID: 11400000, guid: 9aabc7a7733fc3842a476cfe9f6638de,
+    type: 2}

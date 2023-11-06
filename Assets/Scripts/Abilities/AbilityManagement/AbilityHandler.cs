@@ -10,7 +10,7 @@ namespace GamePlay.Abilities.Management
 {
     public class AbilityHandler : MonoBehaviour
     {
-        [SerializeField] private PlayerController _owner;
+        [SerializeField] private ControllerBase _owner;
 
         private List<AbilityBase> _abilities = new();
 
@@ -28,19 +28,19 @@ namespace GamePlay.Abilities.Management
             EventManager.Instance.RemoveListener<CharacterEnteredNewRoomEvent>(StartAbilities);
         }
 
-        private void GainAbility(object data)
+        public void GainAbility(object data)
         {
-            var ability = ((AbilityReward)data);
+            var ability = ((AbilityData)data);
 
-            if (!_abilities.Any((x) => x.GetType() == ability.AbilityPrefab.GetType()))
+            if (!_abilities.Any((x) => x.GetType() == ability.Prefab.GetType()))
             {
-                var abilityInstance = Instantiate(ability.AbilityPrefab, transform.position, transform.rotation, transform);
+                var abilityInstance = Instantiate(ability.Prefab, transform.position, transform.rotation, transform);
                 _abilities.Add(abilityInstance);
                 abilityInstance.Init(_owner);
             }
         }
 
-        private void RemoveAbility(Type ability)
+        public void RemoveAbility(Type ability)
         {
             var existingAbility = _abilities.FirstOrDefault((x) => x.GetType() == ability);
             if (existingAbility != null)
@@ -63,6 +63,16 @@ namespace GamePlay.Abilities.Management
             for (int i = 0; i < _abilities.Count; i++)
             {
                 _abilities[i].ActivateAbility();
+            }
+        }
+
+        private void Update()
+        {
+            if (_abilities.Count <= 0) return;
+
+            for (int i = 0; i < _abilities.Count; i++)
+            {
+                _abilities[i].UpdateAbility();
             }
         }
     }

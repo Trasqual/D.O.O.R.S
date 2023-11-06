@@ -7,11 +7,11 @@ namespace GamePlay.Rewards.AbilityRewards
     [CreateAssetMenu(menuName = "Rewards/AbilityReward")]
     public class AbilityReward : Reward
     {
-        [field: SerializeField] public AbilityBase AbilityPrefab { get; protected set; }
+        [field: SerializeField] public AbilityData AbilityData { get; protected set; }
 
         public override void GiveReward()
         {
-            EventManager.Instance.TriggerEvent<AbilityReward>(this);
+            EventManager.Instance.TriggerEvent<AbilityReward>(AbilityData);
         }
     }
 }

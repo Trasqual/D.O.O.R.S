@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08070881ebef2ad42aa4ac9e3843bc29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 1251839895236357936, guid: 2f59e3a30eb1acb42a90f0d808124517,
+  _enemyPrefab: {fileID: 3005604314652281636, guid: 2f59e3a30eb1acb42a90f0d808124517,
     type: 3}
 --- !u!4 &479170564
 Transform:
@@ -1318,11 +1318,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1277379619}
   - component: {fileID: 1277379623}
+  - component: {fileID: 1277379625}
   - component: {fileID: 1277379622}
   - component: {fileID: 1277379621}
   - component: {fileID: 1277379624}
-  - component: {fileID: 1277379625}
-  - component: {fileID: 1277379626}
   - component: {fileID: 1277379627}
   - component: {fileID: 1277379628}
   - component: {fileID: 1277379629}
@@ -1428,19 +1427,6 @@ MonoBehaviour:
   m_Area: 0
   m_IgnoreFromBuild: 1
   m_AffectedAgents: ffffffff
---- !u!114 &1277379626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1277379618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0971f1897d9ba084ab75d99a783ebe55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 100
 --- !u!114 &1277379627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1466,9 +1452,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b506bd5a499652246a76525c0a2ac9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthManager: {fileID: 1277379629}
   _playerInput: {fileID: 1277379622}
   _playerMovement: {fileID: 1277379621}
-  _healthManager: {fileID: 1277379629}
   <PlayerDetector>k__BackingField: {fileID: 5407014}
 --- !u!114 &1277379629
 MonoBehaviour:

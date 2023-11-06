@@ -9,9 +9,9 @@ namespace GamePlay.EnemySystem
 {
     public class EnemySpawner : MonoBehaviour
     {
-        public Action<Enemy> OnEnemySpawned;
+        public Action<EnemyController> OnEnemySpawned;
 
-        [SerializeField] private Enemy _enemyPrefab;
+        [SerializeField] private EnemyController _enemyPrefab;
 
         private Room _currentRoom;
 

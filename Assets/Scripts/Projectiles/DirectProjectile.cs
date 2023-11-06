@@ -33,7 +33,7 @@ namespace GamePlay.Visuals.Projectiles
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Enemy enemy))
+            if (other.TryGetComponent(out EnemyController enemy))
             {
                 if (enemy.TryGetComponent(out HealthManager healthManager))
                 {

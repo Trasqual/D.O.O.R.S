@@ -12,6 +12,7 @@ using GamePlay.Rewards;
 using TMPro;
 using GamePlay.AnimationSystem.DoorAnimations;
 using DG.Tweening;
+using GamePlay.Rewards.AbilityRewards;
 
 namespace GamePlay.RoomSystem.Placeables.Doors
 {
@@ -41,7 +42,7 @@ namespace GamePlay.RoomSystem.Placeables.Doors
             if (IsUsable)
             {
                 Reward = reward;
-                _text.SetText(Reward.name);
+                _text.SetText(((AbilityReward)Reward).AbilityData.Name);
             }
 
             EventManager.Instance.AddListener<AllEnemiesAreDeadEvent>(ActivateDoor);

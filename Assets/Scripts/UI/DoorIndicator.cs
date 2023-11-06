@@ -23,7 +23,7 @@ namespace UI.Indication
             _door = door;
             _cam = cam;
             if (door.Reward != null)
-                _text.SetText(((AbilityReward)door.Reward).AbilityPrefab.name);
+                _text.SetText(((AbilityReward)door.Reward).AbilityData.Name);
         }
 
         public void Activate()
