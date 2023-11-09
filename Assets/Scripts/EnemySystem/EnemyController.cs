@@ -17,9 +17,15 @@ namespace GamePlay.Entities.Controllers
         public Action<EnemyController> OnDeath;
         private Transform _target;
 
+        private void Awake()
+        {
+            _agent.enabled = false;
+        }
+
         public void Init(Transform target)
         {
             _target = target;
+            _agent.enabled = true;
             _healthManager.OnDeath += OnDeathCallback;
             _abilityHandler.GainAbility(_attack);
             _abilityHandler.StartAbilities(null);
@@ -35,10 +41,11 @@ namespace GamePlay.Entities.Controllers
         {
             _target = null;
             OnDeath?.Invoke(this);
+            _abilityHandler.StopAbilities(null);
             LeanPool.Despawn(this);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             _healthManager.OnDeath -= OnDeathCallback;
         }
