@@ -8,7 +8,6 @@ namespace GamePlay.RoomSystem.Rooms
         protected override void FillRoom()
         {
             base.FillRoom();
-            EventManager.Instance.TriggerEvent<RoomSpawnAnimationFinishedEvent>();
         }
     }
 }

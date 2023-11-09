@@ -301,6 +301,7 @@ MonoBehaviour:
   _waveCount: 5
   _enemyPrefabs:
   - {fileID: 3005604314652281636, guid: 2f59e3a30eb1acb42a90f0d808124517, type: 3}
+  - {fileID: 1637509541363111886, guid: c10f14acca7e1d4419318e6052374a88, type: 3}
 --- !u!4 &479170564
 Transform:
   m_ObjectHideFlags: 0

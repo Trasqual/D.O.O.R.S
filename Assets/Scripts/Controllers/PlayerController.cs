@@ -17,12 +17,12 @@ namespace GamePlay.Entities.Controllers
 
         private void Awake()
         {
-            EventManager.Instance.AddListener<RoomSpawnAnimationFinishedEvent>(ActivateAgent);
+            EventManager.Instance.AddListener<InitialRoomCreatedEvent>(ActivateAgent);
         }
 
         private void OnDestroy()
         {
-            EventManager.Instance.RemoveListener<RoomSpawnAnimationFinishedEvent>(ActivateAgent);
+            EventManager.Instance.RemoveListener<InitialRoomCreatedEvent>(ActivateAgent);
         }
 
         private void ActivateAgent(object data)

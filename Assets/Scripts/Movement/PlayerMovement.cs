@@ -37,6 +37,7 @@ namespace GamePlay.MovementSystem.PlayerMovements
         private void OnDoorSelected(object data)
         {
             _canMove = false;
+            _controller.enabled = false;
         }
 
         private void OnRoomsAreSliding(object data)
@@ -56,6 +57,7 @@ namespace GamePlay.MovementSystem.PlayerMovements
                 }).OnComplete(() =>
                 {
                     _canMove = true;
+                    _controller.enabled = true;
                     _slideWithRoomAmount = Vector3.zero;
                     _anim.SetMovement(0f);
                     EventManager.Instance.TriggerEvent<CharacterEnteredNewRoomEvent>();
@@ -84,6 +86,10 @@ namespace GamePlay.MovementSystem.PlayerMovements
                     _controller.transform.rotation = Quaternion.Lerp(_controller.transform.rotation, Quaternion.LookRotation(_inputManager.Movement()), _rotationSpeed * Time.deltaTime);
 
                 _anim.SetMovement(_inputManager.Movement().magnitude);
+            }
+            else
+            {
+                _anim.SetMovement(0f);
             }
         }
 

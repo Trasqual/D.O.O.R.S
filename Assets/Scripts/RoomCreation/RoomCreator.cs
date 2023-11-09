@@ -68,6 +68,7 @@ namespace GamePlay.RoomSystem.Creation
             CreateRoom(RoomType.Initial, 20, 20, 3);
             _currentRoom.GenerateNavMesh();
             _currentRoom.ActivateDoors();
+            EventManager.Instance.TriggerEvent<InitialRoomCreatedEvent>();
         }
 
         public void CreateRoom(RoomType type, int width, int length, int doorCount)
