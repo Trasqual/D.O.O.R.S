@@ -1,4 +1,6 @@
 
+using GamePlay.EventSystem;
+
 namespace GamePlay.RoomSystem.Rooms
 {
     public class InitialRoom : Room
@@ -6,6 +8,7 @@ namespace GamePlay.RoomSystem.Rooms
         protected override void FillRoom()
         {
             base.FillRoom();
+            EventManager.Instance.TriggerEvent<RoomSpawnAnimationFinishedEvent>();
         }
     }
 }

@@ -47,6 +47,7 @@ namespace GamePlay.EnemySystem
 
         private void SetCurrentRoom(object data)
         {
+            if (data == null) return;
             _currentRoom = ((RoomSpawnAnimationFinishedEvent)data).CurrentRoom;
 
             StartCoroutine(SpawnEnemies());

@@ -9,7 +9,8 @@ namespace GamePlay.MovementSystem.PlayerMovements
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MovementBase
     {
-        [SerializeField] private CharacterController _controller;
+        //[SerializeField] private CharacterController _controller;
+        [SerializeField] private NavMeshAgent _controller;
         [SerializeField] private PlayerAnimationManager _anim;
         [SerializeField] private float _movementSpeed = 8f;
         [SerializeField] private float _rotationSpeed = 50f;
@@ -48,7 +49,7 @@ namespace GamePlay.MovementSystem.PlayerMovements
         {
             if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 100, 1))
             {
-                transform.DOMove(hit.position - _slideWithRoomAmount.normalized * 2f,.5f).OnUpdate(() =>
+                transform.DOMove(hit.position - _slideWithRoomAmount.normalized * 2f, .5f).OnUpdate(() =>
                 {
                     _anim.SetMovement(1f);
 
@@ -68,21 +69,22 @@ namespace GamePlay.MovementSystem.PlayerMovements
             {
                 _movement = new Vector3(_inputManager.Movement().x * _movementSpeed, _movement.y, _inputManager.Movement().z * _movementSpeed);
 
-                if (_controller.isGrounded)
-                {
-                    _movement.y = -0.1f;
-                }
-                else
-                {
-                    _movement.y += _gravity * Time.deltaTime;
-                }
+                //if (_controller.isGrounded)
+                //{
+                //    _movement.y = -0.1f;
+                //}
+                //else
+                //{
+                //    _movement.y += _gravity * Time.deltaTime;
+                //}
 
                 _controller.Move(_movement * Time.deltaTime);
 
                 if (_inputManager.Movement() != Vector3.zero)
                     _controller.transform.rotation = Quaternion.Lerp(_controller.transform.rotation, Quaternion.LookRotation(_inputManager.Movement()), _rotationSpeed * Time.deltaTime);
+
+                _anim.SetMovement(_inputManager.Movement().magnitude);
             }
-            _anim.SetMovement(_inputManager.Movement().magnitude);
         }
 
         private void Update()

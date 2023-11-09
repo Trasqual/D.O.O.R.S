@@ -1365,7 +1365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputManager: {fileID: 1277379622}
-  _controller: {fileID: 1277379623}
+  _controller: {fileID: 1277379631}
   _anim: {fileID: 1277379624}
   _movementSpeed: 5
   _rotationSpeed: 15
@@ -1486,7 +1486,7 @@ NavMeshAgent:
   m_Radius: 0.3
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 1
+  avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -1495,7 +1495,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!95 &1459978358 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3112131838426035393, guid: b1d2eb3d3142f174db5093821f32f85a,

@@ -418,6 +418,8 @@ namespace GamePlay.RoomSystem.Rooms
 
         public void DeActivateRoom(object data)
         {
+            if (data == null) return;
+
             var room = ((RoomSpawnAnimationFinishedEvent)data).CurrentRoom;
             if (room != this)
             {
