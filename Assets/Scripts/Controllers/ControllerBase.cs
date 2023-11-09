@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class ControllerBase : MonoBehaviour
+namespace GamePlay.Entities.Controllers
 {
-    [SerializeField] protected HealthManager _healthManager;
-
-    public virtual void TakeDamage(float damage)
+    public class ControllerBase : Entity
     {
-        _healthManager.TakeDamage(damage);
+        [SerializeField] protected HealthManager _healthManager;
+
+        public virtual void TakeDamage(float damage)
+        {
+            _healthManager.TakeDamage(damage);
+        }
     }
 }

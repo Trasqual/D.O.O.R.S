@@ -1,17 +1,16 @@
-using GamePlay.Abilities.Attacks;
 using GamePlay.Abilities.Management;
 using GamePlay.DetectionSystem;
 using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace GamePlay.EnemySystem
+namespace GamePlay.Entities.Controllers
 {
     public class EnemyController : ControllerBase
     {
         [SerializeField] private NavMeshAgent _agent;
         [field: SerializeField] public EnemyDetector EnemyDetector { get; private set; }
-        [SerializeField] private AbilityHandler _abilityHandler;
+        [SerializeField] private AbilityHandlerBase _abilityHandler;
         [SerializeField] private AbilityData _attack;
 
         public Action<EnemyController> OnDeath;
@@ -22,11 +21,13 @@ namespace GamePlay.EnemySystem
             _target = target;
             _healthManager.OnDeath += OnDeathCallback;
             _abilityHandler.GainAbility(_attack);
+            _abilityHandler.StartAbilities(null);
         }
 
         public void UpdateEnemy()
         {
             _agent.SetDestination(_target.position);
+            _abilityHandler.UpdateAbilities();
         }
 
         private void OnDeathCallback()

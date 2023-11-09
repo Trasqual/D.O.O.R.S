@@ -1,5 +1,7 @@
-using GamePlay.EnemySystem;
+using GamePlay.Entities;
+using GamePlay.Entities.Controllers;
 using GamePlay.StatSystem;
+using System;
 using UnityEngine;
 
 namespace GamePlay.Visuals.Projectiles
@@ -12,12 +14,14 @@ namespace GamePlay.Visuals.Projectiles
         private StatController _stats;
         private Vector3 _startPos;
         private Vector3 _direction;
+        private EntityType _targetType;
 
-        public void Init(Vector3 direction, StatController stats)
+        public void Init(Vector3 direction, StatController stats, EntityType targetType)
         {
             _direction = direction;
             _startPos = transform.position;
             _stats = stats;
+            _targetType = targetType;
         }
 
         private void Update()
@@ -33,8 +37,10 @@ namespace GamePlay.Visuals.Projectiles
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out EnemyController enemy))
+            if (other.TryGetComponent(out ControllerBase enemy))
             {
+                if (enemy.EntityType != _targetType) return;
+
                 if (enemy.TryGetComponent(out HealthManager healthManager))
                 {
                     healthManager.TakeDamage(_stats.GetStat<DamageStat>().CurrentValue);

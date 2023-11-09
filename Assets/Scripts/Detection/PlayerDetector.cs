@@ -1,4 +1,4 @@
-using GamePlay.EnemySystem;
+using GamePlay.Entities.Controllers;
 
 namespace GamePlay.DetectionSystem
 {

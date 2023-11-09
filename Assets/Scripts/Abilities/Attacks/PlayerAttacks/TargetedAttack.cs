@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine;
 using GamePlay.Abilities.Attacks;
 using GamePlay.DetectionSystem;
+using GamePlay.Entities.Controllers;
 
 namespace GamePlay.Attacks
 {

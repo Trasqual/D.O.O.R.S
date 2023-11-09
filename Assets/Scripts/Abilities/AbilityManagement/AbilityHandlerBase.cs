@@ -1,6 +1,5 @@
 using GamePlay.Abilities.Attacks;
-using GamePlay.EventSystem;
-using GamePlay.Rewards.AbilityRewards;
+using GamePlay.Entities.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,25 +7,11 @@ using UnityEngine;
 
 namespace GamePlay.Abilities.Management
 {
-    public class AbilityHandler : MonoBehaviour
+    public class AbilityHandlerBase : MonoBehaviour
     {
         [SerializeField] private ControllerBase _owner;
 
         private List<AbilityBase> _abilities = new();
-
-        private void Awake()
-        {
-            EventManager.Instance.AddListener<AbilityReward>(GainAbility);
-            EventManager.Instance.AddListener<DoorSelectedEvent>(StopAbilities);
-            EventManager.Instance.AddListener<CharacterEnteredNewRoomEvent>(StartAbilities);
-        }
-
-        private void OnDisable()
-        {
-            EventManager.Instance.RemoveListener<AbilityReward>(GainAbility);
-            EventManager.Instance.RemoveListener<DoorSelectedEvent>(StopAbilities);
-            EventManager.Instance.RemoveListener<CharacterEnteredNewRoomEvent>(StartAbilities);
-        }
 
         public void GainAbility(object data)
         {
@@ -50,7 +35,7 @@ namespace GamePlay.Abilities.Management
             }
         }
 
-        private void StopAbilities(object data)
+        public void StopAbilities(object data)
         {
             for (int i = 0; i < _abilities.Count; i++)
             {
@@ -58,7 +43,7 @@ namespace GamePlay.Abilities.Management
             }
         }
 
-        private void StartAbilities(object data)
+        public void StartAbilities(object data)
         {
             for (int i = 0; i < _abilities.Count; i++)
             {
@@ -66,7 +51,7 @@ namespace GamePlay.Abilities.Management
             }
         }
 
-        private void Update()
+        public void UpdateAbilities()
         {
             if (_abilities.Count <= 0) return;
 

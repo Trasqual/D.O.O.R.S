@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6369632450985691745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6369632450985691744}
+  - component: {fileID: 9173410804655100590}
+  - component: {fileID: 1157603181930915133}
+  m_Layer: 0
+  m_Name: EnemyRangedAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6369632450985691744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6369632450985691745}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9173410804655100590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6369632450985691745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5856e377e67194d42a40906e50d8c463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statController: {fileID: 1157603181930915133}
+--- !u!114 &1157603181930915133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6369632450985691745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82913492ec00b2e4f91dd8124683bc02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradeTargetType: 0
+  Stats:
+  - rid: 3707768924779839488
+  - rid: 3707768924779839489
+  - rid: 3707768924779839490
+  references:
+    version: 2
+    RefIds:
+    - rid: 3707768924779839488
+      type: {class: DamageStat, ns: GamePlay.StatSystem, asm: Assembly-CSharp}
+      data:
+        StatName: Damage
+        _baseValue: 3
+    - rid: 3707768924779839489
+      type: {class: CooldownStat, ns: GamePlay.StatSystem, asm: Assembly-CSharp}
+      data:
+        StatName: Cooldown
+        _baseValue: 2
+    - rid: 3707768924779839490
+      type: {class: VisualStat, ns: GamePlay.StatSystem, asm: Assembly-CSharp}
+      data:
+        StatName: Visual
+        <Prefab>k__BackingField: {fileID: 5667872884278941824, guid: 55d85a714c68d1048989617a4b3cd527,
+          type: 3}

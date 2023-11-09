@@ -1,3 +1,4 @@
+using GamePlay.Entities.Controllers;
 using GamePlay.EventSystem;
 using GamePlay.RoomSystem.Rooms;
 using System;
@@ -11,7 +12,9 @@ namespace GamePlay.EnemySystem
     {
         public Action<EnemyController> OnEnemySpawned;
 
-        [SerializeField] private EnemyController _enemyPrefab;
+        [SerializeField] private int _enemyCount;
+        [SerializeField] private int _waveCount;
+        [SerializeField] private EnemyController[] _enemyPrefabs;
 
         private Room _currentRoom;
 
@@ -27,7 +30,7 @@ namespace GamePlay.EnemySystem
 
         private void SpawnEnemy()
         {
-            var enemy = Instantiate(_enemyPrefab, GetRandomPositionOnNavmesh(), Quaternion.identity, transform);
+            var enemy = Instantiate(_enemyPrefabs[UnityEngine.Random.Range(0, _enemyPrefabs.Length)], GetRandomPositionOnNavmesh(), Quaternion.identity, transform);
             OnEnemySpawned?.Invoke(enemy);
         }
 
@@ -51,9 +54,9 @@ namespace GamePlay.EnemySystem
 
         private IEnumerator SpawnEnemies()
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < _waveCount; i++)
             {
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < (float)_enemyCount / _waveCount; j++)
                 {
                     SpawnEnemy();
                 }
