@@ -20,7 +20,7 @@ namespace GamePlay.Abilities.Attacks
         public virtual void ActivateAbility()
         {
             _isActive = true;
-            _timer = _statController.GetStat<CooldownStat>().CurrentValue;
+            _timer = 0f;
         }
 
         public virtual void DeactivateAbility()

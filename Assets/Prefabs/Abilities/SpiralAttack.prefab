@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7410926753824370564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7410926753824370565}
+  - component: {fileID: 8929845419404145238}
+  - component: {fileID: 7410926753824370567}
+  m_Layer: 0
+  m_Name: SpiralAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7410926753824370565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7410926753824370564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8929845419404145238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7410926753824370564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d094f358ddabed948aaeef25d00981f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statController: {fileID: 7410926753824370567}
+--- !u!114 &7410926753824370567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7410926753824370564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82913492ec00b2e4f91dd8124683bc02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradeTargetType: 5
+  Stats:
+  - rid: 5457624567506010115
+  - rid: 5457624567506010116
+  - rid: 5457624567506010117
+  - rid: 854215689781903361
+  references:
+    version: 2
+    RefIds:
+    - rid: 854215689781903361
+      type: {class: ProjectileCountStat, ns: GamePlay.StatSystem, asm: Assembly-CSharp}
+      data:
+        StatName: ProjectileCount
+        _baseValue: 2
+    - rid: 5457624567506010115
+      type: {class: DamageStat, ns: GamePlay.StatSystem, asm: Assembly-CSharp}
+      data:
+        StatName: Damage
+        _baseValue: 3
+    - rid: 5457624567506010116
+      type: {class: CooldownStat, ns: GamePlay.StatSystem, asm: Assembly-CSharp}
+      data:
+        StatName: Cooldown
+        _baseValue: 2.5
+    - rid: 5457624567506010117
+      type: {class: VisualStat, ns: GamePlay.StatSystem, asm: Assembly-CSharp}
+      data:
+        StatName: Visual
+        <Prefab>k__BackingField: {fileID: 5784928259894418138, guid: 5251a2f7f2c00924bb1944083983cccf,
+          type: 3}

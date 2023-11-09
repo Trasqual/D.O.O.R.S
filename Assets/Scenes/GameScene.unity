@@ -535,6 +535,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b215862efbac76c45bdc201bdd0ac67a, type: 2}
   - {fileID: 11400000, guid: e427bf25558e6a445806e74c49fcf66c, type: 2}
   - {fileID: 11400000, guid: 5de83500e4ca55242934e7b6f835e5c1, type: 2}
+  - {fileID: 11400000, guid: c2259e8983e619b46a47e493b17aa293, type: 2}
 --- !u!4 &796783313
 Transform:
   m_ObjectHideFlags: 0
@@ -1922,6 +1923,7 @@ GameObject:
   - component: {fileID: 1831844690}
   - component: {fileID: 1831844696}
   - component: {fileID: 1831844695}
+  - component: {fileID: 1831844697}
   - component: {fileID: 1831844694}
   - component: {fileID: 1831844693}
   - component: {fileID: 1831844692}
@@ -2089,6 +2091,31 @@ MonoBehaviour:
   strategy: 0
   preload: 30
   capacity: 60
+  recycle: 0
+  persist: 1
+  stamp: 0
+  warnings: 1
+  spawnedClonesList: []
+  despawnedClones: []
+  delays: []
+  deactivatedChild: {fileID: 0}
+--- !u!114 &1831844697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831844689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea08375da243a441b88d1e6b0713006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 5784928259894418138, guid: 5251a2f7f2c00924bb1944083983cccf, type: 3}
+  notification: 0
+  strategy: 0
+  preload: 10
+  capacity: 20
   recycle: 0
   persist: 1
   stamp: 0
