@@ -301,7 +301,6 @@ MonoBehaviour:
   _waveCount: 5
   _enemyPrefabs:
   - {fileID: 3005604314652281636, guid: 2f59e3a30eb1acb42a90f0d808124517, type: 3}
-  - {fileID: 1637509541363111886, guid: c10f14acca7e1d4419318e6052374a88, type: 3}
 --- !u!4 &479170564
 Transform:
   m_ObjectHideFlags: 0
@@ -1328,6 +1327,7 @@ GameObject:
   - component: {fileID: 1277379628}
   - component: {fileID: 1277379630}
   - component: {fileID: 1277379629}
+  - component: {fileID: 1277379631}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1368,7 +1368,7 @@ MonoBehaviour:
   _controller: {fileID: 1277379623}
   _anim: {fileID: 1277379624}
   _movementSpeed: 5
-  _rotationSpeed: 50
+  _rotationSpeed: 15
   _gravity: -10
 --- !u!114 &1277379622
 MonoBehaviour:
@@ -1382,7 +1382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063d7b4e749357d4b9c39877a128c8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <UseMouseMovement>k__BackingField: 1
+  <UseMouseMovement>k__BackingField: 0
 --- !u!143 &1277379623
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1446,6 +1446,7 @@ MonoBehaviour:
   _healthManager: {fileID: 1277379629}
   _playerInput: {fileID: 1277379622}
   _playerMovement: {fileID: 1277379621}
+  _agent: {fileID: 1277379631}
   <PlayerDetector>k__BackingField: {fileID: 5407014}
 --- !u!114 &1277379629
 MonoBehaviour:
@@ -1473,6 +1474,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _owner: {fileID: 1277379628}
+--- !u!195 &1277379631
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277379618}
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.3
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 1
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!95 &1459978358 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3112131838426035393, guid: b1d2eb3d3142f174db5093821f32f85a,

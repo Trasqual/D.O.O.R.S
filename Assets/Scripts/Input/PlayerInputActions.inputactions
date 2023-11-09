@@ -155,17 +155,6 @@
                 },
                 {
                     "name": "",
-                    "id": "957de13b-cc8b-46f0-892d-e47c938390cc",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RightClick",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "6bbf6aa7-f48e-4abf-9f9c-66ca65362e4b",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
