@@ -3,6 +3,7 @@ using GamePlay.StatSystem;
 using UnityEngine;
 using GamePlay.Abilities.Attacks;
 using GamePlay.Entities;
+using Lean.Pool;
 
 namespace GamePlay.Attacks
 {
@@ -13,7 +14,7 @@ namespace GamePlay.Attacks
             var count = _statController.GetStat<ProjectileCountStat>().CurrentValue;
             for (int i = 0; i < count; i++)
             {
-                var visual = Instantiate(_statController.GetStat<VisualStat>().Prefab);
+                var visual = LeanPool.Spawn(_statController.GetStat<VisualStat>().Prefab);
                 var projectile = visual.GetComponent<Projectile>();
                 projectile.transform.position = transform.position + Vector3.up * .5f;
                 ((DirectProjectile)projectile).Init(Quaternion.AngleAxis(360f / count * i, Vector3.up) * Vector3.forward, _statController, EntityType.Enemy);

@@ -30,6 +30,6 @@ public class HealthManager : MonoBehaviour
     public void Die()
     {
         OnDeath?.Invoke();
-        Destroy(gameObject);
+        _currentHealth = MaxHealth;
     }
 }

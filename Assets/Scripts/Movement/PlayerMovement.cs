@@ -14,7 +14,7 @@ namespace GamePlay.MovementSystem.PlayerMovements
         [SerializeField] private PlayerAnimationManager _anim;
         [SerializeField] private float _movementSpeed = 8f;
         [SerializeField] private float _rotationSpeed = 50f;
-        [SerializeField] private float _gravity = -10f;
+        //[SerializeField] private float _gravity = -10f;
 
         private Vector3 _slideWithRoomAmount;
         private Vector3 _movement;

@@ -33,7 +33,6 @@ namespace GamePlay.Entities.Controllers
         public override void TakeDamage(float damage)
         {
             base.TakeDamage(damage);
-            Debug.LogWarning($"I took {damage} damage.");
         }
     }
 }

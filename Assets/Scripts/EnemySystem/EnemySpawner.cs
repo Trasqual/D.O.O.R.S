@@ -1,6 +1,7 @@
 using GamePlay.Entities.Controllers;
 using GamePlay.EventSystem;
 using GamePlay.RoomSystem.Rooms;
+using Lean.Pool;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -30,7 +31,7 @@ namespace GamePlay.EnemySystem
 
         private void SpawnEnemy()
         {
-            var enemy = Instantiate(_enemyPrefabs[UnityEngine.Random.Range(0, _enemyPrefabs.Length)], GetRandomPositionOnNavmesh(), Quaternion.identity, transform);
+            var enemy = LeanPool.Spawn(_enemyPrefabs[UnityEngine.Random.Range(0, _enemyPrefabs.Length)], GetRandomPositionOnNavmesh(), Quaternion.identity, transform);
             OnEnemySpawned?.Invoke(enemy);
         }
 

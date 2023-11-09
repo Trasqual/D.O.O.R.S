@@ -1,5 +1,6 @@
 using GamePlay.Abilities.Management;
 using GamePlay.DetectionSystem;
+using Lean.Pool;
 using System;
 using UnityEngine;
 using UnityEngine.AI;
@@ -33,6 +34,7 @@ namespace GamePlay.Entities.Controllers
         private void OnDeathCallback()
         {
             OnDeath?.Invoke(this);
+            LeanPool.Despawn(this);
         }
 
         private void OnDestroy()

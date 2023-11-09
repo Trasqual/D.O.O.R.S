@@ -1,7 +1,7 @@
 using GamePlay.Entities;
 using GamePlay.Entities.Controllers;
 using GamePlay.StatSystem;
-using System;
+using Lean.Pool;
 using UnityEngine;
 
 namespace GamePlay.Visuals.Projectiles
@@ -31,7 +31,7 @@ namespace GamePlay.Visuals.Projectiles
 
             if (Vector3.Distance(transform.position, _startPos) >= _maxDistance)
             {
-                Destroy(gameObject);
+                ResetVisual();
             }
         }
 
@@ -44,9 +44,17 @@ namespace GamePlay.Visuals.Projectiles
                 if (enemy.TryGetComponent(out HealthManager healthManager))
                 {
                     healthManager.TakeDamage(_stats.GetStat<DamageStat>().CurrentValue);
-                    Destroy(gameObject);
+                    ResetVisual();
                 }
             }
+        }
+
+        private void ResetVisual()
+        {
+            _startPos = Vector3.zero;
+            _direction = Vector3.zero;
+            _targetType = EntityType.None;
+            LeanPool.Despawn(this);
         }
     }
 }

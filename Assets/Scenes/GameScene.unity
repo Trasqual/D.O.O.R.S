@@ -1370,7 +1370,6 @@ MonoBehaviour:
   _anim: {fileID: 1277379624}
   _movementSpeed: 5
   _rotationSpeed: 15
-  _gravity: -10
 --- !u!114 &1277379622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1804,6 +1803,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1831844691}
   - component: {fileID: 1831844690}
+  - component: {fileID: 1831844696}
+  - component: {fileID: 1831844695}
+  - component: {fileID: 1831844694}
+  - component: {fileID: 1831844693}
+  - component: {fileID: 1831844692}
   m_Layer: 0
   m_Name: LeanPoolManager
   m_TagString: Untagged
@@ -1851,6 +1855,131 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1831844692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831844689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea08375da243a441b88d1e6b0713006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8743801675085506510, guid: c10f14acca7e1d4419318e6052374a88, type: 3}
+  notification: 3
+  strategy: 0
+  preload: 10
+  capacity: 1000
+  recycle: 0
+  persist: 1
+  stamp: 0
+  warnings: 1
+  spawnedClonesList: []
+  despawnedClones: []
+  delays: []
+  deactivatedChild: {fileID: 0}
+--- !u!114 &1831844693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831844689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea08375da243a441b88d1e6b0713006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 5068711462689979172, guid: 2f59e3a30eb1acb42a90f0d808124517, type: 3}
+  notification: 3
+  strategy: 0
+  preload: 10
+  capacity: 1000
+  recycle: 0
+  persist: 1
+  stamp: 0
+  warnings: 1
+  spawnedClonesList: []
+  despawnedClones: []
+  delays: []
+  deactivatedChild: {fileID: 0}
+--- !u!114 &1831844694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831844689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea08375da243a441b88d1e6b0713006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 5667872884278941824, guid: 55d85a714c68d1048989617a4b3cd527, type: 3}
+  notification: 3
+  strategy: 0
+  preload: 30
+  capacity: 60
+  recycle: 0
+  persist: 1
+  stamp: 0
+  warnings: 1
+  spawnedClonesList: []
+  despawnedClones: []
+  delays: []
+  deactivatedChild: {fileID: 0}
+--- !u!114 &1831844695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831844689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea08375da243a441b88d1e6b0713006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 473023162915660904, guid: d3ec3cb900712974bb72b34c91e65fea, type: 3}
+  notification: 3
+  strategy: 0
+  preload: 2
+  capacity: 2
+  recycle: 0
+  persist: 1
+  stamp: 0
+  warnings: 1
+  spawnedClonesList: []
+  despawnedClones: []
+  delays: []
+  deactivatedChild: {fileID: 0}
+--- !u!114 &1831844696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831844689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea08375da243a441b88d1e6b0713006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6613550736735795109, guid: 61c0633485f5c094dbe8cc1be2bd3193, type: 3}
+  notification: 3
+  strategy: 0
+  preload: 30
+  capacity: 60
+  recycle: 0
+  persist: 1
+  stamp: 0
+  warnings: 1
+  spawnedClonesList: []
+  despawnedClones: []
+  delays: []
+  deactivatedChild: {fileID: 0}
 --- !u!1 &1983289083
 GameObject:
   m_ObjectHideFlags: 0

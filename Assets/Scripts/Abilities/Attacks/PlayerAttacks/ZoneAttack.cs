@@ -3,6 +3,7 @@ using GamePlay.StatSystem;
 using GamePlay.Visuals;
 using GamePlay.Abilities.Attacks;
 using GamePlay.DetectionSystem;
+using Lean.Pool;
 
 namespace GamePlay.Attacks
 {
@@ -16,7 +17,7 @@ namespace GamePlay.Attacks
             base.ActivateAbility();
             if (_visual == null)
             {
-                var visual = Instantiate(_statController.GetStat<VisualStat>().Prefab, transform.position, transform.rotation, transform);
+                var visual = LeanPool.Spawn(_statController.GetStat<VisualStat>().Prefab, transform.position, transform.rotation, transform);
                 _visual = visual.GetComponent<Visual>();
                 _detector = _visual.GetComponentInChildren<PlayerDetector>();
                 ((ZoneProjectile)_visual).UpdateSize(_statController.GetStat<RangeStat>().CurrentValue);

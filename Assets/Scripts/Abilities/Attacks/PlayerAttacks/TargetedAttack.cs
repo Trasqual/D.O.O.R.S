@@ -5,6 +5,7 @@ using UnityEngine;
 using GamePlay.Abilities.Attacks;
 using GamePlay.DetectionSystem;
 using GamePlay.Entities.Controllers;
+using Lean.Pool;
 
 namespace GamePlay.Attacks
 {
@@ -48,7 +49,7 @@ namespace GamePlay.Attacks
             {
                 if (_detector.DetectedCount > 0)
                 {
-                    var visual = Instantiate(_statController.GetStat<VisualStat>().Prefab);
+                    var visual = LeanPool.Spawn(_statController.GetStat<VisualStat>().Prefab);
                     var projectile = visual.GetComponent<Projectile>();
                     projectile.transform.position = transform.position + Vector3.up * 2f;
                     ((TargetedProjectile)projectile).Init(_detector.GetClosestDetected().transform, _statController);

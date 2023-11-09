@@ -1,4 +1,5 @@
 using GamePlay.StatSystem;
+using Lean.Pool;
 using UnityEngine;
 
 namespace GamePlay.Visuals.Projectiles
@@ -33,7 +34,7 @@ namespace GamePlay.Visuals.Projectiles
                     {
                         healthManager.TakeDamage(_stats.GetStat<DamageStat>().CurrentValue);
                     }
-                    Destroy(gameObject);
+                    ResetVisual();
                 }
 
             }
@@ -44,15 +45,22 @@ namespace GamePlay.Visuals.Projectiles
 
                 if (Vector3.Distance(transform.position, _targetsLastKnownPosition) < 0.1f)
                 {
-                    Destroy(gameObject);
+                    ResetVisual();
                 }
             }
 
             _timePassed += Time.deltaTime;
             if (_timePassed >= _lifeTime)
             {
-                Destroy(gameObject);
+                ResetVisual();
             }
+        }
+
+        private void ResetVisual()
+        {
+            _target = null;
+            _timePassed = 0;
+            LeanPool.Despawn(this);
         }
     }
 }
