@@ -1444,6 +1444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EntityType: 1
   _healthManager: {fileID: 1277379629}
+  <SpellSpawnRoot>k__BackingField: {fileID: 2047020499}
   _playerInput: {fileID: 1277379622}
   _playerMovement: {fileID: 1277379621}
   _agent: {fileID: 1277379631}
@@ -2082,6 +2083,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2047020499 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3059346348800674331, guid: b1d2eb3d3142f174db5093821f32f85a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1113359434}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2105227328
 GameObject:
   m_ObjectHideFlags: 0

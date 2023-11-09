@@ -48,6 +48,10 @@ namespace GamePlay.Visuals.Projectiles
                     ResetVisual();
                 }
             }
+            else if(_target == null)
+            {
+                transform.position += transform.forward * _speed * Time.deltaTime;
+            }
 
             _timePassed += Time.deltaTime;
             if (_timePassed >= _lifeTime)

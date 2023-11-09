@@ -29,6 +29,7 @@ namespace GamePlay.Abilities.Attacks.EnemyAttacks
         {
             if (_detector.DetectedCount > 0)
             {
+                ((EnemyController)_owner).Anim.Attack();
                 _detector.Detecteds[0].TakeDamage(_statController.GetStat<DamageStat>().CurrentValue);
             }
         }

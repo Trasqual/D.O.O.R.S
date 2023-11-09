@@ -27,7 +27,8 @@ namespace GamePlay.Visuals.Projectiles
         private void Update()
         {
             transform.position += _speed * Time.deltaTime * _direction;
-            transform.rotation = Quaternion.LookRotation(_direction);
+            if (_direction != Vector3.zero)
+                transform.rotation = Quaternion.LookRotation(_direction);
 
             if (Vector3.Distance(transform.position, _startPos) >= _maxDistance)
             {

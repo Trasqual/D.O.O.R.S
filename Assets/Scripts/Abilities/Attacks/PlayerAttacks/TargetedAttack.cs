@@ -51,7 +51,7 @@ namespace GamePlay.Attacks
                 {
                     var visual = LeanPool.Spawn(_statController.GetStat<VisualStat>().Prefab);
                     var projectile = visual.GetComponent<Projectile>();
-                    projectile.transform.position = transform.position + Vector3.up * 2f;
+                    projectile.transform.position = _owner.SpellSpawnRoot.position;
                     ((TargetedProjectile)projectile).Init(_detector.GetClosestDetected().transform, _statController);
                     yield return wait;
                 }
