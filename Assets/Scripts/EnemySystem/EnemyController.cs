@@ -33,6 +33,7 @@ namespace GamePlay.Entities.Controllers
 
         private void OnDeathCallback()
         {
+            _target = null;
             OnDeath?.Invoke(this);
             LeanPool.Despawn(this);
         }
