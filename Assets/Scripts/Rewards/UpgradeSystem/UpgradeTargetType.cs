@@ -7,6 +7,7 @@ public enum UpgradeTargetType
     CircularAttack,
     ZoneAttack,
     SpiralAttack,
+    SpiningAttack,
     BoomerangAttack,
     DirectAttack,
     MeteorAttack,
