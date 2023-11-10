@@ -297,11 +297,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08070881ebef2ad42aa4ac9e3843bc29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyCount: 50
+  _enemyCount: 250
   _waveCount: 5
   _enemyPrefabs:
-  - {fileID: 3005604314652281636, guid: 2f59e3a30eb1acb42a90f0d808124517, type: 3}
   - {fileID: 1637509541363111886, guid: c10f14acca7e1d4419318e6052374a88, type: 3}
+  - {fileID: 3005604314652281636, guid: 2f59e3a30eb1acb42a90f0d808124517, type: 3}
+  - {fileID: 3005604314652281636, guid: 2f59e3a30eb1acb42a90f0d808124517, type: 3}
+  - {fileID: 3005604314652281636, guid: 2f59e3a30eb1acb42a90f0d808124517, type: 3}
+  - {fileID: 3005604314652281636, guid: 2f59e3a30eb1acb42a90f0d808124517, type: 3}
 --- !u!4 &479170564
 Transform:
   m_ObjectHideFlags: 0
@@ -1438,6 +1441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1277379619}
   - component: {fileID: 1277379623}
+  - component: {fileID: 1277379631}
   - component: {fileID: 1277379625}
   - component: {fileID: 1277379622}
   - component: {fileID: 1277379621}
@@ -1445,7 +1449,7 @@ GameObject:
   - component: {fileID: 1277379628}
   - component: {fileID: 1277379630}
   - component: {fileID: 1277379629}
-  - component: {fileID: 1277379631}
+  - component: {fileID: 1277379632}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1615,6 +1619,21 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
+--- !u!114 &1277379632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277379618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aecc4084ab492e42b7045dc1509f507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textPopUpPrefab: {fileID: 5532437308759622829, guid: 8119267c404cdd647af1e613bd6d400b,
+    type: 3}
+  _healthManager: {fileID: 1277379629}
 --- !u!95 &1459978358 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3112131838426035393, guid: b1d2eb3d3142f174db5093821f32f85a,

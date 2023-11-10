@@ -30,7 +30,9 @@ namespace GamePlay.Visuals.Projectiles
         {
             var dir = new Vector3(_speed * Mathf.Cos(_angle) * _radius, 0f, _speed * Mathf.Sin(_angle) * _radius);
             transform.position = _centerPos.position + Vector3.up * 0.5f + dir;
-            transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.position - _centerPos.position, Vector3.up));
+            var lookdir = Vector3.Cross(transform.position - _centerPos.position, Vector3.up);
+            if (lookdir != Vector3.zero)
+                transform.rotation = Quaternion.LookRotation(lookdir);
 
             _angle += Time.deltaTime * 3f;
             _radius += Time.deltaTime * 0.2f;
