@@ -13,12 +13,13 @@ public class TextPopUp : MonoBehaviour
     {
         transform.SetParent(parent);
         _text.SetText(text);
-        _textMovementTween = _text.transform.DOLocalMove(Vector3.up * 2, 1f).OnUpdate(() => _text.transform.rotation = Quaternion.LookRotation(_text.transform.position - Camera.main.transform.position)).OnComplete(() => Reset());
+        _textMovementTween = _text.transform.DOLocalMove(Vector3.up * 2, 1f).OnUpdate(() => _text.transform.rotation = Quaternion.LookRotation(_text.transform.position - Camera.main.transform.position)).OnComplete(() => ResetText());
     }
 
-    private void Reset()
+    private void ResetText()
     {
-        LeanPool.Despawn(this);
+        _text.transform.localPosition = Vector3.zero;
         _textMovementTween?.Kill();
+        LeanPool.Despawn(this);
     }
 }

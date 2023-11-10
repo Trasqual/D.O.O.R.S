@@ -1490,7 +1490,7 @@ MonoBehaviour:
   _inputManager: {fileID: 1277379622}
   _controller: {fileID: 1277379631}
   _anim: {fileID: 1277379624}
-  _movementSpeed: 5
+  _movementSpeed: 8
   _rotationSpeed: 15
 --- !u!114 &1277379622
 MonoBehaviour:
@@ -1947,6 +1947,7 @@ GameObject:
   - component: {fileID: 1831844694}
   - component: {fileID: 1831844693}
   - component: {fileID: 1831844692}
+  - component: {fileID: 1831844698}
   m_Layer: 0
   m_Name: LeanPoolManager
   m_TagString: Untagged
@@ -2137,6 +2138,31 @@ MonoBehaviour:
   preload: 10
   capacity: 20
   recycle: 0
+  persist: 1
+  stamp: 0
+  warnings: 1
+  spawnedClonesList: []
+  despawnedClones: []
+  delays: []
+  deactivatedChild: {fileID: 0}
+--- !u!114 &1831844698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831844689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea08375da243a441b88d1e6b0713006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1866919678273725084, guid: 8119267c404cdd647af1e613bd6d400b, type: 3}
+  notification: 0
+  strategy: 0
+  preload: 0
+  capacity: 50
+  recycle: 1
   persist: 1
   stamp: 0
   warnings: 1
