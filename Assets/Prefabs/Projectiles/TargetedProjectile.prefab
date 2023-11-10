@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e480b9535f6d02a4397be398518cdcba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 3
   _speed: 20
 --- !u!54 &200294466365178790
 Rigidbody:
@@ -133,6 +132,26 @@ PrefabInstance:
     - target: {fileID: 4200040148562160, guid: 99c114328b10529409559fdde1d5cd8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199184971286802780, guid: 99c114328b10529409559fdde1d5cd8b,
+        type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199184971286802780, guid: 99c114328b10529409559fdde1d5cd8b,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 199184971286802780, guid: 99c114328b10529409559fdde1d5cd8b,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 199184971286802780, guid: 99c114328b10529409559fdde1d5cd8b,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 82281359815435242, guid: 99c114328b10529409559fdde1d5cd8b, type: 3}

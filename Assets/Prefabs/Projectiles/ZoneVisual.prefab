@@ -194,6 +194,26 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.minMaxState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 199560432826946322, guid: 509f626f2e431b048817f04971ce6741,
+        type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199560432826946322, guid: 509f626f2e431b048817f04971ce6741,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 199560432826946322, guid: 509f626f2e431b048817f04971ce6741,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 199560432826946322, guid: 509f626f2e431b048817f04971ce6741,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 509f626f2e431b048817f04971ce6741, type: 3}
 --- !u!198 &311460337640860894 stripped

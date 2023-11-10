@@ -1,3 +1,4 @@
+using Lean.Pool;
 using UnityEngine;
 
 public class HealthPopUp : MonoBehaviour
@@ -17,7 +18,7 @@ public class HealthPopUp : MonoBehaviour
 
     private void PopDamageTakenText(float damage)
     {
-        var textPopUp = Instantiate(_textPopUpPrefab);
+        var textPopUp = LeanPool.Spawn(_textPopUpPrefab);
         textPopUp.PopText(damage.ToString(), transform);
         textPopUp.transform.localPosition = Vector3.up;
     }

@@ -196,6 +196,26 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 199184971286802780, guid: 99c114328b10529409559fdde1d5cd8b,
+        type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199184971286802780, guid: 99c114328b10529409559fdde1d5cd8b,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 199184971286802780, guid: 99c114328b10529409559fdde1d5cd8b,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 199184971286802780, guid: 99c114328b10529409559fdde1d5cd8b,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 82281359815435242, guid: 99c114328b10529409559fdde1d5cd8b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 99c114328b10529409559fdde1d5cd8b, type: 3}

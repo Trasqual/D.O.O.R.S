@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Lean.Pool;
 using TMPro;
 using UnityEngine;
 
@@ -12,11 +13,12 @@ public class TextPopUp : MonoBehaviour
     {
         transform.SetParent(parent);
         _text.SetText(text);
-        _textMovementTween = _text.transform.DOLocalMove(Vector3.up * 2, 1f).OnUpdate(() => _text.transform.rotation = Quaternion.LookRotation(_text.transform.position - Camera.main.transform.position)).OnComplete(() => Destroy(gameObject));
+        _textMovementTween = _text.transform.DOLocalMove(Vector3.up * 2, 1f).OnUpdate(() => _text.transform.rotation = Quaternion.LookRotation(_text.transform.position - Camera.main.transform.position)).OnComplete(() => Reset());
     }
 
-    private void OnDestroy()
+    private void Reset()
     {
+        LeanPool.Despawn(this);
         _textMovementTween?.Kill();
     }
 }
