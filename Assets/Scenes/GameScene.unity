@@ -1490,7 +1490,7 @@ MonoBehaviour:
   _inputManager: {fileID: 1277379622}
   _controller: {fileID: 1277379631}
   _anim: {fileID: 1277379624}
-  _movementSpeed: 8
+  _movementSpeed: 6.5
   _rotationSpeed: 15
 --- !u!114 &1277379622
 MonoBehaviour:
