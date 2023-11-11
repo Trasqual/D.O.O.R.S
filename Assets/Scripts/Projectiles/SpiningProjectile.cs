@@ -3,12 +3,15 @@ using GamePlay.Entities;
 using GamePlay.StatSystem;
 using Lean.Pool;
 using UnityEngine;
+using DG.Tweening;
+using System.Collections;
 
 namespace GamePlay.Visuals.Projectiles
 {
     public class SpiningProjectile : Projectile
     {
         [SerializeField] private float _speed = 20f;
+        [SerializeField] private ParticleSystem _particle;
 
         private StatController _stats;
         private EntityType _targetType;
@@ -23,6 +26,7 @@ namespace GamePlay.Visuals.Projectiles
             _stats = stats;
             _targetType = targetType;
             _radius = stats.GetStat<RangeStat>().CurrentValue;
+            StartCoroutine(TurnOnParticleWithDelay());
         }
 
         private void Update()
@@ -50,6 +54,17 @@ namespace GamePlay.Visuals.Projectiles
         public void Activate(bool isActive)
         {
             gameObject.SetActive(isActive);
+            if (isActive)
+            {
+                StartCoroutine(TurnOnParticleWithDelay());
+            }
+        }
+
+        private IEnumerator TurnOnParticleWithDelay()
+        {
+            _particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            yield return null;
+            _particle.Play();
         }
 
         public void ResetVisual()
