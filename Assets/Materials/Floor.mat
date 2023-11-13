@@ -26,11 +26,11 @@ Material:
         m_Scale: {x: 15, y: 15}
         m_Offset: {x: 0.47, y: -0.42}
     - _BaseTexture:
-        m_Texture: {fileID: 2800000, guid: f98cfa92a5a7b954fa36147546286c45, type: 3}
+        m_Texture: {fileID: 2800000, guid: ec2f65dc1ab2a6c4d84e32135c34b67c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseTextureNormal:
-        m_Texture: {fileID: 2800000, guid: 3bbe040fabde49341bd310c31126535e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7c0a4cdb4a0fd7e4f9977617d8b0bc8e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -86,11 +86,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SecondaryTeture:
-        m_Texture: {fileID: 2800000, guid: 4752031d099f92d43b5e4e183ef8b9ba, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0c1bd61d1c1c1cf4ab7800e56a8c4f3a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SecondaryTetureNormal:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 04a20c9c593472e428eece79fc280a18, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -126,10 +126,11 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NoiseFuzziness: 0.58
-    - _NoiseRange: 0.16
-    - _NoiseScale: 3.06
-    - _NormalStrength: 0.52
+    - _NoiseEdgeSharpness: 1.13
+    - _NoiseFuzziness: 0.6
+    - _NoiseRange: 0.57
+    - _NoiseScale: 2.23
+    - _NormalStrength: 0.3
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -144,11 +145,15 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+    - _BaseTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _BaseTextureTiling: {r: 4, g: 4, b: 0, a: 0}
     - _Color: {r: 0.39622638, g: 0.39622638, b: 0.39622638, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _NoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _NoiseOffset: {r: 1.4, g: 1, b: 0, a: 0}
     - _NoiseTiling: {r: 1, g: 1, b: 0, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _SecondaryTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _SecondaryTextureTiling: {r: 6, g: 6, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TextureOffset: {r: 0, g: 0, b: 0, a: 0}
     - _TextureTiling: {r: 4, g: 4, b: 0, a: 0}
