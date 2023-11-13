@@ -8,15 +8,15 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Floor
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: dcb3aca468129374795b146d5f9778a2,
+    type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -25,6 +25,14 @@ Material:
         m_Texture: {fileID: 2800000, guid: 6ef3e3edf72083f419734229cd775812, type: 3}
         m_Scale: {x: 15, y: 15}
         m_Offset: {x: 0.47, y: -0.42}
+    - _BaseTexture:
+        m_Texture: {fileID: 2800000, guid: f98cfa92a5a7b954fa36147546286c45, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseTextureNormal:
+        m_Texture: {fileID: 2800000, guid: 3bbe040fabde49341bd310c31126535e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -61,6 +69,30 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_5b242dd27e9844fb9711528cb2e8c8bd_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 3bbe040fabde49341bd310c31126535e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_ac424170c20e4aab9d9ba014d9a2ca46_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 3faeb106a35117045ad7a6a0d6eaefe6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_d7a7d31ef01044e8a9f64e4df1df323a_Texture_1:
+        m_Texture: {fileID: 2800000, guid: f98cfa92a5a7b954fa36147546286c45, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_fc1b96aba5254ab5986f4692f0e4a215_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 4752031d099f92d43b5e4e183ef8b9ba, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SecondaryTeture:
+        m_Texture: {fileID: 2800000, guid: 4752031d099f92d43b5e4e183ef8b9ba, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SecondaryTetureNormal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -94,11 +126,16 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _NoiseFuzziness: 0.22
+    - _NoiseRange: 0.25
+    - _NoiseScale: 3.33
+    - _NormalStrength: 0.6
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.065
+    - _Smoothness: 0.05
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -109,7 +146,9 @@ Material:
     - _BaseColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
     - _Color: {r: 0.39622638, g: 0.39622638, b: 0.39622638, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2245549242773040705
 MonoBehaviour:
