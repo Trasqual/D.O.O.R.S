@@ -47,7 +47,7 @@ namespace GamePlay.RoomSystem.Placeables
                 return;
             }
 
-            var size = _wallVisuals[0].localScale.x;
+            var size = _wallVisual.localScale.x;
 
             var torchCount = (size - _minTorchInterval) / _minTorchInterval;
 
