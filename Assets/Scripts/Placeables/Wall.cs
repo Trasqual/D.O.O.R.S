@@ -10,17 +10,24 @@ namespace GamePlay.RoomSystem.Placeables
     public class Wall : MonoBehaviour, IPlaceable, IAnimateable
     {
         [SerializeField] private AnimationBase _animation;
-        [SerializeField] protected Transform _wallVisual;
+        [SerializeField] protected Transform[] _wallVisuals;
         [SerializeField] private BoxCollider _collider;
+        [SerializeField] private Renderer[] _renderers;
 
 
         public List<GridCell> GridCells { get; set; } = new();
 
         public virtual void Initialize(float size)
         {
-            var scale = _wallVisual.transform.localScale;
-            scale.x *= size;
-            _wallVisual.transform.localScale = scale;
+            foreach (var wall in _wallVisuals)
+            {
+                wall.localScale = new Vector3(wall.localScale.x * size, wall.localScale.y, wall.localScale.z);
+
+            }
+            foreach (var rend in _renderers)
+            {
+                rend.material.mainTextureScale = new Vector2(_wallVisuals[0].localScale.x / 3f, 1f);
+            }
             var colSize = _collider.size;
             colSize.x *= size;
             _collider.size = colSize;
@@ -42,7 +49,7 @@ namespace GamePlay.RoomSystem.Placeables
 
         protected virtual void PlaySpawnParticles()
         {
-            var size = _wallVisual.transform.localScale.x;
+            var size = _wallVisuals[0].localScale.x;
 
             var particle = ParticleManager.Instance.GetWallSpawnParticle();
             particle.transform.SetParent(transform);
