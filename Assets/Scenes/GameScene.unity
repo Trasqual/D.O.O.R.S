@@ -2263,9 +2263,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minRoomWidth: 30
-  _maxRoomWidth: 100
+  _maxRoomWidth: 50
   _minRoomLength: 30
-  _maxRoomLength: 100
+  _maxRoomLength: 50
   _minRoomDoorCount: 2
   _maxRoomDoorCount: 4
   _randomSeed: 2147483647
