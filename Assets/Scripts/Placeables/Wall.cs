@@ -24,6 +24,15 @@ namespace GamePlay.RoomSystem.Placeables
             var colSize = _collider.size;
             colSize.x *= size;
             _collider.size = colSize;
+
+            MeshRenderer wallRenderer = _wallVisual.GetComponent<MeshRenderer>();
+
+            MaterialPropertyBlock newBlock = new MaterialPropertyBlock();
+            wallRenderer.GetPropertyBlock(newBlock);
+
+            newBlock.SetVector("_BaseMap_ST", new Vector4(size / 6f, 1f, 0.32f, 0f));
+
+            wallRenderer.SetPropertyBlock(newBlock);
         }
 
         public void Animate(Action OnStart = null, Action OnComplete = null)
