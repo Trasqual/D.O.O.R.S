@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd8231e3efdfa545ad83a56890bf01f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefabs:
+  _prefabs:
     _serializedList:
     - Key: room
       Value: {fileID: 8453465131420322314, guid: bd6fdc3ca6bae434baf24683e8a46312,
@@ -486,24 +486,31 @@ MonoBehaviour:
     - Key: floor
       Value: {fileID: 9058073157052071894, guid: afe760713ec6e3f4e81f8d84b36a1d36,
         type: 3}
-    - Key: shortWallCorner
-      Value: {fileID: 6329156333234699698, guid: 80ed7fa0a642f1145b13fdee0205098d,
-        type: 3}
     - Key: fullHeightWallCorner
       Value: {fileID: 7244985705981384594, guid: 5c790bf408816c943836fa275c47944d,
         type: 3}
-    - Key: shortWall
-      Value: {fileID: 2158811561456249586, guid: 54d7c6aedd4ee914686452bad9c2b4c4,
+    - Key: shortWallCorner
+      Value: {fileID: 6329156333234699698, guid: 80ed7fa0a642f1145b13fdee0205098d,
         type: 3}
     - Key: fullHeightWall
       Value: {fileID: 9075670557835802901, guid: 82d1e4350844f7b4abfd5cc64896c2ee,
         type: 3}
-    - Key: shortDoor
-      Value: {fileID: 6703506920205748389, guid: cfe5500ebfe951e4c8ed422216e9cf61,
+    - Key: shortWall
+      Value: {fileID: 2158811561456249586, guid: 54d7c6aedd4ee914686452bad9c2b4c4,
         type: 3}
     - Key: fullHeightDoor
       Value: {fileID: 5304694142301615059, guid: 75c8bb835a421594e88aeb6b51eefc6a,
         type: 3}
+    - Key: shortDoor
+      Value: {fileID: 6703506920205748389, guid: cfe5500ebfe951e4c8ed422216e9cf61,
+        type: 3}
+  _grassAndPebbles:
+  - {fileID: 6058202916728001280, guid: f4fee1e06d85fb748a7db3ecc6491510, type: 3}
+  - {fileID: 7066876596290817054, guid: cf9095971c65aa341b045f12c6c44e3d, type: 3}
+  - {fileID: 6535888872242418633, guid: de1300cd24c5b2a4992c372b2eb11650, type: 3}
+  - {fileID: 4255468536145732658, guid: fc55e0a6c7ad4da429973344ad263765, type: 3}
+  - {fileID: 5528849382313414818, guid: 639c98b7b889d224791af00234efb4aa, type: 3}
+  - {fileID: 7931815806974348482, guid: bc30bb4b1f71c314986deefda2663ad1, type: 3}
 --- !u!4 &726548726
 Transform:
   m_ObjectHideFlags: 0

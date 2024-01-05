@@ -17,7 +17,6 @@ namespace GamePlay.AnimationSystem
 
         public override void PrepareForAnimation()
         {
-            Debug.Log("Preparing For Animation: " + gameObject.name, gameObject);
             for (int i = 0; i < _meshes.Length; i++)
             {
                 _meshes[i].material.DOFade(0f, 0f);

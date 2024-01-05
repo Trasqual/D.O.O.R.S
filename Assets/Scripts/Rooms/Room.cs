@@ -94,8 +94,7 @@ namespace GamePlay.RoomSystem.Rooms
 
         private void GenerateFloor()
         {
-            var floor = _prefabProvider.GetFloor(transform);
-            floor.transform.localScale = new Vector3(_width, 1f, _length);
+            var floor = _prefabProvider.GetFloor(_width, _length, transform);
             _floor = floor.GetComponent<FloorAppearAnimation>();
         }
 
