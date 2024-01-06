@@ -58,7 +58,7 @@ namespace GamePlay.RoomSystem.Placeables
                 {
                     var torch = Instantiate(_torchPrefab, transform);
                     torch.transform.rotation = transform.rotation;
-                    torch.transform.localPosition = new Vector3((-size / 2f) + (_minTorchInterval / 2f) + (_minTorchInterval * i), 1.3f, 0.5f);
+                    torch.transform.localPosition = new Vector3((-size / 2f) + (_minTorchInterval / 2f) + (_minTorchInterval * i), 2.5f, 0.5f);
                     _torches.Add(torch);
                 }
             }
