@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Dwarf_Torch_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1240039135307002, guid: 03228befdc5ef264bb7862832d88f161, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4041392968632078, guid: 03228befdc5ef264bb7862832d88f161, type: 3}
       propertyPath: m_RootOrder
       value: 0
